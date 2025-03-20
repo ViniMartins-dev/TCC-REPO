@@ -1,30 +1,35 @@
 =============================================
 table animal:
 -idAnimal 	(PK)
--nomeAnimal
--idade
+-nomeAnimal			not null
+-idade		
 -comportamento
 -comentario
--urlFoto
--raca 		(FK) N-1
--especie	(FK) N-1
--localizacao	(FK) 1-1
+-urlFoto			not null
+-especie	(FK) N-1	not null
+-localizacao	(FK) 1-1	not null
 
 =============================================
 table especie: 
--idEspecie	(PK)
--nomeEspecie
+-idEspecie	(PK)		
+-nomeEspecie			not null
+-raca		(FK)
 
 =============================================
 table raca:
 -idRaca		(PK)
--nomeRaca
+-nomeRaca			not null
 
 =============================================
 table local:
 -idLocal	(PK)
--latitude
--longitude
+-latitude			not null
+-longitude			not null
 
 =============================================
+
+
+
+*raça depende de especie
+
 
