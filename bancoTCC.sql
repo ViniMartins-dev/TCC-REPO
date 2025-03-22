@@ -4,7 +4,7 @@ use dbanimais;
 CREATE TABLE cadastrantes (
     id              INT AUTO_INCREMENT PRIMARY KEY,
     nome            VARCHAR(100) NOT NULL,
-    sobrenome 		VARCHAR(100) NOT NULL,
+    sobrenome		VARCHAR(100) NOT NULL,
     email           VARCHAR(100) UNIQUE NOT NULL,
     telefone        VARCHAR(20),
     localizacao     POINT NOT NULL,
@@ -19,7 +19,7 @@ CREATE TABLE cadastrantes (
 CREATE TABLE tutores (
     id              INT AUTO_INCREMENT PRIMARY KEY,
     nome            VARCHAR(100) NOT NULL,
-    sobrenome 		VARCHAR(100) NOT NULL,
+    sobrenome		VARCHAR(100) NOT NULL,
     email           VARCHAR(100) UNIQUE NOT NULL,
     telefone        VARCHAR(20),
     localizacao     POINT NOT NULL,
@@ -38,7 +38,7 @@ CREATE TABLE animais (
     idade           INT,
     sexo            ENUM('M', 'F') NOT NULL,
     descricao       TEXT,
-    fotoURL      	VARCHAR(255),
+    fotoURL			VARCHAR(255),
     personalidade   VARCHAR(50),
 
     cadastrante_id  INT NOT NULL,
