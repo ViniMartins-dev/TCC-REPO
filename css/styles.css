@@ -36,3 +36,79 @@
 .btn btn-secondary {
   background-color: #CB7842;
 }
+
+#carouselExampleFade {
+  width: 30% !important;
+  top: 20px;
+  left: 35%;
+  height: auto !important;
+  justify-content: center !important;
+  align-items: center;
+}
+
+.titulo-carrossel {
+  color: black;
+  font-weight: bold;
+}
+
+.text-carrossel {
+  color: black;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.container-animais {
+  display: flex;
+  justify-content: center;
+  margin-top: 4%;
+}
+.btn-filtro {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 150%;
+  margin-left: 29%;
+}
+
+
+
+
+
+
+
+
+/* deixa esse CSS por ultimo */
+/* .rodape {
+  background-color: #CB7842;
+  display: flex;
+  justify-content: space-around;
+  margin-top: 10%;
+}
+
+.div1-rodape {
+  display: flex;
+  gap: 30px;
+  margin-left: 10%;
+  align-items: center;
+}
+
+.div1-rodape a {
+  text-decoration: none;
+  color: white;
+  margin: 0 10px;
+}
+
+.div2-rodape {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.div2-rodape p {
+  color: white;
+}
+
+#logo-rodape {
+  width: 10%;
+}
+ */
