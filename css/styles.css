@@ -1,40 +1,38 @@
 * {
-    padding: 0;
-    margin: 0;
+  padding: 0;
+  margin: 0;
 }
-
 :root {
-    --cor-vermelho: red;
-    --cor-roxo: purple;
-    --cor-de-fundo: white;
+  --cor-vermelho: red;
+  --cor-roxo: purple;
+  --cor-de-fundo: white;
 }
 
 .cabecalho {
-    background-color: #CB7842;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 20%;
+  background-color: #cb7842;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20%;
 }
 
 #logo {
-    width: 7%;
-    margin-bottom: -1%;
-    
+  width: 7%;
+  margin-bottom: -1%;
 }
 
 #search {
-    display: block;
-    padding: 8px;
-    width: 500px;
-    margin: 5 auto;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+  display: block;
+  padding: 8px;
+  width: 500px;
+  margin: 5 auto;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
 
 .btn btn-secondary {
-  background-color: #CB7842;
+  background-color: #cb7842;
 }
 
 #carouselExampleFade {
@@ -57,24 +55,63 @@
   font-weight: 600;
 }
 
-.container-animais {
+/*****************************
+********** Darlan ************
+*****************************/
+.main {
   display: flex;
   justify-content: center;
-  margin-top: 4%;
+  width: 100%;
+}
+.main-conteudo {
+  display: flex;
+  flex-wrap: wrap;
+  width: 76%;
+  margin: 1rem 0px;
+}
+.container-filtros {
+  display: flex;
+  position: relative;
+  margin: 1rem 1.5rem 0 0;
+  width: 100%;
+  padding: 1rem;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.25);
 }
 .btn-filtro {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  margin: 0 3px;
   background: none;
   border: none;
   cursor: pointer;
-  font-size: 150%;
-  margin-left: 29%;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
 }
-
-
-
-
-
-
+.container-animais {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 100%;
+  margin: 1rem 0px;
+}
+.container-animais-item {
+  background-color: #ffff;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.25);
+  padding: 1rem;
+  margin: 0 1.5rem 1.5rem 0;
+}
+.animais-item-img {
+  width: 300px;
+}
+.animais-item-text {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 1rem 0 0 0;
+}
 
 
 /* deixa esse CSS por ultimo */
