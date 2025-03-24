@@ -39,7 +39,7 @@ CREATE TABLE animais (
     sexo            ENUM('M', 'F') NOT NULL,
     descricao       TEXT,
     fotoURL			VARCHAR(255),
-    personalidade   VARCHAR(50),
+    personalidade   VARCHAR(255),
 
     cadastrante_id  INT NOT NULL,
     localizacao     POINT NOT NULL,
@@ -51,6 +51,7 @@ CREATE TABLE animais (
 
 CREATE TABLE adocoes (
     id              INT AUTO_INCREMENT PRIMARY KEY,
+    status 			ENUM('Pendente', 'Aprovada', 'Rejeitada') DEFAULT 'Pendente',
     animal_id       INT NOT NULL,
     tutor_id        INT NOT NULL,
     data_adocao     TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
