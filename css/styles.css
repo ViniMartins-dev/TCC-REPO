@@ -1,13 +1,10 @@
 * {
   padding: 0;
   margin: 0;
-<<<<<<< Updated upstream
-=======
 }
 
 body {
   height: 100%;
->>>>>>> Stashed changes
 }
 :root {
   --cor-vermelho: red;
@@ -109,13 +106,7 @@ body {
   background-color: #ffff;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.25);
   padding: 1rem;
-<<<<<<< Updated upstream
   margin: 0 1.5rem 1.5rem 0;
-=======
-  padding-bottom: 5px;
-  margin: 0 1.5rem 1.5rem 0;
-  
->>>>>>> Stashed changes
 }
 .animais-item-img {
   width: 300px;
