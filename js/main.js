@@ -121,6 +121,7 @@ const inserirAnimais = (jsonApi) => {
   objetoAnimais.forEach((animal) => {
     let conteudo = `
       <div class="container-animais-item">
+      <div class="container-animais-item-overlay"></div>
       <img class="animais-item-img" src="${animal.fotoURL}" alt="dog1">
       <p class="animais-item-text">Nome: ${animal.nome}</p>
       <p class="animais-item-text">Raça: ${animal.raca}</p>
