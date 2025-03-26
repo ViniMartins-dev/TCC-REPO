@@ -59,3 +59,15 @@ CREATE TABLE adocoes (
     FOREIGN KEY (animal_id) REFERENCES animais(id) ON DELETE CASCADE,
     FOREIGN KEY (tutor_id) REFERENCES tutores(id) ON DELETE CASCADE
 );
+
+CREATE TABLE favoritos (
+    id              INT AUTO_INCREMENT PRIMARY KEY,
+    tutor_id        INT NOT NULL,
+    animal_id       INT NOT NULL,
+    data_favorito   TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (tutor_id) REFERENCES tutores(id) ON DELETE CASCADE,
+    FOREIGN KEY (animal_id) REFERENCES animais(id) ON DELETE CASCADE,
+
+    UNIQUE (tutor_id, animal_id)
+);
