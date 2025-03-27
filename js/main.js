@@ -113,15 +113,17 @@ const exemploJsonApi = {
   },
 };
 
-/*Para cada animal dentro do json insere 
-dentro da div um quadrado com as informações*/
+/* Para cada animal dentro do json insere 
+dentro da div um quadrado com as informações */
 const inserirAnimais = (jsonApi) => {
   let boxAnimais = document.getElementById("container-animais");
   let objetoAnimais = Object.values(jsonApi);
   objetoAnimais.forEach((animal) => {
+    // Transforma o obj em uma string codigicada para passar pelo parametro
+    let animalStr = encodeURIComponent(JSON.stringify(animal));
     let conteudo = `
       <div class="container-animais-item">
-      <div class="container-animais-item-overlay"></div>
+      <div class="container-animais-item-overlay" onclick="abrirPopup('${animalStr}')"></div>
       <img class="animais-item-img" src="${animal.fotoURL}" alt="dog1">
       <p class="animais-item-text">Nome: ${animal.nome}</p>
       <p class="animais-item-text">Raça: ${animal.raca}</p>
@@ -132,28 +134,29 @@ const inserirAnimais = (jsonApi) => {
   });
 };
 
-// Rodando a função
+// Faz o overlay aparecer e insere o popup
+function abrirPopup(animalStr) {
+  const overlay = document.getElementById("overlay");
+  overlay.style.display = "flex";
+  let animalObj = JSON.parse(decodeURIComponent(animalStr)); // Descodifica a string
+  overlay.innerHTML = `
+  <div class="popup">
+  <img src="${animalObj.fotoURL}" class="popup-img" onclick="fecharAmpliacao()" />
+  <p class="popup-text"><b>Nome:</b> ${animalObj.nome}</p>
+  <p class="popup-text"><b>Idade:</b> ${animalObj.idade}</p>
+  <p class="popup-text"><b>Raca:</b> ${animalObj.raca}</p>
+  <p class="popup-text"><b>Sexo:</b> ${animalObj.sexo}</p>
+  <p class="popup-text"><b>Personalidade:</b> <br> ${animalObj.personalidade}</p>
+  <p class="popup-text"><b>Descricao:</b> <br> ${animalObj.descricao}</p>
+  </div>
+  `;
+}
+
+// Faz o popup fechar quando clicar fora dele
+function fecharPopup() {
+  const overlay = document.getElementById("overlay");
+  overlay.style.display = "none";
+}
+
+// Inserindo os animais
 inserirAnimais(exemploJsonApi);
-
-//pega a div overlay e deixa visivel quando clica na imagem
-function ampliarImagem(imagem) {
-  const overlay = document.getElementById('overlay');
-  overlay.style.display = 'flex';
-
-// quando clica pega a imagem e amplia ela deixando no centro 
-const imagemAmpliada = document.getElementById('imagemAmpliada');
-  imagemAmpliada.src = imagem.src;
-  imagemAmpliada.alt = imagem.alt;
-  imagemAmpliada.style.display = 'block';
-}
-
-//quando clicar fora da imagem ele fecha o overlay deixando display none
-function fecharAmpliacao() {
-const overlay = document.getElementById('overlay');
-  overlay.style.display = 'none';
-
-//quando clicar fora da imagem ela some junto com o overlay
-const imagemAmpliada = document.getElementById('imagemAmpliada');
-  imagemAmpliada.src = '';
-  imagemAmpliada.style.display = 'none';
-}

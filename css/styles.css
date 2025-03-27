@@ -47,21 +47,16 @@ body {
   justify-content: center !important;
   align-items: center;
 }
-
 .titulo-carrossel {
   color: black;
   font-weight: bold;
 }
-
 .text-carrossel {
   color: black;
   font-size: 20px;
   font-weight: 600;
 }
 
-/*****************************
-********** Darlan ************
-*****************************/
 .main {
   display: flex;
   justify-content: center;
@@ -136,23 +131,36 @@ body {
 #overlay {
   display: none;
   position: fixed;
-  top: 0;
   left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
   width: 100%;
   height: 100%;
+  justify-content: center;
+  align-items: center;
   background: rgba(0, 0, 0, 0.7);
 }
+.popup {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  padding: 1rem;
+  background-color: #FFFFFF;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+.popup-img {
+  margin: 0 0 10px 0;
+  width: 300px;
+}
+.popup-text {
+  margin: 8px 0 2px 0;
+  max-width: 300px;
+  font-size: 14px;
 
-.imagem-ampliada {
-  display: none;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  max-width: 80%;
-  max-height: 80%;
-  border: 2px solid white;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+  word-wrap: break-word;
 }
 
 
