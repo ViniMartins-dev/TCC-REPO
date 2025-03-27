@@ -134,3 +134,26 @@ const inserirAnimais = (jsonApi) => {
 
 // Rodando a função
 inserirAnimais(exemploJsonApi);
+
+//pega a div overlay e deixa visivel quando clica na imagem
+function ampliarImagem(imagem) {
+  const overlay = document.getElementById('overlay');
+  overlay.style.display = 'flex';
+
+// quando clica pega a imagem e amplia ela deixando no centro 
+const imagemAmpliada = document.getElementById('imagemAmpliada');
+  imagemAmpliada.src = imagem.src;
+  imagemAmpliada.alt = imagem.alt;
+  imagemAmpliada.style.display = 'block';
+}
+
+//quando clicar fora da imagem ele fecha o overlay deixando display none
+function fecharAmpliacao() {
+const overlay = document.getElementById('overlay');
+  overlay.style.display = 'none';
+
+//quando clicar fora da imagem ela some junto com o overlay
+const imagemAmpliada = document.getElementById('imagemAmpliada');
+  imagemAmpliada.src = '';
+  imagemAmpliada.style.display = 'none';
+}
