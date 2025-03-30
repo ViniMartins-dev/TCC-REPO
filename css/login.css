@@ -1,7 +1,8 @@
 :root {
     --laranja : #cb7842;
     --cinza: #333;
-    --branco: #fff
+    --branco: #fff;
+    --font-principal: "Roboto", sans-serif;
 }
 
 .principal {
@@ -29,7 +30,7 @@
 
 .col40 {
     width: 40%;
-    padding: 20px 40px;
+    padding: 20px 35px;
 }
 
 .col60 {
@@ -39,6 +40,7 @@
 
 .form-login h3 {
     text-align: center;
+    font-family: var(--font-principal);
 }
 
 #logo {
@@ -62,6 +64,8 @@
     width: 100%;
     border: solid 1px var(--cinza);
     background-color: var(--laranja);
+    color: var(--branco);
+    font-family: var(--font-principal);
     padding: 10px;
     border-radius: 200px;
     border-bottom: none !important;
@@ -72,12 +76,23 @@
     font-size: 12px;
     align-items: center;
     margin-top: 0;
+    text-decoration: none;
+    color: var(--cinza);
+    font-family: var(--font-principal);
+}
 
+.form-login a:hover {
+    color: blue;
 }
 
 #cadastro .text-login {
     text-align: right;
     padding-left: 100px;
+}
+
+.text-login {
+    color: var(--branco);
+    font-family: var(--font-principal);
 }
 
 .mascara {
