@@ -21,8 +21,7 @@
   <body id="body"">
     <div class="cabecalho">
       <img id="logo" src="./img/Logo-removebg.png" alt="" />
-      <input id="search" type="search" name="" id="" />
-
+      <input id="search" type="search" id="checkbox-indefinido" />
       <div class="dropdown">
         <button
           class="btn btn-secondary dropdown-toggle menu-hamburguer"
@@ -121,14 +120,56 @@
     <!-- Darlan -->
     <div class="main">
       <div class="main-conteudo">
-        <div class="container-filtros">
-          <!-- Ira ser inserido mais opçoes de filtro -->
-          <button class="btn-filtro" type="button">
-            <i class="bi bi-funnel"></i>
-          </button>
+        <div class="container-filtro">
+          <!-- Ira ser inserido mais filtros -->
+          <h3 class="filtro-titulo">Filtros:</h3>
+          <div class="filtro-item">
+            <p class="filtro-text">Raça</p>
+            <label class="filtro-label">
+              <input class="filtro-input"type="checkbox" id="checkbox-indefinido">
+              Indefinido
+            </label>
+            <label class="filtro-label">
+              <input class="filtro-input"type="checkbox" id="checkbox-indefinido">
+              Indefinido
+            </label>
+            <label class="filtro-label">
+              <input class="filtro-input"type="checkbox" id="checkbox-indefinido">
+              Indefinido
+            </label>
+            <label class="filtro-label">
+              <input class="filtro-input"type="checkbox" id="checkbox-indefinido">
+              Indefinido
+            </label>
+            <label class="filtro-label">
+              <input class="filtro-input"type="checkbox" id="checkbox-indefinido">
+              Indefinido
+            </label>
+          </div>
+          <div class="filtro-item">
+            <p class="filtro-text">Tipo</p>
+            <label class="filtro-label">
+              <input class="filtro-input"type="checkbox" id="checkbox-cachorro">
+              Cachorro
+            </label>
+            <label class="filtro-label">
+              <input class="filtro-input"type="checkbox" id="checkbox-gato">
+              Gato
+            </label>
+            <label class="filtro-label">
+              <input class="filtro-input"type="checkbox" id="checkbox-coelho">
+              Coelho
+            </label>
+          </div>
         </div>
-        <div class="container-animais" id="container-animais">
-          <!-- aqui esta sendo inserido os animais com inserirAnimais() -->
+
+        <div class="container-lista">
+          <div class="lista-header">
+            <h1 class="lista-header-titulo">Animais para adoção:</h1>
+          </div>
+          <div class="container-animais" id="container-animais">
+            <!-- aqui esta sendo inserido os animais com inserirAnimais() -->
+          </div>
         </div>
       </div>
     </div>

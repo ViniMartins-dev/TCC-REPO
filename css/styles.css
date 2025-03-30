@@ -62,41 +62,75 @@ body {
   display: flex;
   justify-content: center;
   width: 100%;
+  margin: 1.5rem 0 0 0;
 }
 .main-conteudo {
-  display: flex;
-  flex-wrap: wrap;
-  width: 76%;
+  display: grid;
+  grid-template-columns: 270px 1fr;
+  padding: 2rem;
+  width: 100%;
   margin: 1rem 0px;
+  gap: 1rem;
 }
-.container-filtros {
+.container-filtro {
   display: flex;
+  flex-direction: column;
+  align-items: center;
   position: relative;
-  margin: 1rem 1.5rem 0 0;
   width: 100%;
   padding: 1rem;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.25);
+  background-color: #f6f6f6;
+  border-radius: 0.3rem;
+  gap: 12px;
 }
-.btn-filtro {
+.filtro-titulo {
+  align-self: flex-start;
+  font-weight: 600;
+  margin: 3px 0 0 4px;
+}
+.filtro-item {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  padding: 15px;
+  width: 240px;
+  max-height: 250px;
+  box-shadow: 0px 4px 8px rgba(0,0,0,0.25);
+  background-color: #FFFFFF;
+  gap: 4px
+}
+.filtro-text {
+  font-weight: 600;
+  font-size: 16px;
+}
+.filtro-label {
+  display: flex;
   align-items: center;
-  width: 30px;
-  height: 30px;
-  margin: 0 3px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+  font-size: 15px;
+  gap: 8px;
+}
+.filtro-input {
+  width: 18px;
+  height: 18px;
+}
+.container-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 40px
+}
+.lista-header {
+
+}
+.lista-header-titulo {
+  margin: 0 0 0 3%;
+  font-weight: 600;
 }
 .container-animais {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: flex-start;
-  justify-content: flex-start;
-  width: 100%;
-  margin: 1rem 0px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 345px);
+  gap: 8px;
+  width: auto;
+  justify-content: center;
+  width: 100%
 }
 .container-animais-item {
   position: relative;
