@@ -136,7 +136,9 @@ const inserirAnimais = (jsonApi) => {
 
 // Faz o overlay aparecer e insere o popup
 function abrirPopup(animalStr) {
-  const overlay = document.getElementById("overlay");
+  let overlay = document.getElementById("overlay");
+  let body = document.getElementById("body");
+  body.style.overflow = "hidden";
   overlay.style.display = "flex";
   let animalObj = JSON.parse(decodeURIComponent(animalStr)); // Descodifica a string
   overlay.innerHTML = `
@@ -154,8 +156,11 @@ function abrirPopup(animalStr) {
 
 // Faz o popup fechar quando clicar fora dele
 function fecharPopup() {
-  const overlay = document.getElementById("overlay");
+  let overlay = document.getElementById("overlay");
+  let body = document.getElementById("body");
+  body.style.overflow = "";
   overlay.style.display = "none";
+
 }
 
 // Inserindo os animais

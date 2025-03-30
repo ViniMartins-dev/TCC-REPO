@@ -155,7 +155,7 @@ body {
 }
 .popup-img {
   margin: 0 0 10px 0;
-  width: 300px;
+  width: 350px;
 }
 .popup-text {
   margin: 8px 0 2px 0;
@@ -164,7 +164,6 @@ body {
 
   word-wrap: break-word;
 }
-
 
 /* deixa esse CSS por ultimo */
 .rodape {
