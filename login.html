@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+    <img id="logo" src="./img/Logo-laranja.png" alt="">
+    <div class="principal">
+        <div id="login">
+            <div class="col40 text-login">
+                <h1>Bem Vindo!</h1>
+                <h3>Informe seu usuário e senha para acessar:</h2>
+            </div>
+            <div class="form-login col60">
+                <h3>Login</h3>
+                <form action="#" class="form-login">
+                    <input name="login" type="email" placeholder="Digite seu email" required>
+                    <input type="password" name="senha" placeholder="Digite sua senha" required>
+        
+                    <input class="btn" type="submit" value="Confirmar">
+                    <a href="#login">Torne-se um parceiro</a>
+                </form>
+            </div>
+        </div>
+
+        <div id="cadastro">
+            <div class="col60 form-login">
+                <form action="#" class="form-login">
+                    <input type="text" autocomplete="name" placeholder="Nome Completo" required>
+                    <input type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="Telefone/Celular" autocomplete="tel" required>
+                    <input type="text" autocomplete="street-address" placeholder="Endereço" required>
+                    <input type="email" autocomplete="email" placeholder="Email" required>
+                    <input type="password" id="pass-cadastro" placeholder="Senha" autocomplete="current-password" required>
+
+                    <input class="btn" type="submit" value="Confirmar">
+                    <a href="#cadastro">Já tenho uma conta</a>
+                </form>
+            </div>
+            <div class="col40 text-login">
+                <h1>Cadastre-se!</h1>
+                <h3>Complete seu cadastro preenchendo o formulário: </h3>
+            </div>
+        </div>
+        <div class="mascara"></div>
+    </div>
+    <script src="js/login.js"></script>
+</body>
+</html>

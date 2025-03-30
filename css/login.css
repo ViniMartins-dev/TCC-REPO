@@ -1,0 +1,107 @@
+:root {
+    --laranja : #cb7842;
+    --cinza: #333;
+    --branco: #fff
+}
+
+.principal {
+    max-width: 797px;
+    margin: 20px auto;
+    box-shadow: 0 0 4px var(--cinza);
+    border-radius: 10px;
+    padding: 41px;
+    box-sizing: border-box;
+    position: relative;
+    min-height: 350px;
+    overflow: hidden;
+}
+
+#login, #cadastro {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: all 0.01s ease;
+}
+
+.col40 {
+    width: 40%;
+    padding: 20px 40px;
+}
+
+.col60 {
+    width: 50%;
+    padding: 40px 20px;
+}
+
+.form-login h3 {
+    text-align: center;
+}
+
+#logo {
+    width: 15%;
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    margin: 0 auto;
+}
+
+.form-login input {
+    width: 100%;
+    border: none;
+    outline: none;
+    border-bottom: solid 1px var(--cinza);
+    padding: 5px 0;
+    margin-bottom: 20px;
+}
+
+.btn {
+    width: 100%;
+    border: solid 1px var(--cinza);
+    background-color: var(--laranja);
+    padding: 10px;
+    border-radius: 200px;
+    border-bottom: none !important;
+    cursor: pointer;
+}
+
+.form-login a {
+    font-size: 12px;
+    align-items: center;
+    margin-top: 0;
+
+}
+
+#cadastro .text-login {
+    text-align: right;
+    padding-left: 100px;
+}
+
+.mascara {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: var(--laranja) ;
+    top: 0;
+    left: -60%;
+    z-index: -1;
+    transform: skewX(-40deg);
+    transition: all 1s ease;
+}
+
+/* efeitos de transição */
+#cadastro:not(:target), #login:not(:target) {
+    transition: all 1s 1s ease;
+}
+
+#cadastro:not(:target) ~ .mascara {
+    transform: skewX(40deg);
+    left: 60%;
+}
+#cadastro:target, #login:target {
+    z-index: -2;
+    opacity: 0;
+}
