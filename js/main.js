@@ -140,15 +140,15 @@ function abrirPopup(animalStr) {
   overlay.style.display = "flex";
   let animalObj = JSON.parse(decodeURIComponent(animalStr)); // Descodifica a string
   overlay.innerHTML = `
-  <div class="popup">
-  <img src="${animalObj.fotoURL}" class="popup-img" onclick="fecharAmpliacao()" />
-  <p class="popup-text"><b>Nome:</b> ${animalObj.nome}</p>
-  <p class="popup-text"><b>Idade:</b> ${animalObj.idade}</p>
-  <p class="popup-text"><b>Raca:</b> ${animalObj.raca}</p>
-  <p class="popup-text"><b>Sexo:</b> ${animalObj.sexo}</p>
-  <p class="popup-text"><b>Personalidade:</b> <br> ${animalObj.personalidade}</p>
-  <p class="popup-text"><b>Descricao:</b> <br> ${animalObj.descricao}</p>
-  </div>
+    <div class="popup" onclick="event.stopPropagation()">
+      <img src="${animalObj.fotoURL}" class="popup-img"/>
+      <p class="popup-text"><b>Nome:</b> ${animalObj.nome}</p>
+      <p class="popup-text"><b>Idade:</b> ${animalObj.idade}</p>
+      <p class="popup-text"><b>Raca:</b> ${animalObj.raca}</p>
+      <p class="popup-text"><b>Sexo:</b> ${animalObj.sexo}</p>
+      <p class="popup-text"><b>Personalidade:</b> <br> ${animalObj.personalidade}</p>
+      <p class="popup-text"><b>Descricao:</b> <br> ${animalObj.descricao}</p>
+    </div>
   `;
 }
 
