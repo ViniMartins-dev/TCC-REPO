@@ -160,9 +160,9 @@ const inserirAnimais = (jsonApi) => {
       <div class="container-animais-item">
       <div class="container-animais-item-overlay" onclick="abrirPopup('${animalStr}')"></div>
       <img class="animais-item-img" src="${animal.fotoURL}" alt="dog1">
-      <p class="animais-item-text">Nome: ${animal.nome}</p>
-      <p class="animais-item-text">Raça: ${animal.raca}</p>
-      <p class="animais-item-text">Idade: ${animal.idade}</p>
+      <h6 class="animais-item-text">Nome: ${animal.nome}</h6>
+      <h6 class="animais-item-text">Raça: ${animal.raca}</h6>
+      <h6 class="animais-item-text">Idade: ${animal.idade}</h6>
       </div>
     `;
     boxAnimais.innerHTML += conteudo;
