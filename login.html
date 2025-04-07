@@ -32,11 +32,12 @@
         <div id="cadastro">
             <div class="col60 form-login">
                 <form action="#" method="post" class="form-login">
-                    <input type="text" autocomplete="name" placeholder="Nome Completo" required>
-                    <input type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="Telefone/Celular" autocomplete="tel" required>
+                    <input type="text" autocomplete="name" placeholder="Nome da instituição" required>
+                    <input type="tel"  pattern="\([0-9]{2}\) [0-9]{4}-[0-9]{4}" placeholder="Telefone/Celular" autocomplete="tel" required>
                     <input type="text" autocomplete="street-address" placeholder="Endereço" required>
                     <input type="email" autocomplete="email" placeholder="Email" required>
                     <input type="password" id="pass-cadastro" placeholder="Senha" autocomplete="current-password" required>
+                    <input type="number" placeholder="CNPJ" maxlength=15>
 
                     <input class="btn" type="submit" value="Confirmar">
                     <a href="#cadastro">Já tenho uma conta</a>
