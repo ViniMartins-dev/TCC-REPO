@@ -185,6 +185,10 @@ function abrirPopup(animalStr) {
       <p class="popup-text"><b>Sexo:</b> ${animalObj.sexo}</p>
       <p class="popup-text"><b>Personalidade:</b> <br> ${animalObj.personalidade}</p>
       <p class="popup-text"><b>Descricao:</b> <br> ${animalObj.descricao}</p>
+        <div>
+        <button>Adotar</button>
+        <button>Favoritos</button>
+        </div>
     </div>
   `;
 }
