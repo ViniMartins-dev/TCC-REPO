@@ -171,6 +171,8 @@ const inserirAnimais = (jsonApi) => {
 
 // Faz o overlay aparecer e insere o popup
 function abrirPopup(animalStr) {
+  /* Falta criar uma verificação se o animal é favorito ja
+  para colocar o coração preenchido de vermelho */
   let overlay = document.getElementById("overlay");
   let body = document.getElementById("body");
   body.style.overflow = "hidden";
@@ -179,18 +181,32 @@ function abrirPopup(animalStr) {
   overlay.innerHTML = `
     <div class="popup" onclick="event.stopPropagation()">
       <img src="${animalObj.fotoURL}" class="popup-img"/>
-      <p class="popup-text"><b>Nome:</b> ${animalObj.nome}</p>
-      <p class="popup-text"><b>Idade:</b> ${animalObj.idade}</p>
-      <p class="popup-text"><b>Raca:</b> ${animalObj.raca}</p>
-      <p class="popup-text"><b>Sexo:</b> ${animalObj.sexo}</p>
-      <p class="popup-text"><b>Personalidade:</b> <br> ${animalObj.personalidade}</p>
-      <p class="popup-text"><b>Descricao:</b> <br> ${animalObj.descricao}</p>
-        <div>
-        <button>Adotar</button>
-        <button>Favoritos</button>
-        </div>
+      <div class="popup-content">
+        <i onclick="favoritar()" id="popup-btnFavoritar" class="popup-btnFavoritar fa-regular fa-heart"></i>
+        <p class="popup-text"><b>Nome:</b> ${animalObj.nome}</p>
+        <p class="popup-text"><b>Idade:</b> ${animalObj.idade}</p>
+        <p class="popup-text"><b>Raca:</b> ${animalObj.raca}</p>
+        <p class="popup-text"><b>Sexo:</b> ${animalObj.sexo}</p>
+        <p class="popup-text"><b>Personalidade:</b> <br> ${animalObj.personalidade}</p>
+        <p class="popup-text"><b>Descricao:</b> <br> ${animalObj.descricao}</p>
+        <button class="popup-btnAdotar">Adotar</button>
+      </div>
     </div>
   `;
+}
+
+// Troca a cor do coração de favoritar
+function favoritar() {
+  /* Aqui dentro vai ser feito o processo de favoritar o animal
+  na tabela de favoritos e de desfavoritar tambem */
+  let heart = document.getElementById("popup-btnFavoritar");
+  if (heart.classList.contains("fa-regular")) {
+    heart.classList.replace("fa-regular", "fa-solid");
+    heart.style.color = "#E31B23";
+  }else {
+    heart.classList.replace("fa-solid", "fa-regular");
+    heart.style.color = "#000000";
+  }
 }
 
 // Faz o popup fechar quando clicar fora dele

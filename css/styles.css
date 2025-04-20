@@ -265,17 +265,47 @@ body {
   flex-direction: column;
   flex-wrap: nowrap;
   justify-content: flex-start;
-  padding: 1rem;
+  padding: 14px;
   background-color: #FFFFFF;
   max-height: 90vh;
   overflow-y: auto;
 }
+.popup-content {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  background-color: #FFFFFF;
+  gap: 10px
+}
+.popup-btnAdotar {
+  height: 40px;
+  border:none;
+  margin: 6px 0 2px 0;
+  padding: 4px;
+  background-color: #cb7842;
+  color: #FFFFFF;
+  font-weight: 600;
+  font-size: 15px;
+  transition-delay: 0.1s;
+}
+.popup-btnAdotar:hover {
+  background-color: #a35f34;
+}
+.popup-btnFavoritar {
+  position: absolute;
+  font-size: 23px;
+  right: 15px;
+  cursor: pointer;
+  color: #000000
+}
 .popup-img {
-  margin: 0 0 10px 0;
+  margin: 0 0 18px 0;
   width: 350px;
 }
 .popup-text {
-  margin: 8px 0 2px 0;
+  margin-Bottom: 0;
   max-width: 300px;
   font-size: 14px;
   word-wrap: break-word;
