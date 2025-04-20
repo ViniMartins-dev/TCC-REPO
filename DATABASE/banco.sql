@@ -4,18 +4,18 @@ USE DB_Haustier;
 -- Usuários: pode ser tutor ou org
 CREATE TABLE IF NOT EXISTS usuarios (
     id              INT AUTO_INCREMENT PRIMARY KEY,
-    tipo            ENUM('tutor', 'org') NOT NULL,		-- Escolhido no Front-end
+    tipo            ENUM('tutor', 'protetor') NOT NULL,		-- Escolhido no Front-end
     
-    nome            VARCHAR(100) NOT NULL,
-    sobrenome       VARCHAR(100) NOT NULL,
+    nome            VARCHAR(100),
+    sobrenome       VARCHAR(100),
     email           VARCHAR(100) UNIQUE NOT NULL,
-    telefone        VARCHAR(20),
+    telefone        VARCHAR(20)  NOT NULL,
     senha           VARCHAR(255) NOT NULL,
 
     cpf             VARCHAR(14),            			-- Apenas para tutor
     cnpj            VARCHAR(18),            			-- Apenas para ORG
 
-    nome_org        VARCHAR(255),          				-- Nome fantasia (para ORG)
+    nome_fantasia   VARCHAR(255),          				-- Nome fantasia (para ORG)
     data_nascimento DATE,                   			-- Apenas para tutor
 
     latitude        DECIMAL(10,8),
