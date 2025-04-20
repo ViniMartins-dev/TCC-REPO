@@ -8,16 +8,16 @@ const Usuario = sequelize.define('Usuario', {
     primaryKey: true,
   },
   tipo: {
-    type: DataTypes.ENUM('tutor', 'org'),
+    type: DataTypes.ENUM('tutor', 'protetor'),
     allowNull: false,
   },
   nome: {
     type: DataTypes.STRING(100),
-    allowNull: false,
+    allowNull: true,
   },
   sobrenome: {
     type: DataTypes.STRING(100),
-    allowNull: false,
+    allowNull: true,
   },
   email: {
     type: DataTypes.STRING(100),

@@ -17,7 +17,7 @@ const criarTutor = async (dados) => {                                   // Funç
     } = dados;
 
     // Valida o cpf
-    if(validarCPF(cpf) === false) {
+    if(!validarCPF(cpf)) {
         throw new Error('CPF inválido.');
     }
 

@@ -10,10 +10,10 @@ app.use(cors());                                                        // Habil
 app.use(express.json());                                                // Habilita o uso de JSON
 
 // Definindo as rotas
-const tutorRoutes = require('./packages/usuarios-api/routes/usuarioRoute'); // Importa as rotas de usuários
+const usuarioRoutes = require('./packages/usuarios-api/routes/usuarioRoute');         // Importa as rotas de usuários
 
 // Configurando as rotas para o servidor
-app.use('/tutor', tutorRoutes);
+app.use('/usuario', usuarioRoutes);               // Define a rota para usuarios
 
 // Testando a conexão com o banco de dados
 sequelize.authenticate()                                                
