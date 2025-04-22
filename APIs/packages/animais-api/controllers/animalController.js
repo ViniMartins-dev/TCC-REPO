@@ -50,9 +50,9 @@ const filtrarAnimais = async (req, res) => {
     try {
         const animais = await filtraAnimais.filtrarAnimais(req.query);
         return res.status(200).json(animais);
-      } catch (error) {
+    } catch (error) {
         return res.status(400).json({ erro: error.message });
-      }
+    }
 };
 
 module.exports = {

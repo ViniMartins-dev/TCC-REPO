@@ -20,16 +20,16 @@ app.use('/animal', animalRoutes);                   // Define a rota para animai
 app.use('/adocao', adocaoRoutes);                   // Define a rota para adoções
 
 // Testando a conexão com o banco de dados
-sequelize.authenticate()                                                
-  .then(() => {
-    console.log('Conexão com o banco de dados bem-sucedida!');
-  })
-  .catch(err => {
-    console.error('Erro ao conectar ao banco de dados:', err);
-  });
+sequelize.authenticate()
+    .then(() => {
+        console.log('Conexão com o banco de dados bem-sucedida!');
+    })
+    .catch(err => {
+        console.error('Erro ao conectar ao banco de dados:', err);
+    });
 
 // Iniciando o servidor
 const PORT = process.env.server_port;                                   // Define a porta do servidor a partir das variáveis de ambiente       
 app.listen(PORT, () => {                                                // Inicia o servidor na porta definida
-  console.log(`Servidor rodando na porta ${PORT}`);
+    console.log(`Servidor rodando na porta ${PORT}`);
 });

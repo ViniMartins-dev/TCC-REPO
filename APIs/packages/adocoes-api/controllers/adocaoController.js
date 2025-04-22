@@ -4,17 +4,17 @@ const gerarAdocao = require('../services/requestAdocao'); // Importa o serviço 
 
 const listarAdocoes = async (req, res) => {
     try {
-      const { id } = req.params; // id do protetor
-      const adocoes = await listaAdocoes.listarAdocoes(id);
-      return res.status(200).json(adocoes);
+        const { id } = req.params; // id do protetor
+        const adocoes = await listaAdocoes.listarAdocoes(id);
+        return res.status(200).json(adocoes);
     } catch (error) {
-      return res.status(400).json({ erro: error.message });
+        return res.status(400).json({ erro: error.message });
     }
-  };
+};
 
 const aprovarAdocao = async (req, res) => {
     try {
-        const { idAdocao , aval} = req.body;
+        const { idAdocao, aval } = req.body;
         const adocaoAprovada = await aprovaAdocao.aprovarAdocao(idAdocao, aval);
         return res.status(200).json(adocaoAprovada);
     } catch (error) {

@@ -4,13 +4,13 @@ const validarCNPJ = require('../utils/validarCNPJ');
 
 const criarProtetor = async (dados) => {                                // Função para criar um novo Protetor
     const {
-    nome_fantasia,
-    email,
-    telefone,
-    senha,
-    cnpj,
-    latitude,
-    longitude,
+        nome_fantasia,
+        email,
+        telefone,
+        senha,
+        cnpj,
+        latitude,
+        longitude,
     } = dados;
 
     // Valida o cnpj
@@ -33,7 +33,7 @@ const criarProtetor = async (dados) => {                                // Funç
     // Cria o Protetor no banco
     const novoProtetor = await Usuario.create({
         tipo: 'protetor',
-        nome_fantasia,                                                                                 
+        nome_fantasia,
         email,
         telefone,
         senha: senhaHash,
@@ -50,5 +50,5 @@ const criarProtetor = async (dados) => {                                // Funç
 };
 
 module.exports = {
-  criarProtetor,
+    criarProtetor,
 };

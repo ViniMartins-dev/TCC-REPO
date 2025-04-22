@@ -7,9 +7,9 @@ const atualizarAnimal = async (id, dados) => {
         throw new Error('Animal não encontrado.');
     }
 
-    if(dados.idProtetor !== animal.usuario_id) {
-       throw new Error('Você não tem permissão para atualizar este animal.');
-    } 
+    if (dados.idProtetor !== animal.usuario_id) {
+        throw new Error('Você não tem permissão para atualizar este animal.');
+    }
 
     animalAtualizado = await animal.update(dados);
 

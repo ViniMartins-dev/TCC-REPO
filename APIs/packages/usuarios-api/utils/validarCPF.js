@@ -15,7 +15,7 @@ function validarCPF(cpf) {
     // Calculando os dois dígitos verificadores
     let soma = 0;
     let peso = 10;
-    
+
     // Calcula o primeiro dígito verificador
     for (let i = 0; i < 9; i++) {
         soma += parseInt(cpf.charAt(i)) * peso--;
