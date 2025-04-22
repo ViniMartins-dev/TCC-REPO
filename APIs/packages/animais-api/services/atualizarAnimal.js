@@ -1,5 +1,4 @@
 const Animal = require('../models/Animal');
-const Usuario = require('../models/Usuario');
 
 const atualizarAnimal = async (id, dados) => {
     const animal = await Animal.findByPk(id);
@@ -8,7 +7,7 @@ const atualizarAnimal = async (id, dados) => {
         throw new Error('Animal não encontrado.');
     }
 
-    if(dados.idUsuario !== animal.usuario_id) {
+    if(dados.idProtetor !== animal.usuario_id) {
        throw new Error('Você não tem permissão para atualizar este animal.');
     } 
 
