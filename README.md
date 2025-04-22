@@ -57,10 +57,26 @@
 ![image](https://github.com/user-attachments/assets/78616494-e8c5-4257-853d-0a9315daf673)
 <hr>
 
-<p>listar animais cadastrados (lado do tutor + opções de filtros)</p>
+<p>listar animais cadastrados (lado do tutor + opções de filtros na url)</p>
 
-![image](https://github.com/user-attachments/assets/821eb534-fa3c-4595-8089-f5c714e8c867)
+![image](https://github.com/user-attachments/assets/ab7ff656-4360-4b5f-9ae4-1d8d7514f817)
 <hr>
+
+<p>Realizando Pedido de adoção</p>
+
+![image](https://github.com/user-attachments/assets/c688a0a0-8bba-4617-9ca4-0aa6443fd3da)
+<hr>
+
+<p>Lista pedidos de Adoção (lado do protetor)</p>
+
+![image](https://github.com/user-attachments/assets/1ea27ba7-f952-4d7b-b16d-1e8d336cae47)
+<hr>
+
+<p>Aprovar ou reprovar pedidos de adoção</p>
+
+![image](https://github.com/user-attachments/assets/517e6c47-b04d-4de4-a955-4d15a9d06a3c)
+<hr>
+
 
 
 
