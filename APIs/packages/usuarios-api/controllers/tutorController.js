@@ -1,6 +1,6 @@
-const cadastroTutor = require('../services/cadastroTutor'); // Importa o serviço de cadastro de tutor
-const deletaTutor = require('../services/deleteUsuario'); // Importa o serviço de deletar tutor
-const { atualizarTutor } = require('../services/updateTutor'); // Importa o serviço de atualizar tutor
+const cadastroTutor = require('../services/cadastroTutor');     // Importa o serviço de cadastro de tutor
+const deletaTutor = require('../services/deleteUsuario');       // Importa o serviço de deletar tutor
+const atualizarTutor = require('../services/updateTutor');      // Importa o serviço de atualizar tutor
 
 const cadastrarTutor = async (req, res) => {
     try {

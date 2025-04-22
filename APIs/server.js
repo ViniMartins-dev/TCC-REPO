@@ -10,10 +10,12 @@ app.use(cors());                                                        // Habil
 app.use(express.json());                                                // Habilita o uso de JSON
 
 // Definindo as rotas
-const usuarioRoutes = require('./packages/usuarios-api/routes/usuarioRoute');         // Importa as rotas de usuários
+const usuarioRoutes = require('./packages/usuarios-api/routes/usuarioRoute');           // Importa as rotas de usuários
+const animalRoutes = require('./packages/animais-api/routes/animalRoute');              // Importa as rotas de animais
 
 // Configurando as rotas para o servidor
 app.use('/usuario', usuarioRoutes);               // Define a rota para usuarios
+app.use('/animal', animalRoutes);               // Define a rota para animais
 
 // Testando a conexão com o banco de dados
 sequelize.authenticate()                                                
