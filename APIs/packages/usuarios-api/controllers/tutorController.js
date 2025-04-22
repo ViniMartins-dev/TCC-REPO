@@ -1,5 +1,6 @@
 const cadastroTutor = require('../services/cadastroTutor'); // Importa o serviço de cadastro de tutor
 const deletaTutor = require('../services/deleteUsuario'); // Importa o serviço de deletar tutor
+const { atualizarTutor } = require('../services/updateTutor'); // Importa o serviço de atualizar tutor
 
 const cadastrarTutor = async (req, res) => {
     try {
@@ -21,7 +22,19 @@ const deletarTutor = async (req, res) => {
     }
 };
 
+const updateTutor = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const dados = req.body;
+        const tutorAtualizado = await atualizarTutor(id, dados);
+        return res.status(200).json(tutorAtualizado);
+    } catch (error) {
+        return res.status(400).json({ erro: error.message });
+    }
+};
+
 module.exports = {
     cadastrarTutor,
-    deletarTutor
+    deletarTutor,
+    updateTutor
 };

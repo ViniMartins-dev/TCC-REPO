@@ -5,19 +5,19 @@ const verificarIdade = require('../utils/validarIdade');                // Impor
 
 const criarTutor = async (dados) => {                                   // Função para criar um novo tutor
     const {
-    nome,
-    sobrenome,
-    email,
-    telefone,
-    senha,
-    cpf,
-    data_nascimento,
-    latitude,
-    longitude,
+        nome,
+        sobrenome,
+        email,
+        telefone,
+        senha,
+        cpf,
+        data_nascimento,
+        latitude,
+        longitude,
     } = dados;
 
     // Valida o cpf
-    if(!validarCPF(cpf)) {
+    if (!validarCPF(cpf)) {
         throw new Error('CPF inválido.');
     }
 
@@ -28,7 +28,7 @@ const criarTutor = async (dados) => {                                   // Funç
     }
 
     // Valida a idade
-    if(!verificarIdade(data_nascimento)) {
+    if (!verificarIdade(data_nascimento)) {
 
         throw new Error('Idade inválida.');
     }
@@ -59,5 +59,5 @@ const criarTutor = async (dados) => {                                   // Funç
 };
 
 module.exports = {
-  criarTutor,
+    criarTutor,
 };
