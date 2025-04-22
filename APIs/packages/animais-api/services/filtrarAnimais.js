@@ -29,6 +29,11 @@ const aplicarFiltros = (query) => {
         filtros.sexo = query.sexo;
     }
 
+    // Filtro para 'nome' - busca parcial
+    if (query.nome) {
+        filtros.nome = { [Op.like]: `%${query.nome}%` };
+    }
+
     return filtros;
 };
 
@@ -45,7 +50,3 @@ const filtrarAnimais = async (query) => {
 module.exports = {
     filtrarAnimais,
 };
-
-
-
-//GET /animais?especie=Cachorro&raca=Poodle&idade=2&sexo=M
