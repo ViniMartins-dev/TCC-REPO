@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const tutorController = require('../controllers/tutorController');
 const protetorController = require('../controllers/protetorController');
+const loginController = require('../controllers/loginController');
 
 // Rotas para o Tutor
 router.post('/tutor', tutorController.cadastrarTutor);                      // Rota para cadastrar um tutor
@@ -13,6 +14,6 @@ router.post('/protetor', protetorController.cadastrarProtetor);             // R
 router.delete('/protetor/:id', protetorController.deletarProtetor);         // Rota para deletar um protetor
 
 // Rota login
-
+router.post('/login', loginController.login);                               // Rota para login de usuário (tutor ou protetor)
 
 module.exports = router;
