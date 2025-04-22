@@ -1,6 +1,6 @@
 const cadastroProtetor = require('../services/cadastroProtetor'); // Importa o serviço de cadastro de protetor
-const deletaProtetor = require('../services/deleteUsuario'); // Importa o serviço de deletar protetor
-const { atualizarProtetor } = require('../services/updateProtetor'); // Importa o serviço de atualizar protetor
+const deletaProtetor = require('../services/deletarUsuario'); // Importa o serviço de deletar protetor
+const { atualizarProtetor } = require('../services/atualizarProtetor'); // Importa o serviço de atualizar protetor
 
 const cadastrarProtetor = async (req, res) => {
     try {

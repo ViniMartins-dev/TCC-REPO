@@ -1,4 +1,3 @@
-// services/deleteUsuario.js
 const Usuario = require('../models/Usuario');
 
 const deletarUsuario = async (id, tipoEsperado) => {
