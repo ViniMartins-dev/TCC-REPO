@@ -9,6 +9,7 @@
   * {
     padding: 0;
     margin: 0;
+    box-sizing: border-box;
   }
   
   body {
@@ -66,7 +67,93 @@
   #link:hover {
     color: black;
   }
-  
+  main {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    margin: 1.5rem 0 0 0;
+    gap: 20px;
+    padding: 0 8px;
+  }
+  .banner {
+    display: flex;
+    position: relative;
+    width: 90%;
+    height: auto;
+    border-radius: 6px;
+  }
+  .banner__img {
+    width: 100%;
+    height: 100%;
+    border-radius: 6px;
+  }
+  .banner__overlay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,0.4);
+    border-radius: 6px;
+  }
+  .overlay__text {
+    color: #FFFFFF;
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  .container-animais {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 345px);
+    gap: 20px;
+    justify-content: center;
+    width: 100%;
+    padding: 2%;
+  }
+  .container-animais-item {
+    position: relative;
+    background-color: #ffff;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.25);
+    padding: 8px;
+  }
+  .animais-item-img {
+    width: 100%;
+  }
+  .btnFavoritar {
+    position: absolute;
+    font-size: 23px;
+    right: 15px;
+    cursor: pointer;
+    color: #E31B23
+  }
+  .animais-item-text {
+    font-size: 14px;
+    font-weight: 600;
+    margin: 1rem 0 0 0;
+  }
+  @media (min-width: 1080px) {
+    .container-animais {
+      grid-template-columns: repeat(3, 3fr);
+    }
+    .container-animais {
+      padding: 0 5%;
+    }
+  }
+  @media (min-width: 460px) and (max-width: 1080px){
+    .container-animais {
+      grid-template-columns: repeat(auto-fit, 45%);  
+    }
+  }
+  @media (max-width: 400px) {
+    .container-animais {
+      grid-template-columns: repeat(auto-fit, 100%);  
+    }
+  }
 /* deixa esse CSS por ultimo */
   /* .rodape {
     background-color: #CB7842;
