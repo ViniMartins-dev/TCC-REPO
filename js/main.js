@@ -10,7 +10,7 @@ new Swiper('.card-wrapper', { //iniciando o SwiperJS
   //bolinhas embaixo do slide
   pagination: {
     el: '.swiper-pagination', 
-    clickable: false, //bolinha clicavel
+    clickable: true, //bolinha clicavel
     bottomDinamico  : true //bolinha acompanha a transição dos slides
   },
 
