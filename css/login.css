@@ -6,14 +6,15 @@
 }
 
 .principal {
-    max-width: 797px;
+    width: 60%;
+    height: 5%;
     margin: 20px auto;
     box-shadow: 0 0 4px var(--cinza);
     border-radius: 10px;
     padding: 41px;
     box-sizing: border-box;
     position: relative;
-    min-height: 350px;
+    min-height: 465px;
     overflow: hidden;
 }
 
@@ -25,6 +26,7 @@
     position: absolute;
     top: 0;
     left: 0;
+    margin-right: 10px;
     transition: all 0.01s ease;
 }
 
@@ -36,6 +38,10 @@
 .col60 {
     width: 50%;
     padding: 40px 20px;
+}
+
+.form-login {
+    margin-top: 20px;
 }
 
 .form-login h3 {
@@ -88,6 +94,7 @@
 #cadastro .text-login {
     text-align: right;
     padding-left: 100px;
+    margin-left: 20px
 }
 
 .text-login {
