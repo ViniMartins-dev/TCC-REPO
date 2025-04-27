@@ -24,7 +24,7 @@ new Swiper('.card-wrapper', { //iniciando o SwiperJS
     0: {
       slidesPerView: 1
     },
-    768: {
+    768: { 
       slidesPerView: 2
     },
     1024: {
@@ -189,7 +189,7 @@ function abrirPopup(animalStr) {
         <p class="popup-text"><b>Sexo:</b> ${animalObj.sexo}</p>
         <p class="popup-text"><b>Personalidade:</b> <br> ${animalObj.personalidade}</p>
         <p class="popup-text"><b>Descricao:</b> <br> ${animalObj.descricao}</p>
-        <button class="popup-btnAdotar">Adotar</button>
+        <button id="popup-btnAdotar" onclick="adotar()">Adotar</button>
       </div>
     </div>
   `;
@@ -207,6 +207,16 @@ function favoritar() {
     heart.classList.replace("fa-solid", "fa-regular");
     heart.style.color = "#000000";
   }
+}
+
+function adotar() {
+  let btnAdotar = document.getElementById('popup-btnAdotar');
+
+  btnAdotar.addEventListener('click', function() {
+    alert('Seu requerimento de adoção foi para aprovação! ');
+
+  });
+
 }
 
 // Faz o popup fechar quando clicar fora dele
