@@ -38,7 +38,7 @@ body {
 
 #search {
   padding: 7px;
-  width: 350px;
+  width: 450px;
   height: 30px;
   align-items: center;
   border: 1px solid #ccc;
@@ -51,12 +51,12 @@ body {
   padding: 5px;
   width: 30px;
   height: 30px;
-  margin-left: 4px;
-}
+  margin-left: 10px;
+} 
 
 .links-header {
   display: flex;
-  margin-right: 10%;
+  margin-right: 11%;
 }
 
 #link {
@@ -280,7 +280,7 @@ body {
   background-color: #FFFFFF;
   gap: 10px
 }
-.popup-btnAdotar {
+#popup-btnAdotar {
   height: 40px;
   border:none;
   margin: 6px 0 2px 0;
@@ -291,10 +291,10 @@ body {
   font-size: 15px;
   transition-delay: 0.1s;
 }
-.popup-btnAdotar:hover {
+#popup-btnAdotar:hover {
   background-color: #a35f34;
 }
-.popup-btnFavoritar {
+#popup-btnFavoritar {
   position: absolute;
   font-size: 23px;
   right: 15px;
