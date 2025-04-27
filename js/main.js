@@ -44,7 +44,7 @@ const exemploJsonApi = {
     sexo: "M",
     descricao: "Cachorro brincalhão e amigável, adora correr.",
     fotoURL:
-      "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.b0QF4aTYLdhrzmX2HkomBgHaHT%26pid%3DApi&f=1&ipt=ed0e750c8c018df5bc0b061f425a664dabc3eeb6a1dbb67e9e9fc1bc8484c8e9&ipo=images",
+      "https://images.unsplash.com/photo-1575809983151-38458542a6fc?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzV8fGFuaW1hbCUyMGRlJTIwZXN0aW1hJUMzJUE3JUMzJUEzb3xlbnwwfDJ8MHx8fDA%3D",
     personalidade: "Energético e carinhoso",
     cadastrante_id: 101,
     localizacao: { lat: -23.5505, lng: -46.6333 },
@@ -60,7 +60,7 @@ const exemploJsonApi = {
     sexo: "F",
     descricao: "Gatinha tranquila que adora um bom colo.",
     fotoURL:
-      "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.lk9fThZ_ekxDkSYN1SMeawHaFj%26pid%3DApi&f=1&ipt=f7f5e91e58594f081407c2065b661d9134fd8118c86276073447fece462a4ca5&ipo=images",
+      "https://images.unsplash.com/photo-1577980906127-4ea7faa2c6f0?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDN8fGNhdHxlbnwwfDJ8MHx8fDA%3D",
     personalidade: "Calma e afetuosa",
     cadastrante_id: 102,
     localizacao: { lat: -22.9068, lng: -43.1729 },
@@ -76,7 +76,7 @@ const exemploJsonApi = {
     sexo: "M",
     descricao: "Coelhinho muito fofo, ideal para apartamentos.",
     fotoURL:
-      "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.JxoPcGqX6exYFNAg750sjQHaG6%26pid%3DApi&f=1&ipt=c0e0c3084594f86d0d39e7ab30b57e821d463c938713deafc13d54ac81c6007c&ipo=images",
+      "https://images.unsplash.com/photo-1705587226186-bbb26978b7a0?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGJ1bm55fGVufDB8MnwwfHx8MA%3D%3D",
     personalidade: "Tímido, mas curioso",
     cadastrante_id: 103,
     localizacao: { lat: -19.9167, lng: -43.9345 },
@@ -92,7 +92,7 @@ const exemploJsonApi = {
     descricao:
       "Cachorro inteligente, ótimo para atividades físicas e proteção.",
     fotoURL:
-      "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.SS1ZH-ArlL0TA9dhRNt98wHaFS%26pid%3DApi&f=1&ipt=1334cc609ac2d782910de9e3029ff8105c01fc4963b4c60dcb2dbda490c9a3d2&ipo=images",
+    "https://images.unsplash.com/photo-1561495376-dc9c7c5b8726?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGRvZ3xlbnwwfDJ8MHx8fDA%3D",
     personalidade: "Leal e protetor",
     cadastrante_id: 104,
     localizacao: { lat: -23.5505, lng: -46.6333 },
@@ -124,7 +124,7 @@ const exemploJsonApi = {
     sexo: "M",
     descricao: "Cachorro alegre, adora brincar com crianças e outros animais.",
     fotoURL:
-      "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.wv9eIefbFqs4ONjRsU7h9AHaGa%26pid%3DApi&f=1&ipt=d336ec39ba37f633e7d09c0eda62b4aec5ea9ab2d65c3f042b3c810cd39e56c8&ipo=images",
+      "https://images.unsplash.com/photo-1737309657220-025e96d413fe?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fGRvZyUyMDMwMHgzMDB8ZW58MHwyfDB8fHww",
     personalidade: "Amigável, ativo",
     cadastrante_id: 106,
     localizacao: { lat: -21.7645, lng: -43.2333 },
@@ -140,7 +140,7 @@ const exemploJsonApi = {
     sexo: "M",
     descricao: "Cachorro calmo e carinhoso, adora ficar perto dos donos.",
     fotoURL:
-      "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.v3cm9_avR22fgszuni30WAHaJ4%26pid%3DApi&f=1&ipt=94f5b49ff080bf5d3c0a4468a226df7013cc48b37a4d5716b39a29f97f64a655&ipo=images",
+      "https://images.unsplash.com/photo-1610328477500-6767d375fa7e?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fGRvZyUyMGJveGVyfGVufDB8MnwwfHx8MA%3D%3D",
     personalidade: "Carinhoso e tranquilo",
     cadastrante_id: 107,
     localizacao: { lat: -23.4567, lng: -46.6543 },
@@ -210,13 +210,7 @@ function favoritar() {
 }
 
 function adotar() {
-  let btnAdotar = document.getElementById('popup-btnAdotar');
-
-  btnAdotar.addEventListener('click', function() {
     alert('Seu requerimento de adoção foi para aprovação! ');
-
-  });
-
 }
 
 // Faz o popup fechar quando clicar fora dele
@@ -226,6 +220,21 @@ function fecharPopup() {
   body.style.overflow = "";
   overlay.style.display = "none";
 
+}
+function selecionar(elemento) {
+  if (elemento.classList.contains("filRaca-option")) {
+    if (elemento.classList.contains("checked")) {
+      elemento.classList.remove("checked");
+    } else {
+      elemento.classList.add("checked")
+    }   
+  } else if (elemento.classList.contains("filPersonalidade-option")) {
+    if (elemento.classList.contains("checked")) {
+      elemento.classList.remove("checked");
+    } else {
+      elemento.classList.add("checked")
+    }   
+  }
 }
 
 // Inserindo os animais

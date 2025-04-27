@@ -153,8 +153,9 @@ body {
   margin: 1rem 0px;
   gap: 1rem;
 }
-.container-filtro {
 
+/******************** Filtros *****************************/
+.container-filtro {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -171,29 +172,71 @@ body {
   font-weight: 600;
   margin: 3px 0 0 4px;
 }
-.filtro-item {
+.filtro-raca {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   padding: 15px;
   width: 100%;
-  max-height: 250px;
+  max-height: 400px;
+  overflow: auto;
   box-shadow: 0px 4px 8px rgba(0,0,0,0.25);
   background-color: #FFFFFF;
-  gap: 4px
-}
-.filtro-text {
-  font-weight: 600;
-  font-size: 16px;
-}
-.filtro-label {
-  display: flex;
-  align-items: center;
-  font-size: 15px;
   gap: 8px;
 }
-.filtro-input {
-  width: 18px;
-  height: 18px;
+.filRaca-text {
+  font-weight: 600;
+  font-size: 16px;
+  margin: 0;
+}
+.filRaca-dropdown {
+  color: #000000;
+  text-decoration: none;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 100ms;
+  appearance: none
+}
+.filRaca-dropdown:hover  {
+  font-weight: 600;
+  scale: 1.1
+}
+.filRaca-dropdown:checked ~ .filRaca-content {
+  display: flex;
+  animation: appear 100ms forwards;
+}
+@keyframes appear {
+  0% {
+    opacity: 0;
+    transform: translateY(-10%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.filRaca-content {
+  display: none;
+  opacity: 0;
+  width: 100%;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 10px 0 0 0;
+}
+.filRaca-option {
+  padding: 4px 8px;
+  border-radius: 8px;
+  border: #000000 solid 1px;
+  cursor: pointer;
+  transition: all 100ms;
+  font-weight: 500;
+}
+.filRaca-option.checked {
+  border: #cb7842 solid 2px;
+  color: #cb7842; 
+}
+.filRaca-option:hover {
+  background-color: rgba(0,0,0,0.25)
 }
 .container-lista {
   display: flex;
@@ -201,15 +244,101 @@ body {
   gap: 40px
 }
 
+.filtro-idade {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 15px;
+  width: 100%;
+  box-shadow: 0px 4px 8px rgba(0,0,0,0.25);
+  background-color: #FFFFFF;
+  gap: 8px ;
+}
+.filIdade-text {
+  font-weight: 600;
+  font-size: 16px;
+  margin: 0;
+}
+input.filIdade-option {
+  appearance: none;
+}
+input.filIdade-option:checked ~ label.filIdade-option {
+  color: #cb7942;
+}
+input.filIdade-option:checked ~ label.filIdade-option:before {
+  border: #cb7942 solid 1px;
+  background: #cb7942;
+}
+label.filIdade-option {
+  cursor:pointer;
+  color: #000000;
+  transition: all 100ms;
+}
+label.filIdade-option:hover {
+  font-weight: 600;
+  scale: 1.1;
+}
+
+label.filIdade-option:hover:before {
+  border: solid 2px;
+}
+label.filIdade-option:before {
+  content: "";
+  display: inline-flex;
+  width: 11px;
+  height: 11px;
+  border: #000000 solid 1px;
+  border-radius: 100%;
+  transition: all 100ms;
+}
+
+.filtro-personalidade {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding:15px;
+  width: 100%;
+  box-shadow: 0px 4px 8px rgba(0,0,0,0.25);
+  background-color: #FFFFFF;
+  gap: 8px 
+}
+.filPersonalidade-text {
+  font-weight: 600;
+  font-size: 16px;
+  margin: 0;
+}
+.filPersonalidade-content {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 10px 0 0 0;
+}
+.filPersonalidade-option {
+  padding: 4px 8px;
+  border-radius: 8px;
+  border: #000000 solid 1px;
+  cursor: pointer;
+  transition: all 100ms;
+  font-weight: 500;
+}
+.filPersonalidade-option.checked {
+  border: #cb7842 solid 2px;
+  color: #cb7842; 
+}
+.filPersonalidade-option:hover {
+  background-color: rgba(0,0,0,0.25)
+}
+
 .lista-header-titulo {
   margin: 0 0 0 3%;
   font-weight: 600;
 }
-
 .filtro-mobile {
   display: none;
 }
 
+/*********************** Boxes Animais ************************/
 .container-animais {
   display: grid;
   grid-template-columns: repeat(auto-fit, 345px);
@@ -222,6 +351,10 @@ body {
   background-color: #ffff;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.25);
   padding: 1rem;
+  transition: all 300ms;
+}
+.container-animais-item:hover {
+  scale: 1.02
 }
 .container-animais-item:hover .container-animais-item-overlay {
   opacity: 1;
