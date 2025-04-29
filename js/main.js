@@ -237,5 +237,13 @@ function selecionar(elemento) {
   }
 }
 
+function abrirMenu() {
+  let sidebar = document.getElementById("sidebar");
+  sidebar.style.display = "flex";
+}
+function fecharMenu() {
+  let sidebar = document.getElementById("sidebar");
+  sidebar.style.display = "none";
+}
 // Inserindo os animais
 inserirAnimais(exemploJsonApi);

@@ -27,16 +27,30 @@
   </head>
 
   <body id="body">
+    <!-- <div class="espaco-cabecalho"></div> -->
     <div class="cabecalho">
-        <img id="logo" src="./img/Logo-removebg.png" alt="" />
+        <img id="logo" src="./img/Logo-laranja.png" alt="" />
       <div class="search-container">
         <input id="search" type="search" id="checkbox-indefinido" />
-        <button id="btn-search">🔍</button>
+        <div class="box-btn-search">
+          <i class="btn-search fa-solid fa-magnifying-glass"></i>
+        </div>
       </div>
       <div class="links-header">
           <a id="link" href="cadastro_animais.html">Cadastrar</a>
           <a id="link" href="favoritos.html">Favoritos</a>
           <a id="link" href="perfil.html">Perfil</a>
+      </div>
+      <div onclick="abrirMenu()" class="btn-menu">
+        <i class="btn-menu-icon fa-solid fa-bars"></i>
+      </div>
+    </div>
+    <div class="menu-sidebar" id="sidebar">
+      <div onclick="fecharMenu()" class="sidebar-overlay">
+        
+      </div>
+      <div class="sidebar-content" id="sidebar-content">
+
       </div>
     </div>
 
@@ -201,14 +215,29 @@
            <div class="filtro-mobile">
             <!-- parte em que os filtros selecionados aparecerão -->
             <div class="filtros-selecionados_mobile">
-               
+              <div onClick="selecionar(this)" class="filPersonalidade-option">Curioso</div>
+              <div onClick="selecionar(this)" class="filPersonalidade-option">Carinhoso</div>
+              <div onClick="selecionar(this)" class="filPersonalidade-option">Brincalhão</div>
+              <div onClick="selecionar(this)" class="filPersonalidade-option">Protetor</div>
+              <div onClick="selecionar(this)" class="filPersonalidade-option">Sociável</div>
+              <div onClick="selecionar(this)" class="filPersonalidade-option">Tímido</div>
+              <div onClick="selecionar(this)" class="filPersonalidade-option">Independente</div>
+              <div onClick="selecionar(this)" class="filPersonalidade-option">Medroso</div>
+              <div onClick="selecionar(this)" class="filPersonalidade-option">Obediente</div>
+              <div onClick="selecionar(this)" class="filPersonalidade-option">Teimoso</div>
+              <div onClick="selecionar(this)" class="filPersonalidade-option">Leal</div>
+              <div onClick="selecionar(this)" class="filPersonalidade-option">Calmo</div>
+              <div onClick="selecionar(this)" class="filPersonalidade-option">Agitado</div>
+              <div onClick="selecionar(this)" class="filPersonalidade-option">Inteligente</div>
+              <div onClick="selecionar(this)" class="filPersonalidade-option">Dócil</div>
             </div>
             <!-- botão dos filtros -->
              <!-- precisa adicionar a funcionalidade de clicar nele e aparecer as opções -->
-            <button id="btn-filtro_mobile">Filtros</button>
+            <button onclick="" id="btn-filtro_mobile">Filtros</button>
            </div>
 
           <div class="container-animais" id="container-animais">
+
             <!-- aqui esta sendo inserido os animais com inserirAnimais() -->
           </div>
         </div>

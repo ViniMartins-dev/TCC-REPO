@@ -9,67 +9,190 @@
 * {
   padding: 0;
   margin: 0;
+  box-sizing: border-box;
 }
 
 body {
   height: 100%;
 }
-
+.espaco-cabecalho {
+  height: 100px;
+}
 .cabecalho {
-  background-color: #cb7842;
   width: 100%;
   display: flex;
+  height: 80px;
   align-items: center;
   justify-content: space-around;
+  position: relative;
+  top: 0;
+  background-color: #FFFFFF;
+  box-shadow: 0px 2px 4px rgba(0,0,0,0.25);
+  padding: 10px;
 }
 
 #logo {
-  width: 7%;
+  width: 60px;
   margin-bottom: -1%;
-  margin-left: 4%;
+  position: absolute;
+  left: 5%;
+  top: 10px
 }
 
 .search-container {
-  display: grid;
-  grid-template-columns: 90% 10%;
-  padding: 4px;
+  display: block;
+  flex-direction: row;;
   border-radius: 5px;
+  min-width: 450px;
+  width: 30%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 
 #search {
   padding: 7px;
-  width: 450px;
+  width: 100%;
+  min-width: 450px;
   height: 30px;
   align-items: center;
   border: 1px solid #ccc;
-  border-radius: 2px;
+  border-radius: 5px;
 }
-
-#btn-search {
-  border: none;
-  color: white;
-  padding: 5px;
+/* Tira o x de limpar campo do input type search*/
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+  display: none;
+}
+.box-btn-search {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: 4px;
+  top: 0;
   width: 30px;
   height: 30px;
-  margin-left: 10px;
+  cursor: pointer;
+}
+.box-btn-search:hover  .btn-search{
+  scale: 1.1
+}
+.btn-search {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  font-size: 15px;
+  color: #cb7842;
 } 
 
 .links-header {
   display: flex;
-  margin-right: 11%;
+  position: absolute;
+  right: 70px;
+  gap: 25px;
 }
 
 #link {
-  margin-right: 15%;
   text-decoration: none;
-  color: #FFFFFF;
+  color: #cb7842;
+  font-weight: 600;
   font-family: var(--fonte-principal);
 }
 
 #link:hover {
-  color: black;
+  scale: 1.1
+}
+.btn-menu {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: 5%;
+  padding: 2px;
+  border-radius: 4px;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  color: #cb7842;
+}
+.btn-menu:hover {
+  background-color: rgba(0,0,0,0.25);
+}
+.btn-menu-icon {
+  font-size: 25px;
+}
+@media (max-width: 1200px) {
+  .links-header {
+    display: none
+  }
+  .btn-menu {
+    display: flex;
+  }
+}
+@media (max-width: 750px) {
+  #logo {
+   display: none; 
+  }
+  .cabecalho {
+    height: 50px;
+  }
+}
+@media (max-width: 650px) {
+  .btn-menu {
+    display: none;
+  }
+}
+@media (max-width: 500px) {
+  .search-container {
+    min-width: 0px;
+    width: 90%;
+  }
+  #search {
+    min-width: 0px;
+    width: 100%;
+  }
+  footer.rodape {
+    display: none;
+  } 
 }
 
+.menu-sidebar {
+  display: none;
+  flex-direction: row;
+  justify-content: flex-end;
+  position: absolute;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 3;
+}
+.sidebar-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.25);
+}
+.sidebar-content {
+  width: 80%;
+  background-color: #FFFFFF;
+  z-index: 2;
+  animation: sidebar-appear 400ms forwards;
+}
+
+@keyframes sidebar-appear {
+  0% {
+    transform: translate(100%, 0);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+}
 .card-wrapper {
   max-width: 1100px;
   margin: 0 60px 35px;
@@ -336,6 +459,8 @@ label.filIdade-option:before {
 }
 .filtro-mobile {
   display: none;
+  width: 100%;
+  position: relative
 }
 
 /*********************** Boxes Animais ************************/
@@ -475,20 +600,38 @@ label.filIdade-option:before {
     grid-template-columns: 80% 20%;
     border: #000 1px solid;
     border-radius: 4px;
+    position: relative
+  }
+  .filtro-mobile div:nth-child(1) {
     padding: 5px;
+    gap: 8px
   }
 
-  .filtros-selecionados_mobile {
+  .filtros-selecionados_mobile   {
     display: flex;
     flex-direction: row;
+    overflow-x: auto;
+  }
+  /* Retira a barra de scroll */
+  .filtros-selecionados_mobile::-webkit-scrollbar{
+    display: none;
   }
   
   #btn-filtro_mobile {
     display: flex;
-    align-items: end;
-    
+    align-items: center;
+    justify-content: flex-start;
     border: none;
-    padding: 0 12px;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.05);
+    width: 100%;
+    height: 100%;
+    padding: 0 0 0 8px;
+    font-weight: 600;
+    box-shadow: -2px 0  8px rgba(0,0,0,0.25)
+  }
+  #btn-filtro_mobile:hover {
+    background-color: rgba(0,0,0,0.25);
   }
   /*-----------------------*/
   .container-animais {
@@ -514,7 +657,7 @@ label.filIdade-option:before {
       border-radius: 4px;
       padding: 5px;
     }
-  
+    
     .filtros-selecionados_mobile {
       display: flex;
       flex-direction: row;
@@ -522,8 +665,8 @@ label.filIdade-option:before {
     
     #btn-filtro_mobile {
       display: flex;
-      align-items: end;
-      
+      align-items: center;
+      justify-content: center;
       border: none;
       padding: 0 12px;
     }
