@@ -250,14 +250,139 @@
             </div>
             <!-- botão dos filtros -->
              <!-- precisa adicionar a funcionalidade de clicar nele e aparecer as opções -->
-            <button onclick="" id="btn-filtro_mobile">Filtros</button>
+            <button onclick="abrirMenuFiltros()" id="btn-filtro_mobile">Filtros</button>
            </div>
+          
 
           <div class="container-animais" id="container-animais">
 
             <!-- aqui esta sendo inserido os animais com inserirAnimais() -->
           </div>
         </div>
+      </div>
+    </div>
+
+    <div id="menu-filtros" class="menu-filtros">
+      <div onclick="fecharMenuFiltros()" class="menu-filtros-overlay"></div>
+      <div class="menu-filtros-content">
+        <div class="content-header">
+          <i onclick="fecharMenuFiltros()" class="header-xIcon fa-solid fa-xmark"></i>
+        </div>
+
+        <div class="content-main">
+          <div class="main-filtro">
+            <input type="checkbox" class="main-filtro-item" id="filtro-mobile-cachorro" checked/>
+            <label class="main-filtro-item"for="filtro-mobile-cachorro">&#9660; Cachorro</label>
+            <div class="filtro-content">
+              <div onClick="selecionar(this)" class="filRaca-option">Labrador Retriever</div>
+              <div onClick="selecionar(this)" class="filRaca-option">Golden Retriever</div>
+              <div onClick="selecionar(this)" class="filRaca-option">Poodle</div>
+              <div onClick="selecionar(this)" class="filRaca-option">Bulldog Francês</div>
+              <div onClick="selecionar(this)" class="filRaca-option">Husky Siberiano</div>
+              <div onClick="selecionar(this)" class="filRaca-option">Pastor Alemão</div>
+              <div onClick="selecionar(this)" class="filRaca-option">Beagle</div>
+              <div onClick="selecionar(this)" class="filRaca-option">Border Collie</div>
+              <div onClick="selecionar(this)" class="filRaca-option">Shih Tzu</div>
+              <div onClick="selecionar(this)" class="filRaca-option">Chihuahua</div>
+              <div onClick="selecionar(this)" class="filRaca-option">Spitz Alemão</div>
+              <div onClick="selecionar(this)" class="filRaca-option">Doberman</div>
+              <div onClick="selecionar(this)" class="filRaca-option">Akita Inu</div>
+              <div onClick="selecionar(this)" class="filRaca-option">Cocker Spaniel</div>
+              <div onClick="selecionar(this)" class="filRaca-option">Rottweiler</div>
+            </div>
+          </div>
+          <div class="main-filtro">
+            <input type="checkbox" class="main-filtro-item" id="filtro-mobile-gato" checked/>
+            <label class="main-filtro-item" for="filtro-mobile-gato">&#9660; Gatos</label>
+            <div class="filtro-content">
+              <div onClick="selecionar(this)" class="filRaca-option">Persa</div>
+              <div onClick="selecionar(this)" class="filRaca-option">Siamês</div>
+              <div onClick="selecionar(this)" class="filRaca-option">Maine Coon</div>
+              <div onClick="selecionar(this)" class="filRaca-option">Ragdoll</div>
+              <div onClick="selecionar(this)" class="filRaca-option">Bengal</div>
+              <div onClick="selecionar(this)" class="filRaca-option">Sphynx</div>
+              <div onClick="selecionar(this)" class="filRaca-option">Burmese</div>
+              <div onClick="selecionar(this)" class="filRaca-option">British Shorthair</div>
+              <div onClick="selecionar(this)" class="filRaca-option">Abyssinian</div>
+              <div onClick="selecionar(this)" class="filRaca-option">Scottish Fold</div>
+              <div onClick="selecionar(this)" class="filRaca-option">Oriental</div>
+              <div onClick="selecionar(this)" class="filRaca-option">Devon Rex</div>
+              <div onClick="selecionar(this)" class="filRaca-option">Birman</div>
+              <div onClick="selecionar(this)" class="filRaca-option">Russian Blue</div>
+              <div onClick="selecionar(this)" class="filRaca-option">Exotic Shorthair</div>
+            </div>
+          </div>
+          <div class="main-filtro">
+            <input type="checkbox" class="main-filtro-item" id="filtro-mobile-coelho" checked/>
+            <label class="main-filtro-item" for="filtro-mobile-coelho">&#9660; Coelhos</label>
+            <div class="filtro-content">
+              <div onClick="selecionar(this)" class="filRaca-option">Holland Lop</div>
+              <div onClick="selecionar(this)" class="filRaca-option">Angorá</div>
+              <div onClick="selecionar(this)" class="filRaca-option">Mini Rex</div>
+              <div onClick="selecionar(this)" class="filRaca-option">Netherland Dwarf</div>
+              <div onClick="selecionar(this)" class="filRaca-option">English Lop</div>
+              <div onClick="selecionar(this)" class="filRaca-option">Flemish Giant</div>
+              <div onClick="selecionar(this)" class="filRaca-option">Himalayan</div>
+              <div onClick="selecionar(this)" class="filRaca-option">English Angora</div>
+              <div onClick="selecionar(this)" class="filRaca-option">New Zealand</div>
+              <div onClick="selecionar(this)" class="filRaca-option">Lionhead</div>
+              <div onClick="selecionar(this)" class="filRaca-option">French Lop</div>
+              <div onClick="selecionar(this)" class="filRaca-option">Californian</div>
+            </div>
+          </div>
+          <div class="main-filtro">
+            <input type="checkbox" class="main-filtro-item" id="filtro-mobile-idade" checked/>
+            <label class="main-filtro-item"for="filtro-mobile-idade">&#9660; Idades</label>
+            <div class="filtro-content v2">
+              <div>
+                <input class="filIdade-option" type="radio" id="option-idade-6" name="idade">
+                <label class="filIdade-option" for="option-idade-6"> Todas</label>
+              </div>
+              <div>
+                <input class="filIdade-option" type="radio" id="option-idade-7" name="idade">
+                <label class="filIdade-option" for="option-idade-7"> Até 1 ano</label>
+              </div>
+              <div>
+                <input class="filIdade-option" type="radio" id="option-idade-8" name="idade">
+                <label class="filIdade-option" for="option-idade-8"> Até 2 anos</label>
+              </div>
+              <div>
+                <input class="filIdade-option" type="radio" id="option-idade-9" name="idade">
+                <label class="filIdade-option" for="option-idade-9"> Até 3 anos</label>
+              </div>
+              <div>
+                <input class="filIdade-option" type="radio" id="option-idade-10" name="idade">
+                <label class="filIdade-option" for="option-idade-10"> Até 4 anos</label>
+              </div>
+              <div>
+                <input class="filIdade-option" type="radio" id="option-idade-11" name="idade">
+                <label class="filIdade-option" for="option-idade-11"> A partir de 5 anos</label>
+              </div>
+            </div>
+          </div>
+          <div class="main-filtro">
+            <input type="checkbox" class="main-filtro-item" id="filtro-mobile-personalidade" checked/>
+            <label class="main-filtro-item" for="filtro-mobile-personalidade">&#9660; Personalidade</label>
+            <div class="filtro-content">
+              <div onClick="selecionar(this)" class="filPersonalidade-option">Curioso</div>
+              <div onClick="selecionar(this)" class="filPersonalidade-option">Carinhoso</div>
+              <div onClick="selecionar(this)" class="filPersonalidade-option">Brincalhão</div>
+              <div onClick="selecionar(this)" class="filPersonalidade-option">Protetor</div>
+              <div onClick="selecionar(this)" class="filPersonalidade-option">Sociável</div>
+              <div onClick="selecionar(this)" class="filPersonalidade-option">Tímido</div>
+              <div onClick="selecionar(this)" class="filPersonalidade-option">Independente</div>
+              <div onClick="selecionar(this)" class="filPersonalidade-option">Medroso</div>
+              <div onClick="selecionar(this)" class="filPersonalidade-option">Obediente</div>
+              <div onClick="selecionar(this)" class="filPersonalidade-option">Teimoso</div>
+              <div onClick="selecionar(this)" class="filPersonalidade-option">Leal</div>
+              <div onClick="selecionar(this)" class="filPersonalidade-option">Calmo</div>
+              <div onClick="selecionar(this)" class="filPersonalidade-option">Agitado</div>
+              <div onClick="selecionar(this)" class="filPersonalidade-option">Inteligente</div>
+              <div onClick="selecionar(this)" class="filPersonalidade-option">Dócil</div>
+            </div>
+          </div>  
+        </div>
+
       </div>
     </div>
 

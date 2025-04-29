@@ -252,5 +252,17 @@ function fecharMenu() {
 function irParaHome() {
   window.location.href = "./index.html"
 }
+function abrirMenuFiltros() {
+  let menu = document.getElementById("menu-filtros");
+  let body = document.getElementById("body");
+  body.style.overflow = "hidden";
+  menu.classList.add("active")
+}
+function fecharMenuFiltros() {
+  let menu = document.getElementById("menu-filtros");
+  let body = document.getElementById("body");
+  body.style.overflow = "scroll";
+  menu.classList.remove("active")
+}
 // Inserindo os animais
 inserirAnimais(exemploJsonApi);
