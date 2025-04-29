@@ -29,7 +29,7 @@
   <body id="body">
     <!-- <div class="espaco-cabecalho"></div> -->
     <div class="cabecalho">
-        <img id="logo" src="./img/Logo-laranja.png" alt="" />
+        <img onclick="irParaHome()"id="logo" src="./img/Logo-laranja.png" alt="" />
       <div class="search-container">
         <input id="search" type="search" id="checkbox-indefinido" />
         <div class="box-btn-search">
@@ -50,7 +50,24 @@
         
       </div>
       <div class="sidebar-content" id="sidebar-content">
-
+        <i onclick="fecharMenu()" class="x-icon fa-solid fa-xmark"></i>
+        <div class="sidebar-content-espaco"></div>
+        <div class="sidebar-content-item">
+          <i class="sidebar-link-icon fa-solid fa-caret-right"></i>
+          <a class="sidebar-link" href="index.html">Home</a>
+        </div>
+        <div class="sidebar-content-item">
+          <i class="sidebar-link-icon fa-solid fa-caret-right"></i>
+          <a class="sidebar-link" href="cadastro_animais.html">Cadastrar Animal</a>
+        </div>
+        <div class="sidebar-content-item">
+          <i class="sidebar-link-icon fa-solid fa-caret-right"></i>
+          <a class="sidebar-link" href="favoritos.html">Favoritos</a>
+        </div>
+        <div class="sidebar-content-item">
+          <i class="sidebar-link-icon fa-solid fa-caret-right"></i>
+          <a class="sidebar-link" href="perfil.html">Perfil</a>
+        </div>
       </div>
     </div>
 
