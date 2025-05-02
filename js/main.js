@@ -1,37 +1,3 @@
-//Carrossel
-new Swiper('.card-wrapper', { //iniciando o SwiperJS
-  loop: true, //loop para o slider ficar infinito
-  spaceBetween: 30,
-  autoplay: {
-    delay: 3000, //delay da transição entre slides
-
-  },
-
-  //bolinhas embaixo do slide
-  pagination: {
-    el: '.swiper-pagination', 
-    clickable: true, //bolinha clicavel
-    bottomDinamico  : true //bolinha acompanha a transição dos slides
-  },
-
-  navigation: {
-    nextEl: '.swiper-button-next', //botão de proximo
-    prevEl: '.swiper-button-prev', //botão de anterior
-  },
-
-  //Responsividade dos breakpoints
-  breakpoints: {
-    0: {
-      slidesPerView: 1
-    },
-    768: { 
-      slidesPerView: 2
-    },
-    1024: {
-      slidesPerView: 3
-    },
-  }
-});
 
 // Exemplo de json so para teste (ira ser retirado)
 const exemploJsonApi = {
