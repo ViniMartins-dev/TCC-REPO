@@ -66,6 +66,7 @@
     margin-bottom: 20px;
 }
 
+
 .btn {
     width: 100%;
     border: solid 1px var(--cinza);
@@ -113,6 +114,12 @@
     transform: skewX(-40deg);
     transition: all 1s ease;
 }
+
+@media (max-width: 1890px) {
+    .mascara {
+        width: 95%;
+    } 
+} 
 
 /* efeitos de transição */
 #cadastro:not(:target), #login:not(:target) {
