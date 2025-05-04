@@ -121,6 +121,19 @@
     } 
 } 
 
+@media (max-width: 1400px) {
+    .mascara {
+        margin-left: 15px;
+    } 
+} 
+
+@media (max-width: 1150px) {
+    .form-login form {
+        margin-left: 10px;
+    }
+} 
+
+
 /* efeitos de transição */
 #cadastro:not(:target), #login:not(:target) {
     transition: all 1s 1s ease;
