@@ -176,8 +176,14 @@ body {
 
 .main {
   display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+.main-content {
+  display: flex;
   flex-direction: column;
-  width: 60%;
+  width: 100%;
   max-width: 500px;
   padding: 25px 40px;
   border-radius: 8px;
