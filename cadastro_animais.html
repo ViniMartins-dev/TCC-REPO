@@ -47,13 +47,29 @@
       </div>
     </div>
 
+    <h1 class="form__title">Cadastro de Animais para Adoção</h1>
     <div class="main">
-      <a href="index.html">
-        <img class="main__logo" src="img/Logo-laranja.png" alt="Logo do site" />
-      </a>
-      <!-- Formulário -->
+      <div class="image-upload">
+        <label for="imageInput">
+          <div class="image-placeholder">
+            <input type="file" id="img-input" accept="image/*" required>
+          </div>
+        </label>
+      
+        <img class="resized-img" id="resized-img" src="" />
+        <div class="popup-resize" id="popup-resize">
+          <div class="popup-content">
+            <div class="popup-resize__img-container">
+              <img id="img-container__item" src="" />
+            </div>
+            <button class="popup-resize__btn" id="popup-resize__btn">Ok</button>
+          </div>
+        </div>
+      </form>      
+    </div>
+
       <form class="main__form" action="" method="POST">
-        <h1 class="form__title">Cadastro de Animais para Adoção</h1>
+       
 
         <label for="nome">Nome do Animal:</label>
         <input type="text" id="nome" name="nome" required />
@@ -80,27 +96,8 @@
         <label for="descricao">Descrição:</label>
         <textarea id="descricao" name="descricao" rows="4" required></textarea>
 
-        <label for="imagem">Imagem do Animal:</label>
-        <input
-          type="file"
-          id="img-input"
-          name="imagem"
-          accept="image/*"
-          required
-        />
-
-        <!-- Imagem recortada -->
-        <img class="resized-img" id="resized-img" src="" />
         <button type="submit">Cadastrar</button>
       </form>
-    </div>
-    <div class="popup-resize" id="popup-resize">
-      <div class="popup-content">
-        <div class="popup-resize__img-container">
-          <img id="img-container__item" src="" />
-        </div>
-        <button class="popup-resize__btn" id="popup-resize__btn">Ok</button>
-      </div>
     </div>
     <!-- Necessario para rodar o Cropper -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
