@@ -84,3 +84,8 @@ function fecharMenu() {
 function irParaHome() {
   window.location.href = "./index.html"
 }
+let btnImg = document.getElementById("img-buton");
+btnImg.addEventListener("click", () => {
+  let imgInput = document.getElementById("img-input");
+  imgInput.click();
+})
