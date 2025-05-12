@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/animais_cadastrados.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body id="body" class="body">
+    <div class="cabecalho">
+      <img
+        onclick="irParaHome()"
+        id="logo"
+        src="./img/Logo-laranja.png"
+        alt=""
+      />
+      <div class="links-header">
+        <a id="link" href="index.html">Home</a>
+        <a id="link" href="cadastro_animais.html">Cadastrar</a>
+        <a id="link" href="favoritos.html">Favoritos</a>
+      </div>
+      <div onclick="abrirMenu()" class="btn-menu">
+        <i class="btn-menu-icon fa-solid fa-bars"></i>
+      </div>
+    </div>
+
+    <div class="menu-sidebar" id="sidebar">
+      <div onclick="fecharMenu()" class="sidebar-overlay"></div>
+      <div class="sidebar-content" id="sidebar-content">
+        <i onclick="fecharMenu()" class="x-icon fa-solid fa-xmark"></i>
+        <div class="sidebar-content-espaco"></div>
+        <div class="sidebar-content-item">
+          <a class="sidebar-link" href="index.html">Home</a>
+        </div>
+        <div class="sidebar-content-item">
+          <a class="sidebar-link" href="cadastro_animais.html"
+            >Cadastrar Animal</a
+          >
+        </div>
+        <div class="sidebar-content-item">
+          <a class="sidebar-link" href="favoritos.html">Favoritos</a>
+        </div>
+        <div class="sidebar-content-item">
+          <a class="sidebar-link" href="perfil.html">Perfil</a>
+        </div>
+      </div>
+    </div>
+
+    <main>
+      <div class="container-animais" id="container-animais"></div>
+    </main>
+
+    <div class="popupDeletar" id="popupDeletar">
+      <div class="popupDeletar-content">
+        <h1>Atenção</h1>
+        <p>Você deseja deletar este anuncio de adoção?</p>
+        <div class="box-botoes">
+          <div class="btn cancelar" onclick="fecharPopupDeletar()">Não</div>
+          <div class="btn confirmar" onclick="deletarAnuncio()">Sim</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="popupEditar" id="popupEditar">
+      <!-- Aqui dentro esta sendo inserido o popup-content -->
+    </div>
+  </body>
+
+  <script src="./js/animais_cadastrados.js"></script>
+</html>

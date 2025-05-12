@@ -168,6 +168,7 @@
   .sidebar-content-item:hover .sidebar-link{
     font-size: 22px;
   }
+  
   main {
     display: flex;
     flex-direction: column;
