@@ -326,7 +326,7 @@ input[type="search"]::-webkit-search-cancel-button {
 
 @media screen and (max-width: 768px) {
   .card-wrapper {
-    margin: 0 10px 25px;
+    display: none;
   }
 
   .card-wrapper .swiper-slide-button {
