@@ -164,6 +164,7 @@
     font-size: 20px;
     transition: all 100ms;
     font-weight: 600;
+    font-family: var(--fonte-principal);
   }
   .sidebar-content-item:hover .sidebar-link{
     font-size: 22px;
@@ -192,9 +193,9 @@
   .med-main {
     display: inline-flex;
     justify-content: space-around;
-    gap: 30px;
+    width: 100%;
+    gap: 15px;
     margin-top: 10%;
-    margin-left: 8%;
     align-items: center;
     text-align: center;
   }
@@ -204,18 +205,19 @@
     border-radius: 7px;
     font-weight: bold;
     font-family: var(--fonte-principal);
+    cursor: pointer;
   } 
 
   #btn-1 {
-    background: rgba(19, 214, 35, 0.6);
+    background: var(--laranja,);
   }
 
   #btn-2 {
-    background-color: rgb(173, 125, 35, 0.6);
+    background-color: var(--laranja,);
   }
 
   #btn-3 {
-    background-color: rgb(35, 35, 182, 0.6);
+    background-color: var(--laranja,);
   }
 
   .bott-main {
@@ -258,4 +260,27 @@
       color: #888;
     }
 
-  
+  @media screen and (min-width: 600px) {
+     .div-logo {
+      width: 100px;
+      height: 100px;
+     }
+
+     .info {
+      font-size: 20px;
+     }
+
+     .btn_med-main {
+        width: 20%;
+     }
+    
+  }
+
+  @media screen and (min-width: 1030px) {
+    .div-logo {
+      width: 150px;
+      height: 150px;
+      border-radius: 80px;
+    }
+    
+  }
