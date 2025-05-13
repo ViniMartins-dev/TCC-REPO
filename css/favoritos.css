@@ -164,6 +164,7 @@
     font-size: 20px;
     transition: all 100ms;
     font-weight: 600;
+    font-family: var(--fonte-principal);
   }
   .sidebar-content-item:hover .sidebar-link{
     font-size: 22px;
