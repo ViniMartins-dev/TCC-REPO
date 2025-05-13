@@ -168,3 +168,94 @@
   .sidebar-content-item:hover .sidebar-link{
     font-size: 22px;
   }
+
+  .top-main {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .div-logo {
+    display: flex;
+    margin-top: 5%;
+    margin-left: -2%;
+    background-color: gray;
+    width: 80px;
+    height: 80px;
+    border-radius: 50px;
+  }
+
+  .info {
+      font-family: var(--fonte-principal);
+    }
+
+  .med-main {
+    display: inline-flex;
+    justify-content: space-around;
+    gap: 30px;
+    margin-top: 10%;
+    margin-left: 8%;
+    align-items: center;
+    text-align: center;
+  }
+
+  .btn_med-main {
+    padding: 10px;
+    border-radius: 7px;
+    font-weight: bold;
+    font-family: var(--fonte-principal);
+  } 
+
+  #btn-1 {
+    background: rgba(19, 214, 35, 0.6);
+  }
+
+  #btn-2 {
+    background-color: rgb(173, 125, 35, 0.6);
+  }
+
+  #btn-3 {
+    background-color: rgb(35, 35, 182, 0.6);
+  }
+
+  .bott-main {
+      background-color: #ffffff;
+      width: 100%;
+      border-radius: 12px;
+      padding: 20px;
+      overflow: hidden;
+      font-family: var(--fonte-principal);
+    }
+
+    .menu-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 10px;
+      border-radius: 8px;
+      color: #333;
+      text-decoration: none;
+      transition: background 0.2s;
+      cursor: pointer;
+    }
+
+    .menu-item:hover {
+      background-color: #f0f0f0;
+    }
+
+    .menu-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .menu-icon {
+      font-size: 18px;
+    }
+
+    .arrow {
+      font-size: 14px;
+      color: #888;
+    }
+
+  
