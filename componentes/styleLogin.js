@@ -78,6 +78,16 @@ const styles = StyleSheet.create({
       fontWeight: '700',
       fontSize: 20,
     },
+    logo: {
+      width: 100,
+      height: 100,
+      resizeMode: 'contain',
+      marginLeft: 10,
+      position: 'absolute',
+      top: 20,
+      right: 5,
+    },
+    
   });
 
   export default styles;

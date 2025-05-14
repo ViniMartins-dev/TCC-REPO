@@ -8,10 +8,11 @@ import {
   Image,
 } from 'react-native';
 import styles from "./styleCadastro";
+import { TextInputMask } from 'react-native-masked-text';
 
 export default function Cadastro({navigation}) {
   const [nome, setNome] = useState('');
-  const [sobrenome, setSobrenome] = useState('');
+  const [data, setData] = useState('');
   const [cpf, setCpf] = useState('');
   const [email, setEmail] = useState('');
   const [telefone, setTelefone] = useState('');
@@ -22,12 +23,15 @@ export default function Cadastro({navigation}) {
   const [password, setPassword] = useState(true);
   const [focusStates, setFocusStates] = useState({
     nome: false,
-    sobrenome: false,
+    data: false,
     cpf: false,
     email: false,
     telefone: false,
     senha: false,
   });
+
+// Dentro do componente:
+
 
   const handleFocus = (field) => {
     setFocusStates((prev) => ({ ...prev, [field]: true }));
@@ -67,7 +71,7 @@ export default function Cadastro({navigation}) {
 
       <SafeAreaView style={styles.container2}>
         <View style={styles.wrapper}>
-          <Text style={styles.text}>Nome</Text>
+          <Text style={styles.text}>Nome Completo</Text>
           <TextInput
             style={[
               styles.input,
@@ -82,17 +86,20 @@ export default function Cadastro({navigation}) {
         </View>
 
         <View style={styles.wrapper}>
-          <Text style={styles.text}>Sobrenome</Text>
-          <TextInput
+          <Text style={styles.text}>Data de nascimento</Text>
+          <TextInputMask
+            type={'datetime'}
+            options={{ format: 'DD/MM/YYYY' }}
             style={[
               styles.input,
-              { borderColor: focusStates.sobrenome ? '#ffbb12' : '#d2cec5' },
-              { backgroundColor: focusStates.sobrenome ? '#ffffff' : '#f9f8f6' },
+              { borderColor: focusStates.data ? '#ffbb12' : '#d2cec5' },
+              { backgroundColor: focusStates.data ? '#ffffff' : '#f9f8f6' },
             ]}
-            onFocus={() => handleFocus('sobrenome')}
-            onBlur={() => handleBlur('sobrenome')}
-            value={sobrenome}
-            onChangeText={setSobrenome}
+            value={data}
+            onChangeText={setData}
+            onFocus={() => handleFocus('data')}
+            onBlur={() => handleBlur('data')}
+            placeholder="dd/mm/aaaa"
           />
         </View>
 

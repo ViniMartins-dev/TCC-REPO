@@ -8,6 +8,7 @@ import {
   Image,
 } from 'react-native';
 import styles from "./styleLogin";
+import logo from '../assets/image.png';
 
 export default function Login({ navigation }) {
   const [email, setEmail] = useState('');
@@ -30,7 +31,8 @@ export default function Login({ navigation }) {
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.headerText}>Login</Text>
-        <View style={styles.decorator} />
+        <Image source={logo} style={styles.logo} />
+        
       </View>
 
       <View style={styles.form}>
