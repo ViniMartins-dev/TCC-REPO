@@ -1,5 +1,5 @@
 const { DataTypes } = require('sequelize');
-const sequelize = require('../config/database.js'); // Caminho da conexão com o banco
+const sequelize = require('../../../config/database');
 
 const Usuario = sequelize.define('Usuario', {
     id: {

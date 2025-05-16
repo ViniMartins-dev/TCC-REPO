@@ -1,5 +1,5 @@
 const { DataTypes } = require('sequelize');
-const sequelize = require('../config/database');
+const sequelize = require('../../../config/database');
 
 // Definição do modelo de Adoção
 const Adocao = sequelize.define('Adocao', {

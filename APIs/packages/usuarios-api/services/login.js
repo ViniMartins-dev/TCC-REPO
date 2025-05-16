@@ -21,6 +21,9 @@ const loginUsuario = async (email, senha) => {
     // Gera o token
     const payload = {
         id: usuario.id,
+        nome: usuario.nome,
+        sobrenome: usuario.sobrenome,
+        nome_fantasia: usuario.nome_fantasia,
         email: usuario.email,
         tipo: usuario.tipo
     };
@@ -33,7 +36,7 @@ const loginUsuario = async (email, senha) => {
 
     return {
         token,
-        usuario: usuarioJson,
+        payload
     };
 }
 

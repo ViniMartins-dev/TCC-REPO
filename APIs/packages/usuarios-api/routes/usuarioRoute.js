@@ -3,6 +3,8 @@ const router = express.Router();
 const tutorController = require('../controllers/tutorController');
 const protetorController = require('../controllers/protetorController');
 const loginController = require('../controllers/loginController');
+const auth = require('../../auth/auth'); // Importa o middleware de autenticação
+
 
 // Rotas para o Tutor
 router.post('/tutor', tutorController.cadastrarTutor);                      // Rota para cadastrar um tutor
