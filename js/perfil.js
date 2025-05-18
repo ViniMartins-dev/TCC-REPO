@@ -13,3 +13,4 @@ function fecharMenu() {
 function irParaHome() {
   window.location.href = "./index.html"
 }
+
