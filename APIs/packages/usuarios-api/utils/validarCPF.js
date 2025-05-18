@@ -2,6 +2,8 @@ function validarCPF(cpf) {
     // Remove caracteres não numéricos
     cpf = cpf.replace(/[^\d]+/g, '');
 
+    if (cpf === '0') return true;
+
     // Verifica se o CPF tem 11 dígitos
     if (cpf.length !== 11) {
         return false;
