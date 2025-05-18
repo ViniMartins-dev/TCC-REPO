@@ -1,4 +1,4 @@
-const Animal = require('../models/Animal');
+const Animal = require('../../models/Animal');
 
 const atualizarAnimal = async (id, dados) => {
     const animal = await Animal.findByPk(id);

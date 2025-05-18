@@ -1,6 +1,6 @@
-const Adocao = require('../models/Adocao');
-const Usuario = require('../models/Usuario');
-const Animal = require('../models/Animal');
+const Adocao = require('../../models/Adocao');
+const Usuario = require('../../models/Usuario');
+const Animal = require('../../models/Animal');
 
 const listarAdocoes = async (protetorId) => {
     try {

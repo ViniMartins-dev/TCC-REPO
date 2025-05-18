@@ -1,5 +1,5 @@
 const { DataTypes } = require('sequelize');
-const sequelize = require('../../../config/database');
+const sequelize = require('../../config/database');
 const Usuario = require('./Usuario');
 const Animal = require('./Animal');
 
@@ -45,7 +45,7 @@ Favorito.belongsTo(Usuario, {
     as: 'tutor',  // Alias para o tutor
 });
 
-// Associação do Adocao com o Animal
+// Associação do favorito com o Animal
 Favorito.belongsTo(Animal, {
     foreignKey: 'animal_id',  // Chave estrangeira para o animal
     as: 'animal',  // Alias para o animal

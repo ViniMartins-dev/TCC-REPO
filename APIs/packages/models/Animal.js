@@ -1,6 +1,5 @@
 const { DataTypes } = require('sequelize');
-const sequelize = require('../../../config/database');
-const Usuario = require('./Usuario');
+const sequelize = require('../../config/database');
 
 const Animal = sequelize.define('Animal', {
     id: {
@@ -69,9 +68,12 @@ const Animal = sequelize.define('Animal', {
     },
 });
 
-Animal.belongsTo(Usuario, {
-    foreignKey: 'usuario_id',  // Chave estrangeira para o protetor
-    as: 'protetor',  // Alias para o protetor
-});
+// Exporta com associação separada
+Animal.associate = (models) => {
+    Animal.belongsTo(models.Usuario, {
+        foreignKey: 'usuario_id',
+        as: 'usuario',
+    });
+};
 
 module.exports = Animal;

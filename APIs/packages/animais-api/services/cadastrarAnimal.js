@@ -1,5 +1,5 @@
-const Animal = require('../models/Animal');
-const Usuario = require('../models/Usuario');
+const Animal = require('../../models/Animal');
+const Usuario = require('../../models/Usuario');
 
 const criarAnimal = async (dados) => {
 

@@ -1,4 +1,4 @@
-const Usuario = require('../models/Usuario');
+const Usuario = require('../../models/Usuario');
 
 const deletarUsuario = async (id, tipoEsperado) => {
     const usuario = await Usuario.findByPk(id);

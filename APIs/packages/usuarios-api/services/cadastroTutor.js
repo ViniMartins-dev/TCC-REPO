@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt');                                       // Importa o bcrypt para hash de senhas         
-const Usuario = require('../models/Usuario');                           // Importa o modelo de Usuário
+const Usuario = require('../../models/Usuario');                           // Importa o modelo de Usuário
 const validarCPF = require('../utils/validarCPF');                      // Importa a função de validação de CPF
 const verificarIdade = require('../utils/validarIdade');                // Importa a função de validação de idade
 

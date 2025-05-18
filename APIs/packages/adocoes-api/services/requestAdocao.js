@@ -1,6 +1,6 @@
-const Adocao = require('../models/Adocao');
-const Animal = require('../models/Animal');
-const Usuario = require('../models/Usuario');
+const Adocao = require('../../models/Adocao');
+const Animal = require('../../models/Animal');
+const Usuario = require('../../models/Usuario');
 
 const gerarAdocao = async (dados) => {
     // Verifica se o usuário existe e é do tipo 'tutor'
@@ -17,7 +17,7 @@ const gerarAdocao = async (dados) => {
     if (!animal) {
         throw new Error('Animal não encontrado.');
     }
-    if (animal.status !== 'Disponível') {
+    if (animal.status !== 'disponivel') {
         throw new Error('Animal não está disponível para adoção.');
     }
 
@@ -25,7 +25,7 @@ const gerarAdocao = async (dados) => {
     const adocao = await Adocao.create({
         tutor_id: dados.tutor_id,
         animal_id: dados.animal_id,
-        status: 'Pendente',
+        status: 'pendente',
     });
 
     return adocao;

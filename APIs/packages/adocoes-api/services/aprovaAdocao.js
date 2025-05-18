@@ -1,5 +1,5 @@
-const Adocao = require('../models/Adocao');
-const Animal = require('../models/Animal');
+const Adocao = require('../../models/Adocao');
+const Animal = require('../../models/Animal');
 
 const aprovarAdocao = async (idAdocao, aval) => {
     const adocao = await Adocao.findByPk(idAdocao);
@@ -7,12 +7,12 @@ const aprovarAdocao = async (idAdocao, aval) => {
         throw new Error('Adoção não encontrada.');
     }
 
-    const statusValido = ['Pendente', 'Aprovada', 'Rejeitada'];
+    const statusValido = ['pendente', 'aprovada', 'rejeitada'];
     if (!statusValido.includes(aval)) {
         throw new Error('Status de adoção inválido. Use: Pendente, Aprovada ou Rejeitada.');
     }
 
-    if (adocao.status !== 'Pendente') {
+    if (adocao.status !== 'pendente') {
         throw new Error(`Adoção já foi ${adocao.status.toLowerCase()}.`);
     }
 
@@ -20,10 +20,10 @@ const aprovarAdocao = async (idAdocao, aval) => {
     await adocao.save();
 
     // Se a adoção for aprovada, atualiza o status do animal
-    if (aval === 'Aprovada') {
+    if (aval === 'aprovada') {
         const animal = await Animal.findByPk(adocao.animal_id);
         if (animal) {
-            animal.status = 'Adotado';
+            animal.status = 'adotado';
             await animal.save();
         }
     }

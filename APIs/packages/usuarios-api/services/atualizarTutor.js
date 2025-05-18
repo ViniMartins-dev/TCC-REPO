@@ -1,4 +1,4 @@
-const Usuario = require('../models/Usuario');
+const Usuario = require('../../models/Usuario');
 const validarCPF = require('../utils/validarCPF');
 
 const atualizarTutor = async (id, dados) => {

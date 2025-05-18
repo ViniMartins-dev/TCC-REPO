@@ -1,6 +1,6 @@
-const Favorito = require('../models/Favorito');
-const Usuario = require('../models/Usuario');
-const Animal = require('../models/Animal');
+const Favorito = require('../../models/Favorito');
+const Usuario = require('../../models/Usuario');
+const Animal = require('../../models/Animal');
 
 const removerFavorito = async (id_animal, id_usuario) => {
     // Verifica se o favorito existe

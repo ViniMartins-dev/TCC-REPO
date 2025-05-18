@@ -1,6 +1,6 @@
-const Favorito = require('../models/Favorito');
-const Usuario = require('../models/Usuario');
-const Animal = require('../models/Animal');
+const Favorito = require('../../models/Favorito');
+const Usuario = require('../../models/Usuario');
+const Animal = require('../../models/Animal');
 
 const adicionarFavorito = async (dados) => {
     const { usuario_id, animal_id } = dados;
