@@ -3,6 +3,7 @@ const cadastroAnimal = require('../services/cadastrarAnimal');              // I
 const atualizaAnimal = require('../services/atualizarAnimal');              // Importa o serviço de atualizar animal
 const deletaAnimal = require('../services/deletarAnimal');                  // Importa o serviço de deletar animal
 const filtraAnimais = require('../services/filtrarAnimais');                // Importa o serviço de filtrar animais
+const buscaAnimalPorId = require('../services/animalPorId');                    // Importa o serviço de obter animal por ID
 
 const listarAnimais = async (req, res) => {
     try {
@@ -56,10 +57,21 @@ const filtrarAnimais = async (req, res) => {
     }
 };
 
+const animalPorId = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const animal = await buscaAnimalPorId.animalPorId(id);
+        return res.status(200).json(animal);
+    } catch (error) {
+        return res.status(400).json({ erro: error.message });
+    }
+}
+
 module.exports = {
     listarAnimais,
     cadastrarAnimal,
     atualizarAnimal,
     deletarAnimal,
-    filtrarAnimais
+    filtrarAnimais,
+    animalPorId
 };

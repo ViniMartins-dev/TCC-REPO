@@ -7,6 +7,7 @@ router.get('/cadastrados/:id', auth.authToken, animalController.listarAnimais); 
 router.post('/', auth.authToken, animalController.cadastrarAnimal);                 // Rota para cadastrar um novo animal
 router.put('/:id', auth.authToken, animalController.atualizarAnimal);               // Rota para atualizar um animal existente
 router.delete('/:id', auth.authToken, animalController.deletarAnimal);              // Rota para deletar um animal existente
+router.get('/:id', auth.authToken, animalController.animalPorId);                  // Rota para obter um animal específico pelo id
 
 router.get('/filtrar', auth.authToken, animalController.filtrarAnimais);            // Rota para filtrar animais com base em critérios específicos
 
