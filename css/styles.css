@@ -595,6 +595,45 @@ label.filIdade-option:before {
   align-items: center;
   background: rgba(0, 0, 0, 0.7);
 }
+.popupPedidoAdocao {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  padding: 16px;
+  background-color: #ffffff;
+  max-height: 90vh;
+  overflow-y: auto;
+  gap: 4px;
+}
+.popupPedidoAdocao h1 {
+  align-self: flex-start;
+  font-weight: 600;
+}
+.popupPedidoAdocao p {
+  margin: 0;
+  text-align: center;
+}
+.popupPedidoAdocao button {
+  height: 40px;
+  width: 100%;
+  border: none;
+  margin: 6px 0 2px 0;
+  padding: 4px;
+  background-color: #cb7842;
+  border-radius: 8px;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 15px;
+  transition-delay: 0.1s;
+  margin: 8px 0 0 0;
+}
+.popupPedidoAdocao button:hover {
+  background-color: #a35f34;
+}
 .popup {
   display: flex;
   position: relative;

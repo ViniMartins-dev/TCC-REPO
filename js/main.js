@@ -84,6 +84,21 @@ class Animal {
       popup.trocarIconCoracaoParaFavoritado()
     }
   }
+  async adotar(idUser, idAnimal) {
+    let response = await fetch(`http://localhost:3000/adocao/request`, {
+      method: 'POST',
+      headers: {
+        'Content-Type':'application/json',
+      },
+      body: JSON.stringify({
+        "animal_id": idAnimal,
+        "tutor_id": idUser
+      })
+    })
+    if (response.ok) {
+      popup.inserirPopupPedidoDeAdocao();
+    }
+  }
 }
 const animal = new Animal();
 
@@ -104,7 +119,19 @@ class PopupAnimal {
     this.body.style.overflow = "";
     this.overlay.style.display = "none";
   }
-
+  inserirPopupPedidoDeAdocao() {
+    this.overlay.innerHTML = `
+      <div class="popupPedidoAdocao" onclick="event.stopPropagation()">
+        <h1>Atenção</h1>
+        <p>
+          Seu pedido de adoção foi enviado!
+          <br>
+          Por favor aguarde a aprovação
+        </p>
+        <button onclick="popup.fechar()">Fechar</button>
+      </div>
+    `
+  }
   async inserirConteudo(animalStr) {
     let animalObj = decodificaStrEmObj(animalStr);
     let verificaSeEstaFavoritado = await animal.isFavorite(user.id, animalObj.id);
@@ -119,7 +146,7 @@ class PopupAnimal {
           <p class="popup-text"><b>Sexo:</b> ${animalObj.sexo}</p>
           <p class="popup-text"><b>Personalidade:</b> <br> ${animalObj.personalidade}</p>
           <p class="popup-text"><b>Descricao:</b> <br> ${animalObj.descricao}</p>
-          <button id="popup-btnAdotar" onclick="adotar()">Adotar</button>
+          <button id="popup-btnAdotar" onclick="animal.adotar(${user.id}, ${animalObj.id})">Adotar</button>
         </div>
       </div>
     `;
@@ -184,10 +211,6 @@ function contemClasse(element,classe) {
     return false
   }
 }
-function adotar() {
-    alert('Seu requerimento de adoção foi para aprovação! ');
-}
-
 function selecionar(elemento) {
   if (elemento.classList.contains("filRaca-option")) {
     if (elemento.classList.contains("checked")) {
