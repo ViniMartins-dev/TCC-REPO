@@ -41,17 +41,17 @@
           <a id="link" href="favoritos.html">Favoritos</a>
           <a id="link" href="perfil.html">Perfil</a>
       </div>
-      <div onclick="abrirMenu()" class="btn-menu">
+      <div onclick="sidebar.abrir()" class="btn-menu">
         <i class="btn-menu-icon fa-solid fa-bars"></i>
       </div>
     </div>
     
     <div class="menu-sidebar" id="sidebar">
-      <div onclick="fecharMenu()" class="sidebar-overlay">
+      <div onclick="sidebar.fechar()" class="sidebar-overlay">
         
       </div>
       <div class="sidebar-content" id="sidebar-content">
-        <i onclick="fecharMenu()" class="x-icon fa-solid fa-xmark"></i>
+        <i onclick="sidebar.fechar()" class="x-icon fa-solid fa-xmark"></i>
         <div class="sidebar-content-espaco"></div>
         <div class="sidebar-content-item">
           <i class="sidebar-link-icon fa-solid fa-caret-right"></i>
@@ -243,7 +243,7 @@
             </div>
             <!-- botão dos filtros -->
              <!-- precisa adicionar a funcionalidade de clicar nele e aparecer as opções -->
-            <button onclick="abrirMenuFiltros()" id="btn-filtro_mobile">Filtros</button>
+            <button onclick="menuFiltro.abrir()" id="btn-filtro_mobile">Filtros</button>
            </div>
           
 
@@ -256,10 +256,10 @@
     </div>
 
     <div id="menu-filtros" class="menu-filtros">
-      <div onclick="fecharMenuFiltros()" class="menu-filtros-overlay"></div>
+      <div onclick="menuFiltro.fechar()" class="menu-filtros-overlay"></div>
       <div class="menu-filtros-content">
         <div class="content-header">
-          <i onclick="fecharMenuFiltros()" class="header-xIcon fa-solid fa-xmark"></i>
+          <i onclick="menuFiltro.fechar()" class="header-xIcon fa-solid fa-xmark"></i>
         </div>
 
         <div class="content-main">
@@ -379,7 +379,7 @@
       </div>
     </div>
 
-    <div id="overlay" onclick="fecharPopup()">
+    <div id="overlay" onclick="popup.fechar()">
       <!-- aqui esta sendo inserido o popup com abrirPopup() -->
     </div>
   </body>
