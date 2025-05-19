@@ -1,91 +1,133 @@
-let cropper;
-let popup = document.getElementById("popup-resize");
-let body = document.getElementById("body");
-
-// Dispara uma função sempre que o usuario selecionar um arquivo
-document.getElementById("img-input").addEventListener("change", function (e) {
-  const files = e.target.files; // Retorna uma lista dos arquivos selecionados
-  // Verifica se há algum arquivo e se algum foi selecionado
-  if (files && files.length > 0) {
-    body.style.overflow = "hidden";
-    popup.style.display = "flex";
-    const image = document.getElementById("img-container__item");
-    // Pega o primeiro arquivo da lista de arquivos selecionado
-    const file = files[0];
-
-    // Define o src da tag <img>
-    if (URL) {
-      image.src = URL.createObjectURL(file); // Cria uma URL temporaria para a imagem
-    } else if (FileReader) {
-      // Alternativa para navegadores antigos que nao suportam URL.createObjectURL
-      const reader = new FileReader();
-      reader.onload = function (e) {
-        image.src = e.target.result;
-      };
-      reader.readAsDataURL(file);
-    }
-    // Verifica se há uma instancia cropper e apaga ela
-    if (cropper) {
-      cropper.destroy();
-    }
-    // Dispara uma função quando a imagem terminar de carregar
-    image.onload = function () {
-      // Cria uma nova instancia cropper
-      cropper = new Cropper(image, {
-        aspectRatio: 300 / 298, // Define o tamanho inicial da area de corte
-        viewMode: 1, // Define o modo de visualização
-        guides: false, // Desativa as guias
-        background: false, // Desativa o background
-        cropBoxResizable: false, // Desativa o redimencionamento da area de corte
-        dragMode: "move", // Define o modo inicial para mexer a imagem
-        toggleDragModeOnDblclick: false, // Impede que o user troque de modo
-      });
-    };
+class PaginaODT {
+  constructor() {
+    this.body = document.getElementById("body");
+    this.popup = document.getElementById("popup-resize");
+    this.btnAddImg = document.getElementById("img-buton");
+    this.imgInputfile = document.getElementById("img-input");
   }
-});
-// Dispara uma função quando o botao de OK for clicado
-document
-  .getElementById("popup-resize__btn")
-  .addEventListener("click", function () {
-    popup.style.display = "none"; 
-    body.style.overflow = "";
-    // Verifica se o cropper esta inicializado
-    if (cropper) {
-      // Pega a verção cortada da imagem
-      const canvas = cropper.getCroppedCanvas();
-      if (canvas) {
-        // Tranforma a imagem recortada em um blob (um tipo de obj representado
-        // por binarios) Dispara uma função para lidar com este blob
-        canvas.toBlob(
-          (blob) => {
-            const url = URL.createObjectURL(blob); // Cria um URL temporario para imagem recortada
-            // Define o src da <img> como o url
-            let img = document.getElementById("resized-img");
-            img.src = url;
-          },
-          "image/jpeg",
-          0.95
-        );
-      }
-    }
-  });
-function abrirMenu() {
-  let sidebar = document.getElementById("sidebar");
-  let body = document.getElementById("body");
-  body.style.overflow = "hidden"
-  sidebar.style.display = "flex";
 }
-function fecharMenu() {
-  let sidebar = document.getElementById("sidebar");
-  let body = document.getElementById("body");
-  body.style.overflow = "scroll"
-  sidebar.style.display = "none";
+const pagina = new PaginaODT();
+
+class Sidebar {
+  constructor() {
+    this.sidebar = document.getElementById("sidebar");
+    this.body = document.getElementById("body");
+  }
+  abrir() {
+    this.body.style.overflow = "hidden"
+    this.sidebar.style.display = "flex";
+  }
+  fechar() {
+    this.body.style.overflow = "scroll"
+    this.sidebar.style.display = "none";
+  }
 }
+const sidebar = new Sidebar();
+
 function irParaHome() {
   window.location.href = "./index.html"
 }
-let btnImg = document.getElementById("img-buton");
-btnImg.addEventListener("click", () => {
-  let imgInput = document.getElementById("img-input");
-  imgInput.click();
-})
+
+function adicionaObservadorBtnAddImg() {
+  pagina.btnAddImg.addEventListener("click", () => {
+    pagina.imgInputfile.click();
+  })
+}
+adicionaObservadorBtnAddImg()
+
+let cropper;
+class RecortadorImagem {
+  constructor() {
+    this.file; 
+    this.image;
+    this.imgRecortada = document.getElementById("resized-img");
+  }
+  definirThisImage() {
+    this.image = document.getElementById("img-container__item")
+  }
+  adicionaObservadorNoInputFile() {
+    document.getElementById("img-input").addEventListener("change", (e) => {
+      this.definirThisImage()
+      const files = e.target.files;
+      if (files && files.length > 0) {
+        this.file = files[0];
+        this.dispararRecortador();
+      }
+    });
+  }
+  dispararRecortador() {
+    this.abrirPopupRecortador();
+    this.trocarSrcDaImagem(URL);
+    this.verificaSeHaCropper()
+    this.image.onload = () => {
+      this.criaNovaInstaciaCropper();
+    };
+  }
+  abrirPopupRecortador () {
+      pagina.body.style.overflow = "hidden";
+      pagina.popup.style.display = "flex";
+  }
+  trocarSrcDaImagem(URL) {
+    this.definirThisImage();
+    if (URL) {
+      this.image.src = URL.createObjectURL(this.file);
+    } else if (FileReader) {
+      // Alternativa para navegadores antigos
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        this.image.src = e.target.result;
+      };
+      reader.readAsDataURL(this.file);
+    }
+  }
+  verificaSeHaCropper() {
+    if (cropper) {
+      cropper.destroy();
+    }
+  }
+  criaNovaInstaciaCropper() {
+    this.definirThisImage()
+    cropper = new Cropper(this.image, {
+      aspectRatio: 300 / 298, 
+      viewMode: 1, 
+      guides: false, 
+      background: false, 
+      cropBoxResizable: false, 
+      dragMode: "move", 
+      toggleDragModeOnDblclick: false, 
+    });
+  }
+  adicionarObservadorNoBtnOk() {
+    let btn = document.getElementById("popup-resize__btn");
+    btn.addEventListener("click", () => {
+      this.fecharPopupRecortador();
+      // Verifica se o cropper esta inicializado
+      if (cropper) {
+        const canvas = cropper.getCroppedCanvas();
+        if (canvas) {
+          this.tranformaCanvasEmBlob(canvas)
+        }
+      }
+    });
+  }
+  tranformaCanvasEmBlob(canvas) {
+    canvas.toBlob(
+      (blob) => {
+        const url = URL.createObjectURL(blob); // Cria um URL temporario para imagem recortada
+        this.defineSrcImgRecortada(url)
+      },
+      "image/jpeg",
+      0.95
+    );
+  }
+  defineSrcImgRecortada(url) {
+    this.imgRecortada.src = url;
+  }
+  fecharPopupRecortador() {
+      pagina.popup.style.display = "none"; 
+      pagina.body.style.overflow = "";
+  }
+}
+const recortador = new RecortadorImagem();
+recortador.adicionaObservadorNoInputFile()
+recortador.adicionarObservadorNoBtnOk()

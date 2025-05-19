@@ -21,16 +21,16 @@
           <a id="link" href="favoritos.html">Favoritos</a>
           <a id="link" href="perfil.html">Perfil</a>
       </div>
-      <div onclick="abrirMenu()" class="btn-menu">
+      <div onclick="sidebar.abrir()" class="btn-menu">
         <i class="btn-menu-icon fa-solid fa-bars"></i>
       </div>
     </div>
     <div class="menu-sidebar" id="sidebar">
-      <div onclick="fecharMenu()" class="sidebar-overlay">
+      <div onclick="sidebar.fechar()" class="sidebar-overlay">
         
       </div>
       <div class="sidebar-content" id="sidebar-content">
-        <i onclick="fecharMenu()" class="x-icon fa-solid fa-xmark"></i>
+        <i onclick="sidebar.fechar()" class="x-icon fa-solid fa-xmark"></i>
         <div class="sidebar-content-espaco"></div>
         <div class="sidebar-content-item">
           <a class="sidebar-link" href="index.html">Home</a>
