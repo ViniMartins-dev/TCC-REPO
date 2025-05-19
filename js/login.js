@@ -32,6 +32,7 @@ document.getElementById('form-cadastro').addEventListener('submit', function(eve
     let senha = document.getElementById('pass-cadastro');
 
     let url = '';
+    //faz um objeto para pegar os valores dos dados passados
     const dados = {
         tipo: tipo,
         nome: nome.value.trim(),
@@ -77,6 +78,37 @@ document.getElementById('form-cadastro').addEventListener('submit', function(eve
     })
 
 })
+
+document.getElementById('form-login').addEventListener('submit', function(event) {
+    event.preventDefault(); //trava o envio para podermos manipular os dados
+
+    let email = document.getElementById('email-login').value.trim();
+    let senha = document.getElementById('senha-login').value.trim();
+
+    fetch('', {
+        method: POST,
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            email: email, 
+            senha: senha
+        })
+    })
+
+    .then(response => {
+        if(!response.ok) throw new Error('Erro na validação de login');
+        return response.json();
+    })
+    .then(result => {
+        alert('Validação bem sucedida !!!');
+    })
+    .catch(e => {
+        console.error('Erro:', e);
+        alert('Login ou Senha incorreta !')
+    }) 
+
+} )
 
 
 
