@@ -58,18 +58,7 @@
       <div class="container-animais" id="container-animais"></div>
     </main>
 
-    <div class="popupDeletar" id="popupDeletar">
-      <div class="popupDeletar-content">
-        <h1>Atenção</h1>
-        <p>Você deseja deletar este anuncio de adoção?</p>
-        <div class="box-botoes">
-          <div class="btn cancelar" onclick="fecharPopupDeletar()">Não</div>
-          <div class="btn confirmar" onclick="deletarAnuncio()">Sim</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="popupEditar" id="popupEditar">
+    <div onclick="popup.fechar()" class="popup" id="popup">
       <!-- Aqui dentro esta sendo inserido o popup-content -->
     </div>
   </body>

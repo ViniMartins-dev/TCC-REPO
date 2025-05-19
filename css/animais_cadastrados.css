@@ -332,7 +332,7 @@ main {
   background-color: #a16034;
 }
 
-.popupEditar {
+.popup {
   display: none;
   z-index: 0;
   position: fixed;
@@ -347,7 +347,7 @@ main {
   background: rgba(0, 0, 0, 0.7);
   padding: 8px;
 }
-.popupEditar-content {
+.popup .contentEditar {
   display: flex;
   flex-direction: column;
   background-color: #ffffff;
@@ -357,44 +357,44 @@ main {
   max-width: 350px;
   gap: 2px;
 }
-.popupEditar-content h1 {
+.contentEditar h1 {
   color: #cb7842;
   margin: 0 0 10px 0;
 }
-.popupEditar-content label {
+.contentEditar label {
   font-weight: 500;
 }
-.popupEditar-content input[type="text"] {
+.contentEditar input[type="text"] {
   height: 30px;
   margin: 0 0 8px 0;
   padding: 4px 8px;
   font-size: 13px;
   border: #ddd solid 0.2px;
 }
-.popupEditar-content textarea {
+.contentEditar textarea {
   margin: 0 0 8px 0;
   padding: 4px 8px;
   font-size: 13px;
   height: 50px;
   border: #ddd solid 0.2px;
 }
-.popupEditar-content select {
+.contentEditar select {
   margin: 0 0 8px 0;
   height: 30px;
   font-size: 13px;
   border: #ddd solid 0.2px;
 }
-.popupEditar-content select option {
+.contentEditar select option {
   font-size: 13px;
 }
-.popupEditar-content .box-sexos {
+.contentEditar .box-sexos {
   display: flex;
   justify-content: space-between;
   width: 100%;
   margin: 0 0 8px 0;
   gap: 20px;
 }
-.popupEditar-content .box-sexos div {
+.contentEditar .box-sexos div {
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -406,18 +406,18 @@ main {
   border-radius: 4px;
   cursor: pointer;
 }
-.popupEditar-content .box-sexos div label {
+.contentEditar .box-sexos div label {
   width: 100%;
   cursor: pointer;
 }
-.popupEditar-content .box-sexos div input {
+.contentEditar .box-sexos div input {
   cursor: pointer;
 }
-.popupEditar-content .box-botoes {
+.contentEditar .box-botoes {
   display: flex;
   justify-content: space-between;
 }
-.popupEditar-content .btn {
+.contentEditar .btn {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -429,16 +429,16 @@ main {
   cursor: pointer;
   transition: all 100ms;
 }
-.popupEditar-content .btn.cancelar {
+.contentEditar .btn.cancelar {
   background-color: #ddd;
 }
-.popupEditar-content .btn.cancelar:hover {
+.contentEditar .btn.cancelar:hover {
   background-color: rgba(0, 0, 0, 0.25);
 }
-.popupEditar-content .btn.confirmar {
+.contentEditar .btn.confirmar {
   background-color: #cb7942;
   color: #ffffff;
 }
-.popupEditar-content .btn.confirmar:hover {
+.contentEditar .btn.confirmar:hover {
   background-color: #a16034;
 }

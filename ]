@@ -68,7 +68,7 @@ class AnimalCadastrado {
               <div class="box-icon edit" onclick="popup.abrirPopupEditar('${animalStr}')">
                 <i class="icon fa-solid fa-pen-to-square"></i>
               </div>
-              <div class="box-icon delete" onclick="popup.abrirPopupDeletar('${animalStr}')">
+              <div class="box-icon delete" onclick="popup.abrirPopupDeletar()">
                 <i class="icon fa-solid fa-trash"></i>
               </div>
             </div>
@@ -82,15 +82,7 @@ class AnimalCadastrado {
   }
 
   async deletar(idUser, idAnimal) {
-    let response = await fetch(`http://localhost:3000/animal/${idAnimal}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        "idProtetor": idUser
-      })
-    })
+    console.log("ta deletando em porra")
   }
 
   async editar(idUser, idAnimal) {
@@ -153,8 +145,7 @@ class Popup {
     inserirOptionsRacaDeAcordoComTipoAnimal(animal.especie, animal.raca)
   }
 
-  abrirPopupDeletar(animalStr) {
-    let dados = decodificaStrEmObj(animalStr);
+  abrirPopupDeletar() {
     this.popup.style.display = "flex";
     this.body.style.overflow = "hidden";
     this.popup.innerHTML = `
@@ -163,7 +154,7 @@ class Popup {
         <p>Você deseja deletar este anuncio de adoção?</p>
         <div class="box-botoes">
           <div onclick="popup.fechar()"id="btn-cancelar" class="btn cancelar">Não</div>
-          <div class="btn confirmar" onclick="animais.deletar(${user.id}, ${dados.id})">Sim</div>
+          <div class="btn confirmar" onclick="animais.deletar()">Sim</div>
         </div>
       </div>
     `
