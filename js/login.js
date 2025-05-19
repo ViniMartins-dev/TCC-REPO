@@ -85,8 +85,8 @@ document.getElementById('form-login').addEventListener('submit', function(event)
     let email = document.getElementById('email-login').value.trim();
     let senha = document.getElementById('senha-login').value.trim();
 
-    fetch('', {
-        method: POST,
+    fetch('/usuario/login', {
+        method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
@@ -102,6 +102,7 @@ document.getElementById('form-login').addEventListener('submit', function(event)
     })
     .then(result => {
         alert('Validação bem sucedida !!!');
+        window.location.href = '../index'
     })
     .catch(e => {
         console.error('Erro:', e);
