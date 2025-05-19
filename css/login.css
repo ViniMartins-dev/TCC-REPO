@@ -18,7 +18,7 @@
     overflow: hidden;
 }
 
-#login, #cadastro {
+#login, #cadastro  {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -47,6 +47,18 @@
 .form-login h3 {
     text-align: center;
     font-family: var(--font-principal);
+}
+
+select {
+    margin-bottom: 15px;
+}
+
+select:invalid {
+    color: gray;
+}
+
+.campo-dinamico {
+    display: none;
 }
 
 #logo {
