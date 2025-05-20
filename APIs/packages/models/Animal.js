@@ -12,11 +12,11 @@ const Animal = sequelize.define('Animal', {
         allowNull: false,
     },
     especie: {
-        type: DataTypes.ENUM('Cachorro', 'Gato', 'Outro'),
+        type: DataTypes.ENUM('cachorro', 'gato', 'outro'),
         allowNull: false,
     },
     porte: {
-        type: DataTypes.ENUM('Pequeno', 'Médio', 'Grande'),
+        type: DataTypes.ENUM('pequeno', 'medio', 'grande'),
     },
     raca: {
         type: DataTypes.STRING(50),
@@ -35,11 +35,11 @@ const Animal = sequelize.define('Animal', {
         type: DataTypes.STRING(255),
     },
     foto_url: {
-        type: DataTypes.STRING(255),
+        type:  DataTypes.BLOB('long'),
     },
     status: {
-        type: DataTypes.ENUM('Disponível', 'Adotado'),
-        defaultValue: 'Disponível',
+        type: DataTypes.ENUM('disponivel', 'adotado'),
+        defaultValue: 'disponivel',
     },
     usuario_id: {
         type: DataTypes.INTEGER,
