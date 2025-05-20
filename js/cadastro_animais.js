@@ -138,6 +138,7 @@ document.getElementById('tipo').addEventListener('change', function() {
   const tipoSelect = this.value;
 
   let options;
+
   if (tipoSelect == "cachorro") {
     options = `
       <option value="Labrador Retriever">Labrador Retriever</option>
@@ -176,7 +177,6 @@ document.getElementById('tipo').addEventListener('change', function() {
     `
   } else {
     options = `
-
         <option value="Holland Lop">Holland Lop</option>
         <option value="Angorá">Angorá</option>
         <option value="Mini Rex">Mini Rex</option>
