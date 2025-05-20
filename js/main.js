@@ -31,10 +31,18 @@ new Swiper('.card-wrapper', { //iniciando o SwiperJS
     },
   }
 });
-//////////////////////////////////////////// User mocado por enquanto /////////////////////////////////////////
+function pegarCookieUsuario() {
+  const cookies = document.cookie.split('; ');
+  for (let cookie of cookies) {
+    const [key, value] = cookie.split('=');
+    if (key === "usuario") return JSON.parse(decodeURIComponent(value));
+  }
+  return null;
+}
+const cookieUsuario = pegarCookieUsuario()
+
 const user = {
-  id : 1,
-  nome : "mocado"
+  id : cookieUsuario.id,
 }
 
 class Animal {

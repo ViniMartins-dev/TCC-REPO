@@ -1,8 +1,15 @@
-//////////////////////////////////////////// User mocado por enquanto /////////////////////////////////////////
+function pegarCookieUsuario() {
+  const cookies = document.cookie.split('; ');
+  for (let cookie of cookies) {
+    const [key, value] = cookie.split('=');
+    if (key === "usuario") return JSON.parse(decodeURIComponent(value));
+  }
+  return null;
+}
+const cookieUsuario = pegarCookieUsuario()
+
 const user = {
-  id : 2,
-  tipo : "protetor",
-  nome : "mocado"
+  id : cookieUsuario.id,
 }
 
 function irParaHome() {
@@ -27,6 +34,18 @@ function obterValoresDoFormulario() {
     descricao
   };
 }
+class Pagina {
+  constructor() {
+    this.popup = document.getElementById("popup")
+    this.body = document.getElementById("body");
+  }
+  fechar() {
+    this.body.style.overflow = "auto";
+    this.popup.style.display = "none";
+  }
+}
+
+const pagina = new Pagina()
 
 class Sidebar {
   constructor() {
@@ -91,6 +110,7 @@ class AnimalCadastrado {
         "idProtetor": idUser
       })
     })
+    pagina.fechar();
   }
 
   async editar(idUser, idAnimal) {
@@ -110,6 +130,7 @@ class AnimalCadastrado {
         "idProtetor": idUser
       })
     })
+    pagina.fechar();
   }
 }
 const animais = new AnimalCadastrado();
