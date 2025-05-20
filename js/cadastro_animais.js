@@ -131,3 +131,66 @@ class RecortadorImagem {
 const recortador = new RecortadorImagem();
 recortador.adicionaObservadorNoInputFile()
 recortador.adicionarObservadorNoBtnOk()
+
+
+document.getElementById('tipo').addEventListener('change', function() {
+  let boxOptions = document.getElementById("raca");
+  const tipoSelect = this.value;
+
+  let options;
+  if (tipoSelect == "cachorro") {
+    options = `
+      <option value="Labrador Retriever">Labrador Retriever</option>
+      <option value="Golden Retriever">Golden Retriever</option>
+      <option value="Poodle">Poodle</option>
+      <option value="Bulldog Francês">Bulldog Francês</option>
+      <option value="Husky Siberiano">Husky Siberiano</option>
+      <option value="Pastor Alemão">Pastor Alemão</option>
+      <option value="Beagle">Beagle</option>
+      <option value="Border Collie">Border Collie</option>
+      <option value="Shih Tzu">Shih Tzu</option>
+      <option value="Chihuahua">Chihuahua</option>
+      <option value="Spitz Alemão">Spitz Alemão</option>
+      <option value="Doberman">Doberman</option>
+      <option value="Akita Inu">Akita Inu</option>
+      <option value="Cocker Spaniel">Cocker Spaniel</option>
+      <option value="Rottweiler">Rottweiler</option>
+    `
+  } else if (tipoSelect == "gato") {
+    options = `
+      <option value="Persa">Persa</option>
+      <option value="Siamês">Siamês</option>
+      <option value="Maine Coon">Maine Coon</option>
+      <option value="Ragdoll">Ragdoll</option>
+      <option value="Bengal">Bengal</option>
+      <option value="Sphynx">Sphynx</option>
+      <option value="Burmese">Burmese</option>
+      <option value="British Shorthair">British Shorthair</option>
+      <option value="Abyssinian">Abyssinian</option>
+      <option value="Scottish Fold">Scottish Fold</option>
+      <option value="Oriental">Oriental</option>
+      <option value="Devon Rex">Devon Rex</option>
+      <option value="Birman">Birman</option>
+      <option value="Russian Blue">Russian Blue</option>
+      <option value="Exotic Shorthair">Exotic Shorthair</option>
+    `
+  } else {
+    options = `
+
+        <option value="Holland Lop">Holland Lop</option>
+        <option value="Angorá">Angorá</option>
+        <option value="Mini Rex">Mini Rex</option>
+        <option value="Netherland Dwarf">Netherland Dwarf</option>
+        <option value="English Lop">English Lop</option>
+        <option value="Flemish Giant">Flemish Giant</option>
+        <option value="Himalayan">Himalayan</option>
+        <option value="English Angora">English Angora</option>
+        <option value="New Zealand">New Zealand</option>
+        <option value="Lionhead">Lionhead</option>
+        <option value="French Lop">French Lop</option>
+        <option value="Californian">Californian</option>
+    `
+  }
+  boxOptions.innerHTML = options
+}
+)
