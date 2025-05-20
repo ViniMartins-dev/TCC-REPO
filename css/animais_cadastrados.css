@@ -271,6 +271,29 @@ main {
   }
 }
 
+.popupAcessoNegado-content {
+  display: flex;
+  flex-direction:column ;
+  gap: 10px;
+  background-color: #ffffff;
+  padding: 14px 14px 12px 14px;
+  border-radius: 4px;
+  max-width: 360px;
+}
+.popupAcessoNegado-content div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 10px 8px;
+  border-radius: 4px;
+  font-weight: 500;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 100ms;
+  background-color: #cb7942;
+  color: #FFFFFF
+}
 .popupDeletar {
   display: none;
   z-index: 0;
@@ -346,6 +369,9 @@ main {
   align-items: center;
   background: rgba(0, 0, 0, 0.7);
   padding: 8px;
+}
+.popup#popupAcessoNegado {
+  background-color: rgba(0,0,0,0.92);
 }
 .popup .contentEditar {
   display: flex;

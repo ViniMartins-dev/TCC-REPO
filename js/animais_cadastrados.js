@@ -10,6 +10,7 @@ const cookieUsuario = pegarCookieUsuario()
 
 const user = {
   id : cookieUsuario.id,
+  tipo : cookieUsuario.tipo
 }
 
 function irParaHome() {
@@ -140,6 +141,7 @@ animais.inserirQuadradosAnimais(user.id);
 class Popup {
   constructor() {
     this.popup = document.getElementById("popup")
+    this.popupAcessoNegado = document.getElementById("popupAcessoNegado")
     this.body = document.getElementById("body");
   }
 
@@ -189,7 +191,18 @@ class Popup {
       </div>
     `
   }
-
+  abrirPopupAcessoNegado() {
+    this.popupAcessoNegado.style.display = "flex";
+    this.body.style.overflow = "hidden";
+    console.log(this.popup.onClick)   
+    this.popupAcessoNegado.innerHTML = `
+      <div onclick="event.stopPropagation()" class="popupAcessoNegado-content">
+        <h1>Acesso Negado</h1>
+        <p>Apenas pessoas autorizadas podem acessar esta pagina</p>
+        <div onclick="irParaHome()"id="btn-sair">Sair</div>
+      </div>
+    `
+  }
   fechar() {
     this.body.style.overflow = "auto";
     this.popup.style.display = "none";
@@ -198,6 +211,12 @@ class Popup {
 }
 const popup = new Popup();
 
+function restringirAcesso() {
+  if (user.tipo == "tutor") {
+    popup.abrirPopupAcessoNegado()
+  }
+}
+restringirAcesso()
 function inserirSexosAnimalDeAcordoComSexoAnimal(sexo) {
   let boxSexos = document.getElementById("box-sexos");
   if (sexo == "M") {
