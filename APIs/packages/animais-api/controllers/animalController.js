@@ -3,7 +3,9 @@ const cadastroAnimal = require('../services/cadastrarAnimal');              // I
 const atualizaAnimal = require('../services/atualizarAnimal');              // Importa o serviço de atualizar animal
 const deletaAnimal = require('../services/deletarAnimal');                  // Importa o serviço de deletar animal
 const filtraAnimais = require('../services/filtrarAnimais');                // Importa o serviço de filtrar animais
-const buscaAnimalPorId = require('../services/animalPorId');                    // Importa o serviço de obter animal por ID
+const buscaAnimalPorId = require('../services/animalPorId');                // Importa o serviço de obter animal por ID
+
+const upload = multer(); // Para tratar os dados da imagem
 
 const listarAnimais = async (req, res) => {
     try {
@@ -18,7 +20,8 @@ const listarAnimais = async (req, res) => {
 const cadastrarAnimal = async (req, res) => {
     try {
         const dados = req.body;
-        const novoAnimal = await cadastroAnimal.criarAnimal(dados);
+        const fotoBuffer = req.file ? req.file.buffer : null;  
+        const novoAnimal = await cadastroAnimal.criarAnimal(dados, fotoBuffer);
         return res.status(201).json(novoAnimal);
     } catch (error) {
         return res.status(400).json({ erro: error.message });

@@ -34,7 +34,7 @@ const Animal = sequelize.define('Animal', {
     personalidade: {
         type: DataTypes.STRING(255),
     },
-    foto_url: {
+    bin_foto: {
         type:  DataTypes.BLOB('long'),
     },
     status: {

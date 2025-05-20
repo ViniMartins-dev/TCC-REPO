@@ -1,7 +1,7 @@
 const Animal = require('../../models/Animal');
 const Usuario = require('../../models/Usuario');
 
-const criarAnimal = async (dados) => {
+const criarAnimal = async (dados, fotoBuffer) => {
 
     const {
         nome,
@@ -12,7 +12,6 @@ const criarAnimal = async (dados) => {
         sexo,
         descricao,
         personalidade,
-        foto_url,
         status,
         usuario_id,
     } = dados;
@@ -36,7 +35,7 @@ const criarAnimal = async (dados) => {
         sexo,
         descricao,
         personalidade,
-        foto_url,
+        bin_foto: fotoBuffer,
         status,
         usuario_id
     });
