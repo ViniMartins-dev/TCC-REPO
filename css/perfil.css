@@ -172,93 +172,62 @@
 
   .top-main {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
-  }
-
-  .div-logo {
-    display: flex;
-    margin-top: 5%;
-    margin-left: -2%;
-    background-color: gray;
-    width: 80px;
-    height: 80px;
-    border-radius: 50px;
+    padding: 32px 24px;
+    background-color: #FFFFFF;
+    border-bottom: 1px solid #f0f0f0;
+    gap: 48px;
+    max-width: 900px;
+    margin: 0 auto;
   }
 
   .info {
-      font-family: var(--fonte-principal);
-    }
-
-  .med-main {
-    display: inline-flex;
-    justify-content: space-around;
-    width: 100%;
-    gap: 15px;
-    margin-top: 10%;
-    align-items: center;
-    text-align: center;
-  }
-
-  .btn_med-main {
-    padding: 10px;
-    border-radius: 7px;
-    font-weight: bold;
+    display: flex;
     font-family: var(--fonte-principal);
-    cursor: pointer;
-  } 
-
-  #btn-1 {
-    background: var(--laranja,);
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
   }
 
-  #btn-2 {
-    background-color: var(--laranja,);
+  .info h2 {
+    font-size: 20px;
+    margin: 0;
+    font-weight: bold;
   }
 
-  #btn-3 {
-    background-color: var(--laranja,);
-  }
+  .container-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px; /* espaço entre botões */
+  margin-top: 40px;
+}
 
-  .bott-main {
-      background-color: #ffffff;
-      width: 100%;
-      border-radius: 12px;
-      padding: 20px;
-      overflow: hidden;
-      font-family: var(--fonte-principal);
-    }
+.botao {
+  display: flex;
+  width: 300px;
+  margin-bottom: 1%;
+  font-weight: bold;
+  padding: 12px 24px;
+  font-size: 18px;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: #c66b2c;
+  color: black;
+  border-radius: 6px;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
 
-    .menu-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 12px 10px;
-      border-radius: 8px;
-      color: #333;
-      text-decoration: none;
-      transition: background 0.2s;
-      cursor: pointer;
-    }
-
-    .menu-item:hover {
-      background-color: #f0f0f0;
-    }
-
-    .menu-left {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .menu-icon {
-      font-size: 18px;
-    }
-
-    .arrow {
-      font-size: 14px;
-      color: #888;
-    }
+.botao:hover {
+  background-color: #e87c2f;
+  transform: translateY(-2px);
+}
+  
 
   @media screen and (min-width: 600px) {
      .div-logo {
@@ -282,5 +251,9 @@
       height: 150px;
       border-radius: 80px;
     }
-    
+
+    #foto-user {
+      margin-top: 10%;
+    }
+
   }
