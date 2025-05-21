@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS animais (
     sexo            ENUM('M', 'F') NOT NULL,
     descricao       TEXT,
     personalidade   VARCHAR(255),											            -- Limitada pelo front end
-    foto_url        VARCHAR(255),
+    bin_foto        LONGBLOB,   												-- Imagem do animal (binário)
     status          ENUM('disponivel', 'adotado') DEFAULT 'disponivel',
     
     usuario_id      INT NOT NULL,											            -- FK do cadastrante
