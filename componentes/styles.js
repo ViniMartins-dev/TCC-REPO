@@ -378,4 +378,91 @@ export default StyleSheet.create({
   menuButtonContainer: {
     paddingLeft: 10, // Ajuste para o ícone do menu
   },
+
+  // Estilos para a seção de favoritos
+  favoritesSection: {
+    marginTop: 10,
+    paddingHorizontal: 10,
+  },
+  sectionTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 10,
+    marginLeft: 10,
+    color: '#333',
+  },
+  favoritesScroll: {
+    flexDirection: 'row',
+    marginBottom: 15,
+  },
+  favoriteItem: {
+    width: 120,
+    height: 150,
+    marginRight: 10,
+    borderRadius: 10,
+    backgroundColor: '#fff',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+    position: 'relative',
+  },
+  favoriteItemImage: {
+    width: '100%',
+    height: 100,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+    resizeMode: 'cover',
+  },
+  favoriteHeartIcon: {
+    position: 'absolute',
+    top: 5,
+    right: 5,
+    backgroundColor: 'rgba(255,255,255,0.7)',
+    borderRadius: 15,
+    padding: 5,
+  },
+  favoriteItemName: {
+    padding: 8,
+    fontSize: 14,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  noFavoritesText: {
+    padding: 15,
+    fontSize: 14,
+    color: '#888',
+    fontStyle: 'italic',
+  },
+  cardHeartIcon: {
+    position: 'absolute',
+    top: 10,
+    right: 10,
+    backgroundColor: 'rgba(255,255,255,0.7)',
+    borderRadius: 20,
+    padding: 8,
+    zIndex: 10,
+  },
+
+  // Estilos para a tela de carregamento e mensagens
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingVertical: 50,
+  },
+  loadingText: {
+    marginTop: 10,
+    fontSize: 16,
+    color: '#666',
+    fontStyle: 'italic',
+  },
+  noAnimalsText: {
+    padding: 20,
+    fontSize: 16,
+    color: '#666',
+    fontStyle: 'italic',
+    textAlign: 'center',
+  },
 });

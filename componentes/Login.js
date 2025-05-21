@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import {
   View,
@@ -11,6 +10,7 @@ import {
 } from 'react-native';
 import styles from './styleLogin';
 import logo from '../assets/image.png';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Login({ navigation }) {
   const [email, setEmail] = useState('');
@@ -47,6 +47,12 @@ const handleLogin = async () => {
 
     if (response.ok) {
       console.log('Login bem-sucedido:', data);
+      
+      // Salvar token e ID no AsyncStorage
+      await AsyncStorage.setItem('token', data.token);
+      await AsyncStorage.setItem('id', data.payload.id.toString());
+      console.log('Token e ID salvos no AsyncStorage');
+      
       navigation.navigate('Home');
     } else {
       Alert.alert('Erro', data.erro || 'Erro no login.');
