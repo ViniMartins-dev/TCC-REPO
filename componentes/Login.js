@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import {
   View,
@@ -6,8 +7,9 @@ import {
   TouchableOpacity,
   SafeAreaView,
   Image,
+  Alert,
 } from 'react-native';
-import styles from "./styleLogin";
+import styles from './styleLogin';
 import logo from '../assets/image.png';
 
 export default function Login({ navigation }) {
@@ -20,19 +22,46 @@ export default function Login({ navigation }) {
   };
 
   const handleCadastro = () => {
-    navigation.navigate("Cadastro");
+    navigation.navigate('Cadastro');
   };
 
-  let home = ()=>{
-    navigation.navigate("Home")
+const handleLogin = async () => {
+  if (!email || !senha) {
+    Alert.alert('Atenção', 'Preencha email e senha.');
+    return;
   }
+
+  try {
+    const response = await fetch('http://10.0.2.2:3000/usuario/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: email,
+        senha: senha,
+      }),
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+      console.log('Login bem-sucedido:', data);
+      navigation.navigate('Home');
+    } else {
+      Alert.alert('Erro', data.erro || 'Erro no login.');
+    }
+  } catch (error) {
+    console.error('Erro na requisição:', error);
+    Alert.alert('Erro', 'Erro na conexão com o servidor.');
+  }
+};
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.headerText}>Login</Text>
         <Image source={logo} style={styles.logo} />
-        
       </View>
 
       <View style={styles.form}>
@@ -43,6 +72,8 @@ export default function Login({ navigation }) {
           onChangeText={setEmail}
           placeholder="Digite seu email"
           placeholderTextColor="#aaa"
+          keyboardType="email-address"
+          autoCapitalize="none"
         />
 
         <Text style={styles.label}>Senha</Text>
@@ -55,9 +86,14 @@ export default function Login({ navigation }) {
             placeholderTextColor="#aaa"
             secureTextEntry={!passwordVisible}
           />
-          <TouchableOpacity onPress={togglePasswordVisibility} style={styles.eyeIconWrapper}>
+          <TouchableOpacity
+            onPress={togglePasswordVisibility}
+            style={styles.eyeIconWrapper}
+          >
             <Image
-              source={{ uri: 'https://cdn0.iconfinder.com/data/icons/glyphpack/167/visible-512.png' }}
+              source={{
+                uri: 'https://cdn0.iconfinder.com/data/icons/glyphpack/167/visible-512.png',
+              }}
               style={styles.eyeIcon}
             />
           </TouchableOpacity>
@@ -67,10 +103,10 @@ export default function Login({ navigation }) {
           <Text style={styles.registerLink}>Cadastrar uma conta</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.button} onPress={home} title="Home">
+        <TouchableOpacity style={styles.button} onPress={handleLogin}>
           <Text style={styles.buttonText}>ENTRAR</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
-};
+}

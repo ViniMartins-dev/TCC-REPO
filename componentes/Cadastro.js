@@ -49,9 +49,42 @@ export default function Cadastro({navigation}) {
     setPassword((prevState) => !prevState);
   };
 
-  let login = ()=>{
-    navigation.navigate("Login")
+const handleCadastro = async () => {
+  setErro('');
+  try {
+
+    const dadosParaEnviar = {
+      nome,
+      sobrenome: '', 
+      email,
+      telefone,
+      senha,
+      cpf,
+      data_nascimento: data.split('/').reverse().join('-'), 
+      latitude: null,  
+      longitude: null,
+    };
+const response = await fetch('http://10.0.2.2:3000/usuario/tutor', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify(dadosParaEnviar),
+});
+
+
+    if (!response.ok) {
+      const erroJson = await response.json();
+      throw new Error(erroJson.erro || 'Erro no cadastro');
+    }
+
+    const result = await response.json();
+    console.log('Cadastro realizado:', result);
+
+    navigation.navigate("Login");
+  } catch (error) {
+    setErro(error.message);
   }
+};
+
 
   return (
     <SafeAreaView style={styles.container1}>
@@ -175,10 +208,10 @@ export default function Cadastro({navigation}) {
             />
           </View>
         </View>
+<TouchableOpacity style={styles.button} onPress={handleCadastro} title="Voltar">
+  <Text style={styles.textoCadastro}> Cadastrar Conta </Text>
+</TouchableOpacity>
 
-        <TouchableOpacity style={styles.button} onPress={login} title="Voltar">
-          <Text style={styles.textoCadastro}> Cadastrar Conta </Text>
-        </TouchableOpacity>
 
         <View style={styles.wrapper}>
         {erro ? <Text style={styles.error}>{erro}</Text> : null}
