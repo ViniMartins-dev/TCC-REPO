@@ -1,3 +1,38 @@
+function pegarCookieUsuario() {
+  const cookies = document.cookie.split('; ');
+  for (let cookie of cookies) {
+    const [key, value] = cookie.split('=');
+    if (key === "usuario") return JSON.parse(decodeURIComponent(value));
+  }
+  return null;
+}
+const cookieUsuario = pegarCookieUsuario()
+
+function irParaLogin() {
+  window.location.href = "login.html#cadastro"
+}
+
+function estaLogado() {
+  if (cookieUsuario == null) {
+    return false
+  } else {
+    return true
+  }
+}
+
+if (!estaLogado()) {
+  irParaLogin()
+} else if (cookieUsuario.tipo == "tutor") {
+  let boxLinks = document.getElementById("box-links")
+  let linkCadastro = document.getElementById("sidebarLinkCadastro")
+  linkCadastro.style.display = "none";
+  boxLinks.innerHTML = `
+      <a id="link" href="favoritos.html">Favoritos</a>
+      <a id="link" href="perfil.html">Perfil</a>
+  `
+}
+
+
 function abrirMenu() {
   let sidebar = document.getElementById("sidebar");
   let body = document.getElementById("body");

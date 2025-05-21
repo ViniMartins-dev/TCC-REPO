@@ -20,8 +20,9 @@
             <div class="form-login col60">
                 <h3>Login</h3>
                 <form action="#" class="form-login" id="form-login">
-                    <input id="email-login" name="login" type="email" placeholder="Digite seu email" required>
-                    <input id="senha-login" type="password" name="senha" placeholder="Digite sua senha" required>
+                    <input class="input"id="email-login" name="login" type="email" placeholder="Digite seu email" required>
+                    <input class="input"id="senha-login" type="password" name="senha" placeholder="Digite sua senha" required>
+                    <span class="error" id="erroLogin"></span>
         
                     <input class="btn" type="submit" value="Confirmar">
                     <a href="#login">Torne-se um parceiro</a>
@@ -32,24 +33,27 @@
         <div id="cadastro">
             <div class="col60 form-login">
                 <form action="#" method="post" class="form-login" id="form-cadastro">
-                    <select id="tipo">
+                    <select id="tipo" autocomplete="off">
                         <option value="tutor" selected>Tutor</option>
                         <option value="protetor">ONG ou Pet-Shop</option>
                     </select>
-
-                    <input id="nome-cadastro" type="text" autocomplete="name" placeholder="Nome" required>
-                    <input id="tel-cadastro" type="tel"  pattern="\([0-9]{2}\) [0-9]{4}-[0-9]{4}" placeholder="Telefone/Celular" autocomplete="tel" required>
-                    <input id="email-cadastro" type="email" autocomplete="email" placeholder="Email" required>
-                    <input id="pass-cadastro" type="password"  placeholder="Senha" autocomplete="current-password" required>
-                    
+                    <input class="input" id="nome-cadastro" type="text" placeholder="Nome" autocomplete="off" required>
+                    <input class="input" id="sobrenome-cadastro" type="text" placeholder="Sobrenome" autocomplete="off" required>
+                    <input class="input"id="email-cadastro"  type="email" placeholder="Email" autocomplete="off" required>
+                    <span id="erroEmail" class="error""></span>
+                    <input class="input"id="pass-cadastro" type="password"  placeholder="Senha" autocomplete="off" required>
+                    <input class="input"id="tel-cadastro" min="1905-05-21" max="2007-05-21" type="tel" placeholder="Telefone/Celular" autocomplete="off" required>
+                    <span id="erroTel" class="error"></span>
+                    <input class="input"id="data-cadastro" type="date"  placeholder="Data Nascimento"  autocomplete="off" required>
+                    <span id="erroData" class="error""></span>
                     <div class="campo-dinamico" id="cnpjInp">
-                        <input id="cnpj" type="number" placeholder="CNPJ" maxlength=14>
+                        <input class="input"id="cnpj" type="number" placeholder="CNPJ" autocomplete="off" maxlength=14>
+                        <span id="erroCNPJ" class="error""></span>
                     </div>
-
                     <div class="campo-dinamico" id="cpfInp">
-                        <input id="cpf" type="number" placeholder="CPF" maxlength=11>
+                        <input class="input"id="cpf" type="number" placeholder="CPF" autocomplete="off" maxlength=11>
+                        <span id="erroCPF" class="error""></span>
                     </div>
-
                     <input class="btn" type="submit" value="Confirmar">
                     <a href="#cadastro">Já tenho uma conta</a>
                 </form>

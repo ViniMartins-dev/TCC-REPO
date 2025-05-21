@@ -6,7 +6,8 @@
 }
 
 .principal {
-    width: 60%;
+    width: 100%;
+    max-width: 800px;
     height: 5%;
     margin: 20px auto;
     box-shadow: 0 0 4px var(--cinza);
@@ -23,16 +24,18 @@
     justify-content: center;
     align-items: center;
     width: 100%;
+    height: 100%;
     position: absolute;
     top: 0;
     left: 0;
     margin-right: 10px;
     transition: all 0.01s ease;
 }
-
 .col40 {
     width: 40%;
     padding: 20px 35px;
+    position: relative;
+    top: -80px
 }
 
 .col60 {
@@ -41,16 +44,15 @@
 }
 
 .form-login {
-    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 5px;
 }
 
 .form-login h3 {
     text-align: center;
     font-family: var(--font-principal);
-}
-
-select {
-    margin-bottom: 15px;
 }
 
 select:invalid {
@@ -63,45 +65,56 @@ select:invalid {
 
 #logo {
     width: 15%;
+    max-width: 80px;
     display: flex;
     justify-content: center;
     align-self: center;
     margin: 0 auto;
 }
 
-.form-login input {
+.form-login .input {
     width: 100%;
     border: none;
     outline: none;
     border-bottom: solid 1px var(--cinza);
     padding: 5px 0;
-    margin-bottom: 20px;
+    background-color: transparent;
 }
-
 
 .btn {
     width: 100%;
     border: solid 1px var(--cinza);
-    background-color: var(--laranja);
+    background-color: #cb7842;
     color: var(--branco);
     font-family: var(--font-principal);
-    padding: 10px;
+    padding: 10px 8px;
+    border: none;
     border-radius: 200px;
     border-bottom: none !important;
     cursor: pointer;
+    font-weight: 600;
+    font-size: 12px;
+    margin: 16px 0 10px 0;
 }
-
+.form-login select#tipo {
+  width: 45%;
+  margin: 0 0 8px 0;
+}
 .form-login a {
     font-size: 12px;
     align-items: center;
-    margin-top: 0;
     text-decoration: none;
     color: var(--cinza);
     font-family: var(--font-principal);
 }
-
+.error {
+  color: red;
+  margin: 4px 0 0 0;
+  font-weight: 500;
+  font-size: 10px;
+}
 .form-login a:hover {
-    color: blue;
+    color: #cb7842;
 }
 
 #cadastro .text-login {
@@ -145,6 +158,34 @@ select:invalid {
     }
 } 
 
+@media (max-width: 500px) {
+  #login {
+    flex-direction: column;
+  }
+  #cadastro {
+    flex-direction: column-reverse;
+  }
+  #login .col40 {
+    position: relative;
+    top: 50px;
+    right: 100px;
+  }
+  #login .col60 {
+    position: relative;
+    top: -90px;
+    right: -90px;
+  }
+  #cadastro .col40 {
+    position: relative;
+    top: 100px;
+    right: -70px;
+  }
+  #cadastro .col60 {
+    position: relative;
+    top: -90px;
+    right: 100px;
+  }
+}
 
 /* efeitos de transição */
 #cadastro:not(:target), #login:not(:target) {

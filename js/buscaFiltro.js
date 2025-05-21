@@ -77,25 +77,9 @@ function aplicarFiltros() {
     if (query.idadeMax !== undefined) {
         params.append('idadeMax', query.idadeMax);
     }
-
-    // Fazer fetch GET para a API
-    fetch('http://localhost:3000/animal/filtrar/?' + params.toString(), {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            'bearer': '000'
-        }
-    })
-    .then(res => res.json())
-    .then(data => {
-        console.log(data);
-        mostrarResultado(data);
-    })
-    .catch(err => {
-        console.error('Erro na busca:', err);
-    });
+    return params.toString()
 }
 
 function mostrarResultado(animais) {
-
+  console.log(animais)
 }

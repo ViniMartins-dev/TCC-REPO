@@ -2,12 +2,13 @@ function pegarCookieUsuario() {
   const cookies = document.cookie.split('; ');
   for (let cookie of cookies) {
     const [key, value] = cookie.split('=');
-    if (key === "usuario") return JSON.parse(decodeURIComponent(value));
+    if (key == "usuario") return JSON.parse(decodeURIComponent(value));
   }
   return null;
 }
 const cookieUsuario = pegarCookieUsuario()
 
+console.log(cookieUsuario)
 const user = {
   id : cookieUsuario.id,
   tipo : cookieUsuario.tipo

@@ -41,15 +41,38 @@ function pegarCookieUsuario() {
 }
 const cookieUsuario = pegarCookieUsuario()
 
-const user = {
-  id : cookieUsuario.id,
+function estaLogado() {
+  if (cookieUsuario == null) {
+    return false
+  } else {
+    return true
+  }
+}
+if (!estaLogado()) {
+  let boxLinks = document.getElementById("box-links")
+  boxLinks.innerHTML = `
+      <a id="link" href="login.html#cadastro">Login</a>
+  `
+} else if (cookieUsuario.tipo == "tutor") {
+  let boxLinks = document.getElementById("box-links")
+  let linkCadastro = document.getElementById("sidebarLinkCadastro")
+  linkCadastro.style.display = "none";
+  boxLinks.innerHTML = `
+      <a id="link" href="favoritos.html">Favoritos</a>
+      <a id="link" href="perfil.html">Perfil</a>
+  `
+} else {
 }
 
 class Animal {
-  async isFavorite(idUser, idAnimal) {
-    let response = await fetch(`http://localhost:3000/favoritos/listar/${idUser}`)
-    let dados = await response.json();
-    return dados.some(elemento => elemento.animal_id == idAnimal);
+  async isFavorite(idAnimal) {
+    if (!estaLogado()) {
+      return false;
+    } else {
+      let response = await fetch(`http://localhost:3000/favoritos/listar/${cookieUsuario.id}`)
+      let dados = await response.json();
+      return dados.some(elemento => elemento.animal_id == idAnimal);
+    }
   } 
 
   async desfavoritar(idUser, idAnimal) {
@@ -83,28 +106,36 @@ class Animal {
     }
   }
 
-  async alterarFavorito(idUser, idAnimal) {
-    if (await this.isFavorite(idUser, idAnimal)) {
-      await this.desfavoritar(idUser, idAnimal) 
-      popup.trocarIconCoracaoParaNormal()
+  async alterarFavorito(idAnimal) {
+    if (estaLogado()) {
+      if (await this.isFavorite(idAnimal)) {
+        await this.desfavoritar(cookieUsuario.id, idAnimal) 
+        popup.trocarIconCoracaoParaNormal()
+      } else {
+        await this.favoritar(cookieUsuario.id, idAnimal)
+        popup.trocarIconCoracaoParaFavoritado()
+      }
     } else {
-      await this.favoritar(idUser, idAnimal)
-      popup.trocarIconCoracaoParaFavoritado()
+      irParaLogin()
     }
   }
-  async adotar(idUser, idAnimal) {
-    let response = await fetch(`http://localhost:3000/adocao/request`, {
-      method: 'POST',
-      headers: {
-        'Content-Type':'application/json',
-      },
-      body: JSON.stringify({
-        "animal_id": idAnimal,
-        "tutor_id": idUser
+  async adotar(idAnimal) {
+    if (estaLogado()) {
+      let response = await fetch(`http://localhost:3000/adocao/request`, {
+        method: 'POST',
+        headers: {
+          'Content-Type':'application/json',
+        },
+        body: JSON.stringify({
+          "animal_id": idAnimal,
+          "tutor_id": cookieUsuario.id
+        })
       })
-    })
-    if (response.ok) {
-      popup.inserirPopupPedidoDeAdocao();
+      if (response.ok) {
+        popup.inserirPopupPedidoDeAdocao();
+      }
+    } else {
+      irParaLogin()
     }
   }
 }
@@ -142,19 +173,19 @@ class PopupAnimal {
   }
   async inserirConteudo(animalStr) {
     let animalObj = decodificaStrEmObj(animalStr);
-    let verificaSeEstaFavoritado = await animal.isFavorite(user.id, animalObj.id);
+    let verificaSeEstaFavoritado = await animal.isFavorite(animalObj.id);
     this.overlay.innerHTML = `
       <div class="popup" onclick="event.stopPropagation()">
         <img src="${animalObj.fotoURL}" class="popup-img"/>
         <div class="popup-content">
-          <i onclick="animal.alterarFavorito(${user.id},${animalObj.id})" id="popup-btnFavoritar" class="popup-btnFavoritar fa-regular fa-heart"></i>
+          <i onclick="animal.alterarFavorito(${animalObj.id})" id="popup-btnFavoritar" class="popup-btnFavoritar fa-regular fa-heart"></i>
           <p class="popup-text"><b>Nome:</b> ${animalObj.nome}</p>
           <p class="popup-text"><b>Idade:</b> ${animalObj.idade}</p>
           <p class="popup-text"><b>Raca:</b> ${animalObj.raca}</p>
           <p class="popup-text"><b>Sexo:</b> ${animalObj.sexo}</p>
           <p class="popup-text"><b>Personalidade:</b> <br> ${animalObj.personalidade}</p>
           <p class="popup-text"><b>Descricao:</b> <br> ${animalObj.descricao}</p>
-          <button id="popup-btnAdotar" onclick="animal.adotar(${user.id}, ${animalObj.id})">Adotar</button>
+          <button id="popup-btnAdotar" onclick="animal.adotar(${animalObj.id})">Adotar</button>
         </div>
       </div>
     `;
@@ -179,9 +210,10 @@ class PopupAnimal {
 
 const popup = new PopupAnimal();
 
-async function inserirQuadradosDosAnimais() {
-  let jsonApi = await consumirApi("http://localhost:3000/animal/filtrar")
+async function inserirQuadradosDosAnimais(params) {
+  let jsonApi = await consumirApi(`http://localhost:3000/animal/filtrar/?${params}`)
   let boxAnimais = document.getElementById("container-animais");
+  boxAnimais.innerHTML = "";
   jsonApi.forEach((animal) => {
     // Transforma o obj em uma string codigicada para passar pelo parametro
     let animalStr = encodeURIComponent(JSON.stringify(animal));
@@ -203,7 +235,13 @@ function decodificaStrEmObj(str) {
 }
 async function consumirApi(url) {
   try {
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'bearer': '000'
+      }
+    })
     if (!response.ok) throw new Error("Erro na resposta da api:")
     const dados = await response.json();
     return dados;
@@ -272,4 +310,8 @@ function irParaHome() {
   window.location.href = "./index.html"
 }
 
-inserirQuadradosDosAnimais();
+function irParaLogin() {
+  window.location.href = "login.html#cadastro"
+}
+
+inserirQuadradosDosAnimais("");

@@ -1,7 +1,49 @@
+function pegarCookieUsuario() {
+  const cookies = document.cookie.split('; ');
+  for (let cookie of cookies) {
+    const [key, value] = cookie.split('=');
+    if (key == "usuario") return JSON.parse(decodeURIComponent(value));
+  }
+  return "";
+}
+const cookieUsuario = pegarCookieUsuario()
+
+function irParaLogin() {
+  window.location.href = "login.html#cadastro"
+}
+
+function estaLogado() {
+  if (cookieUsuario == "") {
+    return false
+  } else {
+    return true
+  }
+}
+
+if (!estaLogado()) {
+  irParaLogin()
+}
+
+if (cookieUsuario.tipo == "tutor" || cookieUsuario.tipo == null) {
+  abrirPopupRestricao()
+}
+
+function irParaHome() {
+  window.location.href = "./index.html";
+}
+
+function abrirPopupRestricao() {
+  let popup = document.getElementById("popupRestricao")
+  popup.style.display = "flex";
+  popup.addEventListener("click", (event) => {
+    irParaHome();   
+  })
+}
 class PaginaODT {
   constructor() {
     this.body = document.getElementById("body");
     this.popup = document.getElementById("popup-resize");
+    this.popupRecortadorContent = document.getElementById("popup-content")
     this.btnAddImg = document.getElementById("img-buton");
     this.imgInputfile = document.getElementById("img-input");
   }
@@ -113,6 +155,7 @@ class RecortadorImagem {
   tranformaCanvasEmBlob(canvas) {
     canvas.toBlob(
       (blob) => {
+        console.log(blob)
         const url = URL.createObjectURL(blob); // Cria um URL temporario para imagem recortada
         this.defineSrcImgRecortada(url)
       },
@@ -132,15 +175,22 @@ const recortador = new RecortadorImagem();
 recortador.adicionaObservadorNoInputFile()
 recortador.adicionarObservadorNoBtnOk()
 
-
-document.getElementById('tipo').addEventListener('change', function() {
-  let boxOptions = document.getElementById("raca");
-  const tipoSelect = this.value;
-
-  let options;
-
-  if (tipoSelect == "cachorro") {
-    options = `
+class Formulario {
+  constructor() {
+    this.tagForm = document.getElementById("main__form")
+    this.inputNome = document.getElementById("nome");
+    this.inputEspecie = document.getElementById("tipo");
+    this.inputRaca = document.getElementById("raca");
+    this.inputPorte = document.getElementById("porte");
+    this.inputIdade = document.getElementById("idade");
+    this.inputSexo = document.getElementById("sexo");
+    this.inputPersonalidade = document.getElementById("personalidade");
+    this.inputDescricao = document.getElementById("descricao");
+    this.btnCadastrar = document.getElementById("btnCadastrar")
+  }
+  adicionaOptionsRacaCachorro() {
+    this.inputRaca.innerHTML = `
+      <option selected disabled>Selecione uma Raça</option>
       <option value="Labrador Retriever">Labrador Retriever</option>
       <option value="Golden Retriever">Golden Retriever</option>
       <option value="Poodle">Poodle</option>
@@ -156,9 +206,11 @@ document.getElementById('tipo').addEventListener('change', function() {
       <option value="Akita Inu">Akita Inu</option>
       <option value="Cocker Spaniel">Cocker Spaniel</option>
       <option value="Rottweiler">Rottweiler</option>
-    `
-  } else if (tipoSelect == "gato") {
-    options = `
+    `;
+  }
+  adicionaOptionsRacaGato() {
+    this.inputRaca.innerHTML = `
+      <option selected disabled>Selecione uma Raça</option>
       <option value="Persa">Persa</option>
       <option value="Siamês">Siamês</option>
       <option value="Maine Coon">Maine Coon</option>
@@ -175,8 +227,10 @@ document.getElementById('tipo').addEventListener('change', function() {
       <option value="Russian Blue">Russian Blue</option>
       <option value="Exotic Shorthair">Exotic Shorthair</option>
     `
-  } else {
-    options = `
+  }
+  adicionaOptionsRacaCoelho() {
+    this.inputRaca.innerHTML =  `
+        <option selected disabled>Selecione uma Raça</option>
         <option value="Holland Lop">Holland Lop</option>
         <option value="Angorá">Angorá</option>
         <option value="Mini Rex">Mini Rex</option>
@@ -191,6 +245,65 @@ document.getElementById('tipo').addEventListener('change', function() {
         <option value="Californian">Californian</option>
     `
   }
-  boxOptions.innerHTML = options
+  adicionaObservadorTipo() {
+    this.inputEspecie.addEventListener('change',(event) => {
+      let tipoSelect = this.inputEspecie.value
+      if (tipoSelect == "cachorro") {
+        this.adicionaOptionsRacaCachorro()
+      } else if (tipoSelect == "gato") {
+        this.adicionaOptionsRacaGato()
+      } else {
+        this.adicionaOptionsRacaCoelho()
+      }
+    })
+  }
+  adicionarObservadorSubmit() {
+   this.tagForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    this.cadastrar(this.pegarValuesInputs())
+   })
+  } 
+  pegarValuesInputs() {
+    return {
+      nome : this.inputNome.value,
+      especie : this.inputEspecie.value,
+      porte : this.inputPorte.value,
+      raca : this.inputRaca.value,
+      idade : this.inputIdade.value,
+      sexo : this.inputSexo.value,
+      descricao : this.inputDescricao.value,
+      personalidade : this.inputPersonalidade.value
+   }
+  }
+  // Cadastrando sem imagem por enquanto
+  async cadastrar(obj) {
+    try {
+      console.log(obj)
+      let response = await fetch("http://localhost:3000/animal/", {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          nome: obj.nome,
+          especie: obj.especie,
+          porte: obj.porte,
+          raca: obj.raca,
+          idade: obj.idade,
+          sexo: obj.sexo,
+          descricao: obj.descricao,
+          personalidade: obj.personalidade,
+          foto_url: "",
+          status: "disponivel",
+          usuario_id: cookieUsuario.id
+        })
+      })
+      if (!response.ok) throw new Error("deu ruim porra")
+    } catch (erro) {
+      console.log(erro)
+    }
+  }
 }
-)
+const formulario = new Formulario();
+formulario.adicionaObservadorTipo()
+formulario.adicionarObservadorSubmit()

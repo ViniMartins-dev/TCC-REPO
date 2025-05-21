@@ -21,13 +21,7 @@
     <!-- <div class="espaco-cabecalho"></div> -->
     <div class="cabecalho">
         <img onclick="irParaHome()" id="logo" src="./img/Logo-laranja.png" alt="" />
-        <div class="search-container">
-            <input id="search" type="search" id="checkbox-indefinido" />
-            <div class="box-btn-search">
-                <i class="btn-search fa-solid fa-magnifying-glass"></i>
-            </div>
-        </div>
-        <div class="links-header">
+        <div id="box-links" class="links-header">
             <a id="link" href="cadastro_animais.html">Cadastrar</a>
             <a id="link" href="favoritos.html">Favoritos</a>
             <a id="link" href="perfil.html">Perfil</a>
@@ -44,15 +38,15 @@
         <div class="sidebar-content" id="sidebar-content">
             <i onclick="sidebar.fechar()" class="x-icon fa-solid fa-xmark"></i>
             <div class="sidebar-content-espaco"></div>
-            <div class="sidebar-content-item">
+            <div id="sidebarLinkCadastro" class="sidebar-content-item">
                 <i class="sidebar-link-icon fa-solid fa-caret-right"></i>
                 <a class="sidebar-link" href="cadastro_animais.html">Cadastrar Animal</a>
             </div>
-            <div class="sidebar-content-item">
+            <div id="sidebarLinkFavoritos" class="sidebar-content-item">
                 <i class="sidebar-link-icon fa-solid fa-caret-right"></i>
                 <a class="sidebar-link" href="favoritos.html">Favoritos</a>
             </div>
-            <div class="sidebar-content-item">
+            <div id="sidebarLinkPerfil" class="sidebar-content-item">
                 <i class="sidebar-link-icon fa-solid fa-caret-right"></i>
                 <a class="sidebar-link" href="perfil.html">Perfil</a>
             </div>
@@ -95,6 +89,7 @@
             <div class="container-filtro">
                 <!-- Ira ser inserido mais filtros -->
                 <h3 class="filtro-titulo">Filtros:</h3>
+                <button id="btn-buscar"class="btn-buscar" onclick="inserirQuadradosDosAnimais(aplicarFiltros())">Buscar</button>
                 <div class="filtro-raca">
                     <p class="filRaca-text">Raças:</p>
                     <div>
@@ -161,7 +156,7 @@
                 <div class="filtro-idade">
                     <p class="filIdade-text">Idades:</p>
                     <div>
-                        <input class="filIdade-option" type="radio" id="option-idade-0" name="idades">
+                        <input select class="filIdade-option" type="radio" id="option-idade-0" name="idades">
                         <label class="filIdade-option" for="option-idade-0"> Todas</label>
                     </div>
                     <div>
@@ -207,11 +202,10 @@
                 </div>
             </div>
 
-            <div class="container-lista">
+            <div id="container-lista"class="container-lista">
                 <div class="lista-header">
                     <h1 class="lista-header-titulo">Animais para adoção:</h1>
                 </div>
-
                 <!-- AQUI QUE VAI FICAR OS FILTROS MOBILE -->
                 <div class="filtro-mobile">
                     <!-- parte em que os filtros selecionados aparecerão -->
@@ -232,28 +226,16 @@
                         <div onClick="selecionar(this)" class="filPersonalidade-option">Inteligente</div>
                         <div onClick="selecionar(this)" class="filPersonalidade-option">Dócil</div>
                     </div>
-                    <!-- botão dos filtros -->
-                    <!-- precisa adicionar a funcionalidade de clicar nele e aparecer as opções -->
                     <button onclick="menuFiltro.abrir()" id="btn-filtro_mobile">Filtros</button>
+                </div>
 
-
+                <div class="container-animais" id="container-animais">
+                  
                 </div>
             </div>
 
-            <button onclick="aplicarFiltros()">Buscar</button>
 
-            <script src="./js/buscaFiltro.js"></script>
-
-
-
-
-
-            <div class="container-animais" id="container-animais">
-
-                <!-- aqui esta sendo inserido os animais com inserirAnimais() -->
-            </div>
         </div>
-    </div>
     </div>
 
     <div id="menu-filtros" class="menu-filtros">
@@ -384,6 +366,7 @@
         <!-- aqui esta sendo inserido o popup com abrirPopup() -->
     </div>
 </body>
+<script src="./js/buscaFiltro.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script src="./js/main.js"></script>
 

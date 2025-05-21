@@ -14,6 +14,15 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css" rel="stylesheet"/>
   </head>
   <body id="body">
+    <div class="popupRestricao" id="popupRestricao">
+      <div onclick="event.stopPropagation()" class="popupRestricao-content">
+        <h1>Acesso Negado!</h1>
+        <p>
+          Apenas usuarios autorizados podem acessar essa pagina
+        </p>
+        <button onclick="irParaHome()"id="btnSair">Sair</button>
+      </div>
+    </div>
     <div class="cabecalho">
       <img onclick="irParaHome()"id="logo" src="./img/Logo-laranja.png" alt="" />
       <div class="links-header">
@@ -43,7 +52,6 @@
         </div>
       </div>
     </div>
-
     <h1 class="form__title">Cadastro de Animais para Adoção</h1>
     <div class="main">
       <div class="image-upload">
@@ -63,42 +71,67 @@
           </div>
         </div>
         
-      </form>      
     </div>
 
-      <form class="main__form" action="" method="POST">
-       
-
+      <form class="main__form" id="main__form">
         <label for="nome">Nome do Animal:</label>
-        <input type="text" id="nome" name="nome" required />
+        <input type="text" id="nome" name="nome" placeholder="Luke" autocomplete="off"/>
 
         <label for="tipo">Espécie:</label>
-        <select id="tipo" name="tipo" required>
+        <select id="tipo" name="tipo" autocomplete="off" required>
           <option selected disabled>Selecione uma Espécie</option>
           <option value="cachorro">Cachorro</option>
           <option value="gato">Gato</option>
-          <option value="outro">Coelho</option>
+          <option value="coelho">Coelho</option>
         </select>
         
         <label for="raca">Raça do Animal:</label>
-        <select name="raca" id="raca" required>
+        <select name="raca" id="raca" autocomplete="off" required>
+          <option selected disabled>Selecione uma Raça</option>
           <!--Options vão aparecer conforme for selecionado 
           a especie do animal -->
         </select>
+        
+        <label for="porte">Porte do animal:</label>
+        <select name="porte" id="porte" autocomplete="off" required>
+          <option selected disabled>Selecione um Porte</option>
+          <option value="pequeno">Pequeno</option>
+          <option value="medio">Medio</option>
+          <option value="grande">Grande</option>
+        </select>
 
         <label for="idade">Idade:</label>
-        <input type="number" id="idade" name="idade" required />
+        <input type="number" min="1" id="idade" name="idade" autocomplete="off" required />
 
         <label for="sexo">Sexo:</label>
-        <select id="sexo" name="sexo" required>
-          <option value="macho">Macho</option>
-          <option value="femea">Fêmea</option>
+        <select id="sexo" name="sexo" autocomplete="off" required>
+          <option selected disabled>Selecione um Sexo</option>
+          <option value="M">Macho</option>
+          <option value="F">Fêmea</option>
+        </select>
+
+        <label for="personalidade">Personalidade:</label>
+        <select id="personalidade" name="personalidade" autocomplete="off" required>
+          <option selected disabled>Selecione uma Pesonalidade</option>
+          <option value="Curioso">Curioso</option>
+          <option value="Carinhoso">Carinhoso</option>
+          <option value="Brincalhao">Brincalhão</option>
+          <option value="Protetor">Protetor</option>
+          <option value="Sociavel">Sociável</option>
+          <option value="Timido">Tímido</option>
+          <option value="Independente">Independente</option>
+          <option value="Medroso">Medroso</option>
+          <option value="Obediente">Obediente</option>
+          <option value="Teimoso">Teimoso</option>
+          <option value="Leal">Leal</option>
+          <option value="Calmo">Calmo</option>
+          <option value="Agitado">Agitado</option>
         </select>
 
         <label for="descricao">Descrição:</label>
-        <textarea id="descricao" name="descricao" rows="4" required></textarea>
+        <textarea id="descricao" name="descricao" rows="4" autocomplete="off" placeholder="Adora passear de manhã" required></textarea>
 
-        <button type="submit">Cadastrar</button>
+        <button id="btnCadastrar" type="submit">Cadastrar</button>
       </form>
     </div>
     <!-- Necessario para rodar o Cropper -->

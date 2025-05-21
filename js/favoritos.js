@@ -8,8 +8,28 @@ function pegarCookieUsuario() {
 }
 const cookieUsuario = pegarCookieUsuario()
 
-const user = {
-  id : cookieUsuario.id,
+function irParaLogin() {
+  window.location.href = "login.html#cadastro"
+}
+
+function estaLogado() {
+  if (cookieUsuario == null) {
+    return false
+  } else {
+    return true
+  }
+}
+
+if (!estaLogado()) {
+  irParaLogin()
+} else if (cookieUsuario.tipo == "tutor") {
+  let boxLinks = document.getElementById("box-links")
+  let linkCadastro = document.getElementById("sidebarLinkCadastro")
+  linkCadastro.style.display = "none";
+  boxLinks.innerHTML = `
+      <a id="link" href="index.html">Home</a>
+      <a id="link" href="perfil.html">Perfil</a>
+  `
 }
 
 let contador = 0;
@@ -102,7 +122,7 @@ async function inserirQuadradosDosAnimaisFavoritos(idUser) {
     `;
   }
 }
-inserirQuadradosDosAnimaisFavoritos(user.id);
+inserirQuadradosDosAnimaisFavoritos(cookieUsuario.id);
 // Troca a cor do coração de favoritar
 function favoritar(id) {
   /* Aqui dentro vai ser feito o processo de favoritar o animal

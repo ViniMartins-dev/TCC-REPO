@@ -93,13 +93,6 @@ class FormularioCadastro {
     this.inputData = document.getElementById('data-cadastro');
     this.inputCPF = document.getElementById("cpf")
     this.inputCNPJ = document.getElementById("cnpj")
-    
-    this.erroEmail = document.getElementById("erroEmail");
-    this.erroCNPJ = document.getElementById("erroCNPJ")
-    this.erroCPF = document.getElementById("erroCPF")
-    this.erroTel = document.getElementById("erroTel")
-    this.erroData = document.getElementById("erroData")
-    this.erroLogin = document.getElementById("erroLogin")
 
     this.boxInputCPF = document.getElementById('cpfInp');
     this.boxInputCNPJ = document.getElementById('cnpjInp');
@@ -124,15 +117,11 @@ class FormularioCadastro {
         if(tipo === 'tutor') {
           this.trocaSelectTipo(this.boxInputCPF, this.boxInputCNPJ)
           this.inputSobrenome.style.display = "flex"
-          this.inputSobrenome.required = true
           this.inputData.style.display = "flex"
-          this.inputData.required = true
         } else if(tipo === 'protetor') {
           this.trocaSelectTipo(this.boxInputCNPJ, this.boxInputCPF)
           this.inputSobrenome.style.display = "none"
-          this.inputSobrenome.required = false
           this.inputData.style.display = "none"
-          this.inputData.required = false
         }
     })
   }
@@ -162,6 +151,7 @@ class FormularioCadastro {
     usuario.inserirInformacoes(informacoes.tipo, informacoes)
   }
   async cadastrarProtetor() {
+    try {
       const resposta = await fetch("http://localhost:3000/usuario/protetor", {
         method: 'POST',
         headers: {
@@ -169,17 +159,15 @@ class FormularioCadastro {
         },
         body: JSON.stringify(usuario.pegarInformacoesProtetor())
       });
-      let dados = await resposta.json()
-      if (dados.erro == "CNPJ inválido.") {
-        this.erroCNPJ.textContent = "Digite um CNPJ valido"
-        return false
-      } else if (dados.erro == "Validation error: Validation isEmail on email failed") {
-        this.erroEmail.textContent = "Digite um e-mail válido"
-        return false
+      if (!resposta.ok) {
+        throw new Error("Erro ao cadastrar protetor");
       }
-      return true
+    } catch (erro) {
+      console.error("Erro na requisição:", erro);
+    }
   }
   async cadastrarTutor() {
+    try {
       const resposta = await fetch("http://localhost:3000/usuario/tutor", {
         method: 'POST',
         headers: {
@@ -187,90 +175,13 @@ class FormularioCadastro {
         },
         body: JSON.stringify(usuario.pegarInformacoesTutor())
       });
-      let dados = await resposta.json()
-      if (dados.erro == "Idade inválida.") {
-        this.erroData.textContent = "Voce deve ter entre 18 anos e 120 anos"
-        return false
-      } else if (dados.erro == "Validation error: Validation isEmail on email failed") {
-        this.erroEmail.textContent = "Digite um e-mail válido"
-        return false
+      if (!resposta.ok) {
+        let erro = await resposta.json()
+        throw new Error(erro.erro);
       }
-      return true
-  }
-  adicionaObservadoresDeErro() {
-    this.inputEmail.addEventListener('invalid', (e) => {
-      e.preventDefault(); // evita o balãozinho do navegador
-      this.erroEmail.textContent = "Digite um e-mail válido.";
-    });
-    this.inputEmail.addEventListener('input', () => {
-      if (this.inputEmail.checkValidity()) {
-        this.erroEmail.textContent = "";
-      }
-    });
-
-    this.inputCPF.addEventListener('invalid', (e) => {
-      e.preventDefault(); // evita o balão do navegador
-      this.erroCPF.textContent = "CPF deve conter 11 números.";
-    });
-    this.inputCPF.addEventListener('input', () => {
-      const cpfNumeros = this.inputCPF.value.replace(/\D/g, '');
-      if (cpfNumeros.length === 11) {
-        this.erroCPF.textContent = "";
-      } else {
-        this.erroCPF.textContent = "CPF invalido"
-      }
-    });
-
-    this.inputCNPJ.addEventListener('invalid', (e) => {
-      e.preventDefault(); // evita o balão do navegador
-      this.erroCNPJ.textContent = "CNPJ deve conter 14 números.";
-    });
-
-    this.inputCNPJ.addEventListener('input', () => {
-      const cnpjNumeros = this.inputCNPJ.value.replace(/\D/g, '');
-      if (cnpjNumeros.length === 14) {
-        this.erroCNPJ.textContent = "";
-      } else {
-        this.erroCNPJ.textContent = "CNPJ invalido"
-      }
-    });
-    this.inputTel.addEventListener('invalid', (e) => {
-      e.preventDefault(); // evita o balão do navegador
-      this.erroTel.textContent = "Telefone deve conter 10 ou 11 números.";
-    });
-    this.inputTel.addEventListener('input', () => {
-      const telNumeros = this.inputTel.value.replace(/\D/g, '');
-      if (telNumeros.length === 10 || telNumeros.length === 11) {
-        this.erroTel.textContent = "";
-      } else {
-        this.erroTel.textContent = "Telefone deve ter 11 caracteres";
-      }
-    });
-    
-    this.inputData.addEventListener('invalid', (e) => {
-      e.preventDefault(); // evita o balão do navegador
-      const idade = calcularIdade(this.inputData.value);
-      if (!this.inputData.value) {
-        this.erroData.textContent = "Informe sua data de nascimento.";
-      } else if (idade < 18) {
-        this.erroData.textContent = "Idade minima 18";
-      } else if (idade > 120) {
-        this.erroData.textContent = "Idade maxima 120";
-      }
-    });
-
-    this.inputData.addEventListener('input', () => {
-      const data = this.inputData.value;
-      const idade = calcularIdade(data);
-
-      if (data && idade >= 18) {
-        this.erroData.textContent = "";
-      } else if (data && idade < 18) {
-        this.erroData.textContent = "Idade minima 18";
-      } else if (idade > 120) {
-        this.erroData.textContent = "Idade maxima 120";
-      }
-    });
+    } catch (erro) {
+      console.error("Erro na requisição:", erro);
+    }
   }
   adicionaObservadorSubmitForm() {
     this.formulario.addEventListener('submit', (event) => {
@@ -278,16 +189,14 @@ class FormularioCadastro {
       this.enviarForm();
     })
   }
-  async enviarForm() {
+  enviarForm() {
     this.definirThisInformacoes();
     if(this.informacoes.tipo === 'tutor' ) {
-      if (await this.cadastrarTutor()) {
-        pagina.irParaLogin()
-      }
+      this.cadastrarTutor()
+      pagina.irParaLogin()
     } else {
-      if (await this.cadastrarTutor()) {
-        pagina.irParaLogin()
-      }
+      this.cadastrarProtetor()
+      pagina.irParaLogin()
     }
   }
 }
@@ -296,7 +205,6 @@ const formularioCadastro = new FormularioCadastro();
 formularioCadastro.aparecerInputCPF()
 formularioCadastro.adicionaObservadorSelectTipo()
 formularioCadastro.adicionaObservadorSubmitForm()
-formularioCadastro.adicionaObservadoresDeErro()
 
 class FormularioLogin {
   constructor() {
@@ -310,6 +218,7 @@ class FormularioLogin {
     }
   }
   async login(obj) {
+    try {
       const response = await fetch('http://localhost:3000/usuario/login', {
         method: 'POST',
         headers: {
@@ -320,52 +229,35 @@ class FormularioLogin {
           senha: obj.senha
         })
       });
+      if (!response.ok) throw new Error('Erro ao fazer login.');
       const data = await response.json(); 
-      if (data.erro == "Usuário não encontrado.")  {
-        formularioCadastro.erroLogin.textContent = "Usuario não encontrado"
-        return false
-      } else if (data.erro == "Senha incorreta.") {
-        formularioCadastro.erroLogin.textContent = "Senha incorreta"
-        return false
-      }
+      console.log(data.payload)
+
       cadastrarCookie(decodificaObjEmStr({
         id: data.payload.id,
         tipo: data.payload.tipo,
         email: data.payload.email
       }));
-     return true
-  }
 
+      pagina.irParaHome();
+    } catch (error) {
+        console.error(error);
+    }
+  }
   adicionarObsevadorSubmitForm() {
     document.getElementById('form-login').addEventListener('submit', (event) => {
       event.preventDefault(); 
-      this.enviar()
+      this.login(this.pegarValorInputs())  
     })
-  }
-  async enviar() {
-      let verificacao = await this.login(this.pegarValorInputs())
-      if (verificacao) {
-        pagina.irParaHome()
-      }
   }
 }
 const formularioLogin = new FormularioLogin();
 formularioLogin.adicionarObsevadorSubmitForm()
-
-function calcularIdade(dataStr) {
-  const hoje = new Date();
-  const nascimento = new Date(dataStr);
-  let idade = hoje.getFullYear() - nascimento.getFullYear();
-  const mes = hoje.getMonth() - nascimento.getMonth();
-  if (mes < 0 || (mes === 0 && hoje.getDate() < nascimento.getDate())) {
-    idade--;
-  }
-  return idade;
-}
 
 function decodificaObjEmStr(obj) {
   return encodeURIComponent(JSON.stringify(obj))
 }
 function cadastrarCookie(str) {
   document.cookie = `usuario=${str}; path=/;`;
+  console.log(document.cookie)
 }
