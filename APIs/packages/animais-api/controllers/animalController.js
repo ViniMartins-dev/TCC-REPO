@@ -4,7 +4,7 @@ const atualizaAnimal = require('../services/atualizarAnimal');              // I
 const deletaAnimal = require('../services/deletarAnimal');                  // Importa o serviço de deletar animal
 const filtraAnimais = require('../services/filtrarAnimais');                // Importa o serviço de filtrar animais
 const buscaAnimalPorId = require('../services/animalPorId');                // Importa o serviço de obter animal por ID
-
+const multer = require('multer')
 const upload = multer(); // Para tratar os dados da imagem
 
 const listarAnimais = async (req, res) => {

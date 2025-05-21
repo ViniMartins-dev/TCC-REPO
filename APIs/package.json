@@ -3,24 +3,24 @@
     "version": "1.0.0",
     "main": "APIS/server.js",
     "scripts": {
-      "start": "node server.js",
-      "dev": "nodemon server.js",
-      
-      "testeModelUser": "node packages/tests/testeModelUser",
-      "testeModelAnimal": "node packages/tests/testeModelAnimal",
-      "testeModelAdocao": "node packages/adocoes-api/testes/testeModelAdocao.js"
+        "start": "node server.js",
+        "dev": "nodemon server.js",
+        "testeModelUser": "node packages/tests/testeModelUser",
+        "testeModelAnimal": "node packages/tests/testeModelAnimal",
+        "testeModelAdocao": "node packages/adocoes-api/testes/testeModelAdocao.js"
     },
     "author": "https://github.com/ViniMartins-dev",
     "dependencies": {
-      "cors": "^2.8.5",
-      "dotenv": "^16.4.7",
-      "express": "^4.21.2",
-      "mysql2": "^3.14.0",
-      "sequelize": "^6.37.6",
-      "jsonwebtoken": "^9.0.2",
-      "bcrypt": "^5.1.1"
+        "bcrypt": "^5.1.1",
+        "cors": "^2.8.5",
+        "dotenv": "^16.4.7",
+        "express": "^4.21.2",
+        "jsonwebtoken": "^9.0.2",
+        "multer": "^2.0.0",
+        "mysql2": "^3.14.0",
+        "sequelize": "^6.37.6"
     },
     "devDependencies": {
-      "nodemon": "^3.1.9"
+        "nodemon": "^3.1.9"
     }
 }
