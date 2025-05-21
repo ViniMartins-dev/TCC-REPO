@@ -11,10 +11,11 @@ const deletarAnimal = async (id, idUsuario) => {
     }
 
     if (!usuario) {
-        throw new Error(idUsuario);
+        throw new Error('Usuário não encontrado.');
     }
+    
     if (usuario.tipo !== 'protetor') {
-        throw new Error('Apenas protetor podem deletar animais.');
+        throw new Error('Apenas protetores podem deletar animais.');
     }
 
     if (animal.usuario_id !== idUsuario) {

@@ -22,7 +22,7 @@ const criarAnimal = async (dados, fotoBuffer) => {
         throw new Error('Usuário não encontrado.');
     }
     if (usuario.tipo !== 'protetor') {
-        throw new Error('Apenas tutores podem cadastrar animais.');
+        throw new Error('Apenas protetores podem cadastrar animais.');
     }
 
     // Cria o animal no banco

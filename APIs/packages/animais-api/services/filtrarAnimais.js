@@ -11,7 +11,8 @@ const aplicarFiltros = (query) => {
 
     // Filtro para 'raca' - busca exata
     if (query.raca) {
-        filtros.raca = query.raca;
+        const racas = Array.isArray(query.raca) ? query.raca : [query.raca];
+        filtros.raca = { [Op.in]: racas };
     }
 
     // Filtro para 'idadeMin' - maior ou igual
