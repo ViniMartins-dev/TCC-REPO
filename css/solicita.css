@@ -259,3 +259,69 @@ input[type="search"]::-webkit-search-cancel-button {
 .sidebar-content-item:hover .sidebar-link {
   font-size: 22px;
 }
+
+    #card {
+      background-color: white;
+      font-family: var(--fonte-principal);
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      max-width: 600px;
+      margin: 40px auto;
+      overflow: hidden;
+    }
+
+    .card-header {
+      background-color: var(--laranja);
+      margin-top: 5%;
+      color: white;
+      padding: 15px;
+      font-size: 18px;
+    }
+
+    .card-body {
+      padding: 20px;
+    }
+
+    #titulo-adotante, #titulo-animal {
+      font-size: 19px;
+      font-family: var(--fonte-principal);
+      font-weight: bold;
+      margin-top: 15px;
+      border-bottom: 2px solid #cb7842;
+      border-radius: 2px;
+      margin-right: 90%;
+    }
+
+    .info {
+      margin: 7px 0;
+      
+    }
+
+    .div-btn {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .div-btn button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      align-items: center;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    .div-btn button:hover {
+    transform: translateY(-2px);
+    opacity: 0.8;
+    }
+
+    #foto-animal {
+      float: right;
+      border-radius: 8px;
+      max-width: 150px;
+      border: 2px solid #cb7842;
+    }
