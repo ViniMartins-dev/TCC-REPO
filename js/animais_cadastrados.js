@@ -44,6 +44,7 @@ class Pagina {
   fechar() {
     this.body.style.overflow = "auto";
     this.popup.style.display = "none";
+    window.location.reload()
   }
 }
 
@@ -69,7 +70,11 @@ const sidebar = new Sidebar();
 
 class AnimalCadastrado {
   async buscarAnimaisCadastrados(idUser) {
-    let response = await fetch(`http://localhost:3000/animal/cadastrados/${idUser}`);
+    let response = await fetch(`http://localhost:3000/animal/cadastrados/${idUser}`, {
+      headers: {
+        bearer: cookieUsuario.token
+      }
+    });
     let dados = await response.json();
     return dados;
   }
@@ -106,7 +111,8 @@ class AnimalCadastrado {
     let response = await fetch(`http://localhost:3000/animal/${idAnimal}`, {
       method: "DELETE",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        bearer: cookieUsuario.token
       },
       body: JSON.stringify({
         "idProtetor": idUser
@@ -121,7 +127,8 @@ class AnimalCadastrado {
     let response = await fetch(`http://localhost:3000/animal/${idAnimal}`, {
       method : "PUT",
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+         bearer: cookieUsuario.token
       },
       body: JSON.stringify({
         "nome": dados.nome,

@@ -35,17 +35,29 @@ if (!estaLogado()) {
 let contador = 0;
 class AnimaisFavoritos {
   async buscarAnimaisFavoritos(idUser) {
-    let response = await fetch(`http://localhost:3000/favoritos/listar/${idUser}`)
+    let response = await fetch(`http://localhost:3000/favoritos/listar/${idUser}`, {
+      headers: {
+        bearer: cookieUsuario.token
+      }
+    })
     let dados = await response.json();
     return dados;
   } 
   async isFavorite(idUser, idAnimal) {
-    let response = await fetch(`http://localhost:3000/favoritos/listar/${idUser}`)
+    let response = await fetch(`http://localhost:3000/favoritos/listar/${idUser}`, {
+      headers: {
+        bearer: cookieUsuario.token
+      }
+    })
     let dados = await response.json();
     return dados.some(elemento => elemento.animal_id == idAnimal);
   } 
   async buscarAnimal(idAnimal) {
-    let response = await fetch(`http://localhost:3000/animal/show/${idAnimal}`)
+    let response = await fetch(`http://localhost:3000/animal/show/${idAnimal}`, {
+      headers: {
+        bearer: cookieUsuario.token
+      }
+    })
     let dados = response.json();
     return dados;
   }
@@ -61,7 +73,11 @@ class AnimaisFavoritos {
   async desfavoritar(idUser, idAnimal) {
     try {
       let response = await fetch(`http://localhost:3000/favoritos/${idAnimal}/${idUser}`, {
-        method: "DELETE"
+        method: "DELETE",
+        headers: {
+          'Content-Type': 'application/json',
+          bearer: cookieUsuario.token
+        }
       })
       if (!response.ok) throw new Error("Erro ao remover favorito")
     } catch (erro) {
@@ -73,7 +89,8 @@ class AnimaisFavoritos {
        let response = await fetch("http://localhost:3000/favoritos/", {
         method: "POST",
         headers: {
-          'Content-Type':'application/json'
+          'Content-Type':'application/json',
+          bearer: cookieUsuario.token
         },
         body: JSON.stringify({
           "usuario_id": idUser,

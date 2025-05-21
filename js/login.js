@@ -331,7 +331,8 @@ class FormularioLogin {
       cadastrarCookie(decodificaObjEmStr({
         id: data.payload.id,
         tipo: data.payload.tipo,
-        email: data.payload.email
+        email: data.payload.email,
+        token: data.token
       }));
      return true
   }

@@ -31,6 +31,10 @@ if (!estaLogado()) {
       <a id="link" href="perfil.html">Perfil</a>
   `
 }
+function logout() {
+  document.cookie = "usuario=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+  irParaHome()
+}
 
 
 function abrirMenu() {
@@ -47,6 +51,12 @@ function fecharMenu() {
 }
 function irParaHome() {
   window.location.href = "./index.html"
+}
+function irParaSolicitacoes() {
+  window.location.href = "solicita.html"
+}
+function irParaAnimaisCadastrados() {
+  window.location.href = "./animais_cadastrados.html"
 }
 
 const infoPerfil = async () => {
@@ -84,4 +94,4 @@ const infoPerfil = async () => {
 
 }
 
-window.addEventListener('load', infoPerfil); //execulta ao carregar a página 
+//window.addEventListener('load', infoPerfil); //execulta ao carregar a página 

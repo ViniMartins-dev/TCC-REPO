@@ -70,6 +70,7 @@ function irParaHome() {
   window.location.href = "./index.html"
 }
 
+
 function adicionaObservadorBtnAddImg() {
   pagina.btnAddImg.addEventListener("click", () => {
     pagina.imgInputfile.click();
@@ -282,7 +283,8 @@ class Formulario {
       let response = await fetch("http://localhost:3000/animal/", {
         method: "POST",
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          bearer: cookieUsuario.token
         },
         body: JSON.stringify({
           nome: obj.nome,
@@ -298,7 +300,8 @@ class Formulario {
           usuario_id: cookieUsuario.id
         })
       })
-      if (!response.ok) throw new Error("deu ruim porra")
+      if (!response.ok) throw new Error("Erro ao cadastrar animal")
+      irParaHome()
     } catch (erro) {
       console.log(erro)
     }

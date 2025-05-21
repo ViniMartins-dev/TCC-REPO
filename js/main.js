@@ -69,7 +69,11 @@ class Animal {
     if (!estaLogado()) {
       return false;
     } else {
-      let response = await fetch(`http://localhost:3000/favoritos/listar/${cookieUsuario.id}`)
+      let response = await fetch(`http://localhost:3000/favoritos/listar/${cookieUsuario.id}`, {
+        headers: {
+          bearer: cookieUsuario.token
+        }
+      })
       let dados = await response.json();
       return dados.some(elemento => elemento.animal_id == idAnimal);
     }
@@ -78,7 +82,10 @@ class Animal {
   async desfavoritar(idUser, idAnimal) {
     try {
       let response = await fetch(`http://localhost:3000/favoritos/${idAnimal}/${idUser}`, {
-        method: "DELETE"
+        method: "DELETE",
+        headers: {
+          bearer: cookieUsuario.token
+        }
       })
       if (!response.ok) throw new Error("Erro ao remover favorito")
     } catch (erro) {
@@ -91,7 +98,8 @@ class Animal {
        let response = await fetch("http://localhost:3000/favoritos/", {
         method: "POST",
         headers: {
-          'Content-Type':'application/json'
+          'Content-Type':'application/json',
+           bearer: cookieUsuario.token
         },
         body: JSON.stringify({
           "usuario_id": idUser,
@@ -125,6 +133,7 @@ class Animal {
         method: 'POST',
         headers: {
           'Content-Type':'application/json',
+           bearer: cookieUsuario.token
         },
         body: JSON.stringify({
           "animal_id": idAnimal,
@@ -234,20 +243,14 @@ function decodificaStrEmObj(str) {
     return JSON.parse(decodeURIComponent(str))
 }
 async function consumirApi(url) {
-  try {
-    const response = await fetch(url, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'bearer': '000'
-      }
-    })
-    if (!response.ok) throw new Error("Erro na resposta da api:")
-    const dados = await response.json();
-    return dados;
-  } catch(error) {
-    console.log("log:", error)
-  }
+  const response = await fetch(url, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    }
+  })
+  const dados = await response.json();
+  return dados;
 }
 
 function contemClasse(element,classe) {
