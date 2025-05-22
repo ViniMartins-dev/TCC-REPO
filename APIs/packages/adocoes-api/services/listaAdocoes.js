@@ -12,7 +12,7 @@ const listarAdocoes = async (protetorId) => {
                 },
                 {
                     association: 'animal',
-                    attributes: ['id', 'nome', 'especie', 'raca', 'idade', 'usuario_id'],
+                    attributes: ['id', 'nome', 'especie', 'raca', 'idade', 'usuario_id', 'bin_foto'],
                     where: {
                         usuario_id: protetorId  // Filtra os animais cadastrados por esse protetor
                     }
