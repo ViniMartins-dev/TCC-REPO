@@ -1,0 +1,202 @@
+:root {
+    --laranja : #cb7842;
+    --cinza: #333;
+    --branco: #fff;
+    --font-principal: "Roboto", sans-serif;
+}
+
+.principal {
+    width: 100%;
+    max-width: 800px;
+    height: 5%;
+    margin: 20px auto;
+    box-shadow: 0 0 4px var(--cinza);
+    border-radius: 10px;
+    padding: 41px;
+    box-sizing: border-box;
+    position: relative;
+    min-height: 465px;
+    overflow: hidden;
+}
+
+#login, #cadastro  {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-right: 10px;
+    transition: all 0.01s ease;
+}
+.col40 {
+    width: 40%;
+    padding: 20px 35px;
+    position: relative;
+    top: -80px
+}
+
+.col60 {
+    width: 50%;
+    padding: 40px 20px;
+}
+
+.form-login {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 5px;
+}
+
+.form-login h3 {
+    text-align: center;
+    font-family: var(--font-principal);
+}
+
+select:invalid {
+    color: gray;
+}
+
+.campo-dinamico {
+    display: none;
+}
+
+#logo {
+    width: 15%;
+    max-width: 80px;
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    margin: 0 auto;
+}
+
+.form-login .input {
+    width: 100%;
+    border: none;
+    outline: none;
+    border-bottom: solid 1px var(--cinza);
+    padding: 5px 0;
+    background-color: transparent;
+}
+
+.btn {
+    width: 100%;
+    border: solid 1px var(--cinza);
+    background-color: #cb7842;
+    color: var(--branco);
+    font-family: var(--font-principal);
+    padding: 10px 8px;
+    border: none;
+    border-radius: 200px;
+    border-bottom: none !important;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 12px;
+    margin: 16px 0 10px 0;
+}
+.form-login select#tipo {
+  width: 45%;
+  margin: 0 0 8px 0;
+}
+.form-login a {
+    font-size: 12px;
+    align-items: center;
+    text-decoration: none;
+    color: var(--cinza);
+    font-family: var(--font-principal);
+}
+.error {
+  color: red;
+  margin: 4px 0 0 0;
+  font-weight: 500;
+  font-size: 10px;
+}
+.form-login a:hover {
+    color: #cb7842;
+}
+
+#cadastro .text-login {
+    text-align: right;
+    padding-left: 100px;
+    margin-left: 20px
+}
+
+.text-login {
+    color: var(--branco);
+    font-family: var(--font-principal);
+}
+
+.mascara {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: var(--laranja) ;
+    top: 0;
+    left: -60%;
+    z-index: -1;
+    transform: skewX(-40deg);
+    transition: all 1s ease;
+}
+
+@media (max-width: 1890px) {
+    .mascara {
+        width: 95%;
+    } 
+} 
+
+@media (max-width: 1400px) {
+    .mascara {
+        margin-left: 15px;
+    } 
+} 
+
+@media (max-width: 1150px) {
+    .form-login form {
+        margin-left: 10px;
+    }
+} 
+
+@media (max-width: 500px) {
+  #login {
+    flex-direction: column;
+  }
+  #cadastro {
+    flex-direction: column-reverse;
+  }
+  #login .col40 {
+    position: relative;
+    top: 50px;
+    right: 100px;
+  }
+  #login .col60 {
+    position: relative;
+    top: -90px;
+    right: -90px;
+  }
+  #cadastro .col40 {
+    position: relative;
+    top: 100px;
+    right: -70px;
+  }
+  #cadastro .col60 {
+    position: relative;
+    top: -90px;
+    right: 100px;
+  }
+}
+
+/* efeitos de transição */
+#cadastro:not(:target), #login:not(:target) {
+    transition: all 1s 1s ease;
+}
+
+#cadastro:not(:target) ~ .mascara {
+    transform: skewX(40deg);
+    left: 60%;
+}
+#cadastro:target, #login:target {
+    z-index: -2;
+    opacity: 0;
+}

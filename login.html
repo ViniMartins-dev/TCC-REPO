@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+    <img id="logo" src="./img/Logo-laranja.png" alt="">
+    <div class="principal">
+        <div id="login">
+            <div class="col40 text-login">
+                <h1>Bem Vindo!</h1>
+                <h3>Informe seu usuário e senha <br> para acessar:</h2>
+            </div>  
+            <div class="form-login col60">
+                <h3>Login</h3>
+                <form action="#" class="form-login" id="form-login">
+                    <input class="input"id="email-login" name="login" type="email" placeholder="Digite seu email" required>
+                    <input class="input"id="senha-login" type="password" name="senha" placeholder="Digite sua senha" required>
+                    <span class="error" id="erroLogin"></span>
+        
+                    <input class="btn" type="submit" value="Confirmar">
+                    <a href="#login">Torne-se um parceiro</a>
+                </form>
+            </div>
+        </div>
+
+        <div id="cadastro">
+            <div class="col60 form-login">
+                <form action="#" method="post" class="form-login" id="form-cadastro">
+                    <select id="tipo" autocomplete="off">
+                        <option value="tutor" selected>Tutor</option>
+                        <option value="protetor">ONG ou Pet-Shop</option>
+                    </select>
+                    <input class="input" id="nome-cadastro" type="text" placeholder="Nome" autocomplete="off" required>
+                    <input class="input" id="sobrenome-cadastro" type="text" placeholder="Sobrenome" autocomplete="off" required>
+                    <input class="input"id="email-cadastro"  type="email" placeholder="Email" autocomplete="off" required>
+                    <span id="erroEmail" class="error""></span>
+                    <input class="input"id="pass-cadastro" type="password"  placeholder="Senha" autocomplete="off" required>
+                    <input class="input"id="tel-cadastro" min="1905-05-21" max="2007-05-21" type="tel" placeholder="Telefone/Celular" autocomplete="off" required>
+                    <span id="erroTel" class="error"></span>
+                    <input class="input"id="data-cadastro" type="date"  placeholder="Data Nascimento"  autocomplete="off" required>
+                    <span id="erroData" class="error""></span>
+                    <div class="campo-dinamico" id="cnpjInp">
+                        <input class="input"id="cnpj" type="number" placeholder="CNPJ" autocomplete="off" maxlength=14>
+                        <span id="erroCNPJ" class="error""></span>
+                    </div>
+                    <div class="campo-dinamico" id="cpfInp">
+                        <input class="input"id="cpf" type="number" placeholder="CPF" autocomplete="off" maxlength=11>
+                        <span id="erroCPF" class="error""></span>
+                    </div>
+                    <input class="btn" type="submit" value="Confirmar">
+                    <a href="#cadastro">Já tenho uma conta</a>
+                </form>
+            </div>
+            <div class="col40 text-login">
+                <h1>Cadastre-se!</h1>
+                <h3>Complete seu cadastro preenchendo o formulário: </h3>
+            </div>
+        </div>
+        <div class="mascara"></div>
+    </div>
+    <script src="js/login.js"></script>
+</body>
+</html>

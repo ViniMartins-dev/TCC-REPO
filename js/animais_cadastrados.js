@@ -1,0 +1,313 @@
+function pegarCookieUsuario() {
+  const cookies = document.cookie.split('; ');
+  for (let cookie of cookies) {
+    const [key, value] = cookie.split('=');
+    if (key == "usuario") return JSON.parse(decodeURIComponent(value));
+  }
+  return null;
+}
+const cookieUsuario = pegarCookieUsuario()
+
+console.log(cookieUsuario)
+const user = {
+  id : cookieUsuario.id,
+  tipo : cookieUsuario.tipo
+}
+
+function irParaHome() {
+  window.location.href = "./index.html";
+}
+
+function decodificaStrEmObj(str) {
+    return JSON.parse(decodeURIComponent(str))
+}
+
+function obterValoresDoFormulario() {
+  const nome = document.getElementById('nome').value;
+  const raca = document.getElementById('racas').value;
+  const personalidade = document.getElementById('pesonalidade').value;
+  const descricao = document.getElementById('descricao').value;
+  const sexoSelecionado = document.querySelector('#box-sexos input[type="radio"]:checked')?.value || null;
+  return {
+    nome,
+    raca,
+    sexo: sexoSelecionado,
+    personalidade,
+    descricao
+  };
+}
+class Pagina {
+  constructor() {
+    this.popup = document.getElementById("popup")
+    this.body = document.getElementById("body");
+  }
+  fechar() {
+    this.body.style.overflow = "auto";
+    this.popup.style.display = "none";
+    window.location.reload()
+  }
+}
+
+const pagina = new Pagina()
+
+class Sidebar {
+  constructor() {
+    this.sidebar = document.getElementById("sidebar");
+    this.body = document.getElementById("body");
+  }
+
+  abrir() {
+    this.body.style.overflow = "hidden"
+    this.sidebar.style.display = "flex";
+  }
+
+  fechar() {
+    this.body.style.overflow = "scroll"
+    this.sidebar.style.display = "none";
+  }
+}
+const sidebar = new Sidebar();
+
+class AnimalCadastrado {
+  async buscarAnimaisCadastrados(idUser) {
+    let response = await fetch(`http://localhost:3000/animal/cadastrados/${idUser}`, {
+      headers: {
+        bearer: cookieUsuario.token
+      }
+    });
+    let dados = await response.json();
+    return dados;
+  }
+
+  async inserirQuadradosAnimais(idUser) {
+    let dados = await this.buscarAnimaisCadastrados(idUser)
+    let boxAnimais = document.getElementById("container-animais");
+    console.log(dados);
+    dados.forEach((animal) => {
+      // Transforma o obj em uma string codigicada para passar pelo parametro
+      let animalStr = encodeURIComponent(JSON.stringify(animal));
+      boxAnimais.innerHTML += `
+        <div class="container-animais-item">
+          <img class="animais-item-img" src="${animal.fotoBase64}" alt="dog1">
+          <div class="item-content">
+            <div class="box-icons">
+              <div class="box-icon edit" onclick="popup.abrirPopupEditar('${animalStr}')">
+                <i class="icon fa-solid fa-pen-to-square"></i>
+              </div>
+              <div class="box-icon delete" onclick="popup.abrirPopupDeletar('${animalStr}')">
+                <i class="icon fa-solid fa-trash"></i>
+              </div>
+            </div>
+            <h6 class="animais-item-text">Nome: ${animal.nome}</h6>
+            <h6 class="animais-item-text">Raça: ${animal.raca}</h6>
+            <h6 class="animais-item-text">Idade: ${animal.idade}</h6>
+          </div>
+        </div>
+      `;
+    });
+  }
+
+  async deletar(idUser, idAnimal) {
+    let response = await fetch(`http://localhost:3000/animal/${idAnimal}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        bearer: cookieUsuario.token
+      },
+      body: JSON.stringify({
+        "idProtetor": idUser
+      })
+    })
+    pagina.fechar();
+  }
+
+  async editar(idUser, idAnimal) {
+    let dados = obterValoresDoFormulario();
+    console.log(dados);
+    let response = await fetch(`http://localhost:3000/animal/${idAnimal}`, {
+      method : "PUT",
+      headers: {
+        'Content-Type': 'application/json',
+         bearer: cookieUsuario.token
+      },
+      body: JSON.stringify({
+        "nome": dados.nome,
+        "raca": dados.raca,
+        "sexo": dados.sexo,
+        "personalidade": dados.personalidade,
+        "descricao": dados.descricao,
+        "idProtetor": idUser
+      })
+    })
+    pagina.fechar();
+  }
+}
+const animais = new AnimalCadastrado();
+
+animais.inserirQuadradosAnimais(user.id);
+
+class Popup {
+  constructor() {
+    this.popup = document.getElementById("popup")
+    this.popupAcessoNegado = document.getElementById("popupAcessoNegado")
+    this.body = document.getElementById("body");
+  }
+
+  abrirPopupEditar(animalStr) {
+    let animal = decodificaStrEmObj(animalStr)
+    this.body.style.overflow = "hidden";
+    this.popup.style.display = "flex";
+    this.popup.innerHTML = `
+      <div onclick="event.stopPropagation()" class="contentEditar">
+        <h1>Editar</h1>
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" value="${animal.nome}">
+        <label for="racas">Escolha a raça:</label>
+        <select id="racas" name="racas">
+        </select>
+        <label for="box-sexos">Sexos:</label>
+        <div class="box-sexos" id="box-sexos">  
+        </div>
+        <label for="pesonalidade">Personalidade:</label>
+        <input type="text" id="pesonalidade" value="${animal.personalidade}">
+        <label for="descricao">Descrição:</label>
+        <textarea type="text" id="descricao">${animal.descricao}</textarea>
+        <div class="box-botoes">
+          <div onclick="popup.fechar()"id="btn-cancelar" class="btn cancelar">Cancelar</div>
+          <div class="btn confirmar" onclick="animais.editar(${user.id}, ${animal.id})">Editar</div>
+        </div>
+      </div>
+    `;
+    // onclick estava dando interferencia de this, entao add um event click
+    document.getElementById("btn-cancelar").addEventListener("click", () => this.fechar);
+    inserirSexosAnimalDeAcordoComSexoAnimal(animal.sexo);
+    inserirOptionsRacaDeAcordoComTipoAnimal(animal.especie, animal.raca)
+  }
+
+  abrirPopupDeletar(animalStr) {
+    let dados = decodificaStrEmObj(animalStr);
+    this.popup.style.display = "flex";
+    this.body.style.overflow = "hidden";
+    this.popup.innerHTML = `
+      <div onclick="event.stopPropagation()" class="popupDeletar-content">
+        <h1>Atenção</h1>
+        <p>Você deseja deletar este anuncio de adoção?</p>
+        <div class="box-botoes">
+          <div onclick="popup.fechar()"id="btn-cancelar" class="btn cancelar">Não</div>
+          <div class="btn confirmar" onclick="animais.deletar(${user.id}, ${dados.id})">Sim</div>
+        </div>
+      </div>
+    `
+  }
+  abrirPopupAcessoNegado() {
+    this.popupAcessoNegado.style.display = "flex";
+    this.body.style.overflow = "hidden";
+    console.log(this.popup.onClick)   
+    this.popupAcessoNegado.innerHTML = `
+      <div onclick="event.stopPropagation()" class="popupAcessoNegado-content">
+        <h1>Acesso Negado</h1>
+        <p>Apenas pessoas autorizadas podem acessar esta pagina</p>
+        <div onclick="irParaHome()"id="btn-sair">Sair</div>
+      </div>
+    `
+  }
+  fechar() {
+    this.body.style.overflow = "auto";
+    this.popup.style.display = "none";
+  }
+  
+}
+const popup = new Popup();
+
+function restringirAcesso() {
+  if (user.tipo == "tutor") {
+    popup.abrirPopupAcessoNegado()
+  }
+}
+restringirAcesso()
+function inserirSexosAnimalDeAcordoComSexoAnimal(sexo) {
+  let boxSexos = document.getElementById("box-sexos");
+  if (sexo == "M") {
+    boxSexos.innerHTML = `
+      <div>
+        <label for="sexo-m">Macho</label>
+        <input type="radio" id="sexo-m" name="sexo" value="M" checked>
+      </div>
+      <div>
+        <label for="sexo-f">Femea</label>
+        <input type="radio" id="sexo-f" name="sexo" value="F">
+      </div>
+    `
+  } else {
+    boxSexos.innerHTML = `
+      <div>
+        <label for="sexo-m">Macho</label>
+        <input type="radio" id="sexo-m" name="sexo" value="M">
+      </div>
+      <div>
+        <label for="sexo-f">Femea</label>
+        <input type="radio" id="sexo-f" name="sexo" value="F" checked>
+      </div>
+    `
+  }
+}
+function inserirOptionsRacaDeAcordoComTipoAnimal(tipo, racaSelecionada) {
+  let boxOptions = document.getElementById("racas")
+  let options;
+  if (tipo == "cachorro") {
+    options = `
+      <option selected disabled>${racaSelecionada}</option>
+      <option value="Labrador Retriever">Labrador Retriever</option>
+      <option value="Golden Retriever">Golden Retriever</option>
+      <option value="Poodle">Poodle</option>
+      <option value="Bulldog Francês">Bulldog Francês</option>
+      <option value="Husky Siberiano">Husky Siberiano</option>
+      <option value="Pastor Alemão">Pastor Alemão</option>
+      <option value="Beagle">Beagle</option>
+      <option value="Border Collie">Border Collie</option>
+      <option value="Shih Tzu">Shih Tzu</option>
+      <option value="Chihuahua">Chihuahua</option>
+      <option value="Spitz Alemão">Spitz Alemão</option>
+      <option value="Doberman">Doberman</option>
+      <option value="Akita Inu">Akita Inu</option>
+      <option value="Cocker Spaniel">Cocker Spaniel</option>
+      <option value="Rottweiler">Rottweiler</option>
+    `
+  } else if (tipo == "gato") {
+    options = `
+      <option selected disabled>${racaSelecionada}</option>
+      <option value="Persa">Persa</option>
+      <option value="Siamês">Siamês</option>
+      <option value="Maine Coon">Maine Coon</option>
+      <option value="Ragdoll">Ragdoll</option>
+      <option value="Bengal">Bengal</option>
+      <option value="Sphynx">Sphynx</option>
+      <option value="Burmese">Burmese</option>
+      <option value="British Shorthair">British Shorthair</option>
+      <option value="Abyssinian">Abyssinian</option>
+      <option value="Scottish Fold">Scottish Fold</option>
+      <option value="Oriental">Oriental</option>
+      <option value="Devon Rex">Devon Rex</option>
+      <option value="Birman">Birman</option>
+      <option value="Russian Blue">Russian Blue</option>
+      <option value="Exotic Shorthair">Exotic Shorthair</option>
+    `
+  } else {
+    options = `
+        <option selected disabled>${racaSelecionada}</option>
+        <option value="Holland Lop">Holland Lop</option>
+        <option value="Angorá">Angorá</option>
+        <option value="Mini Rex">Mini Rex</option>
+        <option value="Netherland Dwarf">Netherland Dwarf</option>
+        <option value="English Lop">English Lop</option>
+        <option value="Flemish Giant">Flemish Giant</option>
+        <option value="Himalayan">Himalayan</option>
+        <option value="English Angora">English Angora</option>
+        <option value="New Zealand">New Zealand</option>
+        <option value="Lionhead">Lionhead</option>
+        <option value="French Lop">French Lop</option>
+        <option value="Californian">Californian</option>
+    `
+  }
+  boxOptions.innerHTML = options
+}

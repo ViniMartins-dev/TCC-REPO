@@ -1,0 +1,260 @@
+:root {
+  --cor-vermelho: red;
+  --cor-roxo: purple;
+  --cor-de-fundo: white;
+  --laranja: #cb7942;
+  --fonte-principal: "Roboto", sans-serif;
+}
+  
+  * {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    height: 100%;
+  }
+  
+  .cabecalho {
+    width: 100%;
+    display: flex;
+    height: 80px;
+    align-items: center;
+    justify-content: space-around;
+    position: relative;
+    top: 0;
+    background-color: #FFFFFF;
+    box-shadow: 0px 1px 8px rgba(0,0,0,0.05);
+    padding: 10px;
+  }
+  
+  #logo {
+    width: 60px;
+    margin-bottom: -1%;
+    position: absolute;
+    left: 5%;
+    top: 10px
+  }
+  
+  .links-header {
+    display: flex;
+    position: absolute;
+    right: 70px;
+    gap: 25px;
+  }
+  
+  #link {
+    text-decoration: none;
+    color: #cb7842;
+    font-weight: 600;
+    font-family: var(--fonte-principal);
+    font-size: 15px;
+    transition: all 100ms;
+  }
+  
+  #link:hover {
+    scale: 1.1
+  }
+  .btn-menu {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    right: 5%;
+    padding: 2px;
+    border-radius: 4px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    color: #cb7842;
+    transition: all 100ms;
+  }
+  .btn-menu:hover {
+    scale:1.1;
+  }
+  .btn-menu-icon {
+    font-size: 25px;
+  }
+  @media (max-width: 1200px) {
+    .links-header {
+      display: none
+    }
+    .btn-menu {
+      display: flex;
+    }
+  }
+  @media (max-width: 750px) {
+    #logo {
+     display: none; 
+    }
+    .cabecalho {
+      height: 50px;
+    }
+  }
+  @media (max-width: 500px) {
+    footer.rodape {
+      display: none;
+    } 
+  }
+  
+  .menu-sidebar {
+    display: none;
+    flex-direction: row;
+    justify-content: flex-end;
+    position: absolute;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 3;
+  }
+  .sidebar-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.25);
+  }
+  .sidebar-content {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    min-width: 300px;
+    max-width: 400px;
+    background-color: #FFFFFF;
+    z-index: 2;
+    position: relative;
+    gap: 10px;
+    animation: sidebar-appear 200ms forwards;
+  }
+  @keyframes sidebar-appear {
+    0% {
+      transform: translate(100%, 0);
+      opacity: 0;
+    }
+    100% {
+      transform: translate(0, 0);
+      opacity: 1;
+    }
+  }
+  .x-icon {
+    position: absolute;
+    top: 25px;
+    right: 14%;
+    font-size: 30px;
+    cursor: pointer;
+    transition: all 100ms;
+    color: #cb7842;
+  }
+  .x-icon:hover {
+    scale: 1.1;
+  
+  }
+  .sidebar-content-espaco {
+    width: 100%;
+    height: 90px;
+  }
+  .sidebar-content-item {
+    width: 90%;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  .sidebar-link {
+    color:#cb7942;
+    text-decoration: none;
+    font-size: 20px;
+    transition: all 100ms;
+    font-weight: 600;
+    font-family: var(--fonte-principal);
+  }
+  .sidebar-content-item:hover .sidebar-link{
+    font-size: 22px;
+  }
+
+  .top-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 32px 24px;
+    background-color: #FFFFFF;
+    border-bottom: 1px solid #f0f0f0;
+    gap: 48px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .info {
+    display: flex;
+    font-family: var(--fonte-principal);
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+  }
+
+  .info h2 {
+    font-size: 20px;
+    margin: 0;
+    font-weight: bold;
+  }
+
+  .container-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px; /* espaço entre botões */
+  margin-top: 40px;
+}
+
+.botao {
+  display: flex;
+  width: 300px;
+  margin-bottom: 1%;
+  font-weight: bold;
+  padding: 12px 24px;
+  font-size: 18px;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: #c66b2c;
+  color: black;
+  border-radius: 6px;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  color: #FFFFFF;
+}
+
+.botao:hover {
+  background-color: #e87c2f;
+  transform: translateY(-2px);
+}
+  
+
+  @media screen and (min-width: 600px) {
+     .div-logo {
+      width: 100px;
+      height: 100px;
+     }
+
+     .info {
+      font-size: 20px;
+     }
+
+     .btn_med-main {
+        width: 20%;
+     }
+    
+  }
+
+  @media screen and (min-width: 1030px) {
+    .div-logo {
+      width: 150px;
+      height: 150px;
+      border-radius: 80px;
+    }
+
+    #foto-user {
+      margin-top: 10%;
+    }
+
+  }
