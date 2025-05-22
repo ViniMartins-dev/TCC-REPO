@@ -88,7 +88,7 @@ class AnimalCadastrado {
       let animalStr = encodeURIComponent(JSON.stringify(animal));
       boxAnimais.innerHTML += `
         <div class="container-animais-item">
-          <img class="animais-item-img" src="${animal.fotoURL}" alt="dog1">
+          <img class="animais-item-img" src="${animal.fotoBase64}" alt="dog1">
           <div class="item-content">
             <div class="box-icons">
               <div class="box-icon edit" onclick="popup.abrirPopupEditar('${animalStr}')">

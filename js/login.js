@@ -122,12 +122,14 @@ class FormularioCadastro {
         let tipo = event.currentTarget.value;
         this.definirThisTipo(tipo)
         if(tipo === 'tutor') {
+          console.log("tutor")
           this.trocaSelectTipo(this.boxInputCPF, this.boxInputCNPJ)
           this.inputSobrenome.style.display = "flex"
           this.inputSobrenome.required = true
           this.inputData.style.display = "flex"
           this.inputData.required = true
         } else if(tipo === 'protetor') {
+          console.log("protetor")
           this.trocaSelectTipo(this.boxInputCNPJ, this.boxInputCPF)
           this.inputSobrenome.style.display = "none"
           this.inputSobrenome.required = false
@@ -180,6 +182,7 @@ class FormularioCadastro {
       return true
   }
   async cadastrarTutor() {
+      console.log("cadastrar tutor")
       const resposta = await fetch("http://localhost:3000/usuario/tutor", {
         method: 'POST',
         headers: {
@@ -285,7 +288,7 @@ class FormularioCadastro {
         pagina.irParaLogin()
       }
     } else {
-      if (await this.cadastrarTutor()) {
+      if (await this.cadastrarProtetor()) {
         pagina.irParaLogin()
       }
     }

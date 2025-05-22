@@ -185,7 +185,7 @@ class PopupAnimal {
     let verificaSeEstaFavoritado = await animal.isFavorite(animalObj.id);
     this.overlay.innerHTML = `
       <div class="popup" onclick="event.stopPropagation()">
-        <img src="${animalObj.fotoURL}" class="popup-img"/>
+        <img src="${animalObj.fotoBase64}" class="popup-img"/>
         <div class="popup-content">
           <i onclick="animal.alterarFavorito(${animalObj.id})" id="popup-btnFavoritar" class="popup-btnFavoritar fa-regular fa-heart"></i>
           <p class="popup-text"><b>Nome:</b> ${animalObj.nome}</p>
@@ -229,7 +229,7 @@ async function inserirQuadradosDosAnimais(params) {
     let conteudo = `
       <div class="container-animais-item">
       <div class="container-animais-item-overlay" onclick="popup.abrir('${animalStr}')"></div>
-      <img class="animais-item-img" src="${animal.fotoURL}" alt="imagem do animal">
+      <img class="animais-item-img" src="${animal.fotoBase64}" alt="imagem do animal">
       <h6 class="animais-item-text">Nome: ${animal.nome}</h6>
       <h6 class="animais-item-text">Raça: ${animal.raca}</h6>
       <h6 class="animais-item-text">Idade: ${animal.idade}</h6>

@@ -39,6 +39,21 @@ function abrirPopupRestricao() {
     irParaHome();   
   })
 }
+
+function blobToBase64(blob) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      resolve(reader.result); // Isso retorna a string base64 (data URL)
+    };
+
+    reader.onerror = reject;
+
+    reader.readAsDataURL(blob); // Converte o Blob em Base64
+  });
+}
+
 class PaginaODT {
   constructor() {
     this.body = document.getElementById("body");
@@ -77,7 +92,8 @@ function adicionaObservadorBtnAddImg() {
   })
 }
 adicionaObservadorBtnAddImg()
-
+let base64Img;
+let blobImg;
 let cropper;
 class RecortadorImagem {
   constructor() {
@@ -157,6 +173,10 @@ class RecortadorImagem {
     canvas.toBlob(
       (blob) => {
         console.log(blob)
+        blobImg = blob
+        blobToBase64(blob).then(base64String => {
+          base64Img = base64String
+        });
         const url = URL.createObjectURL(blob); // Cria um URL temporario para imagem recortada
         this.defineSrcImgRecortada(url)
       },
@@ -273,32 +293,27 @@ class Formulario {
       idade : this.inputIdade.value,
       sexo : this.inputSexo.value,
       descricao : this.inputDescricao.value,
-      personalidade : this.inputPersonalidade.value
+      personalidade : this.inputPersonalidade.value,
+      status: "disponivel",
+      usuario_id: cookieUsuario.id
    }
   }
   // Cadastrando sem imagem por enquanto
   async cadastrar(obj) {
     try {
-      console.log(obj)
+      const valores = obj; // seu método que retorna o objeto
+      const formData = new FormData();
+      for (const chave in valores) {
+        formData.append(chave, valores[chave]);
+      }
+      formData.append('bin_foto', blobImg);
+      console.log(formData)
       let response = await fetch("http://localhost:3000/animal/", {
         method: "POST",
         headers: {
-          'Content-Type': 'application/json',
           bearer: cookieUsuario.token
         },
-        body: JSON.stringify({
-          nome: obj.nome,
-          especie: obj.especie,
-          porte: obj.porte,
-          raca: obj.raca,
-          idade: obj.idade,
-          sexo: obj.sexo,
-          descricao: obj.descricao,
-          personalidade: obj.personalidade,
-          foto_url: "",
-          status: "disponivel",
-          usuario_id: cookieUsuario.id
-        })
+        body: formData
       })
       if (!response.ok) throw new Error("Erro ao cadastrar animal")
       irParaHome()

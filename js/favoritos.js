@@ -128,7 +128,7 @@ async function inserirQuadradosDosAnimaisFavoritos(idUser) {
     let animal = await animaisFavoritos.buscarAnimal(element.animal_id);
     containerAnimais.innerHTML += `
       <div class="container-animais-item">
-        <img class="animais-item-img" src="${animal.fotoURL}" alt="dog1">
+        <img class="animais-item-img" src="${animal.fotoBase64}" alt="dog1">
         <div class="item-content">
           <i class="btnFavoritar fa-solid fa-heart" onclick="animaisFavoritos.alterarFavorito(${idUser}, ${animal.id}, ${contador})" id="btnFavoritar${contador}"></i>
           <h6 class="animais-item-text">Nome: ${animal.nome}</h6>
