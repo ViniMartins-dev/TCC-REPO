@@ -13,11 +13,13 @@ app.use(express.json());                                                // Habil
 const usuarioRoutes = require('./packages/usuarios-api/routes/usuarioRoute');       // Importa as rotas de usuários
 const animalRoutes = require('./packages/animais-api/routes/animalRoute');          // Importa as rotas de animais
 const adocaoRoutes = require('./packages/adocoes-api/routes/adocoesRoute');         // Importa as rotas de adoções
+const favoritoRoutes = require('./packages/favoritos-api/routes/favoritoRoute');    // Importa as rotas de favoritos
 
 // Configurando as rotas para o servidor
 app.use('/usuario', usuarioRoutes);                 // Define a rota para usuarios
 app.use('/animal', animalRoutes);                   // Define a rota para animais
 app.use('/adocao', adocaoRoutes);                   // Define a rota para adoções
+app.use('/favoritos', favoritoRoutes);              // Define a rota para favoritos
 
 // Testando a conexão com o banco de dados
 sequelize.authenticate()
@@ -29,7 +31,7 @@ sequelize.authenticate()
     });
 
 // Iniciando o servidor
-const PORT = process.env.server_port;                                   // Define a porta do servidor a partir das variáveis de ambiente       
+const PORT = process.env.server_port ?? 3000;                                   // Define a porta do servidor a partir das variáveis de ambiente       
 app.listen(PORT, () => {                                                // Inicia o servidor na porta definida
     console.log(`Servidor rodando na porta ${PORT}`);
 });

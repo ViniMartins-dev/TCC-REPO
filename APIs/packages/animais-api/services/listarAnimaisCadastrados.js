@@ -1,5 +1,5 @@
-const Animal = require('../models/Animal');
-const Usuario = require('../models/Usuario');
+const Animal = require('../../models/Animal');
+const Usuario = require('../../models/Usuario');
 
 const listarAnimaisCadastrados = async (idProtetor) => {
     // Verifica se o usuario existe e pertence ao tipo 'protetor'

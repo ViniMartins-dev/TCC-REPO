@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const Usuario = require('../models/Usuario');
+const Usuario = require('../../models/Usuario');
 
 const SECRET = process.env.JWT_SECRET;
 
@@ -21,6 +21,9 @@ const loginUsuario = async (email, senha) => {
     // Gera o token
     const payload = {
         id: usuario.id,
+        nome: usuario.nome,
+        sobrenome: usuario.sobrenome,
+        nome_fantasia: usuario.nome_fantasia,
         email: usuario.email,
         tipo: usuario.tipo
     };
@@ -33,7 +36,7 @@ const loginUsuario = async (email, senha) => {
 
     return {
         token,
-        usuario: usuarioJson,
+        payload
     };
 }
 

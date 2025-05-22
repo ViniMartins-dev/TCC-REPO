@@ -81,6 +81,24 @@
 ![image](https://github.com/user-attachments/assets/517e6c47-b04d-4de4-a955-4d15a9d06a3c)
 <hr>
 
+<h3>Rotas de favoritos</h3>
+
+<p>Adicionar favoritos</p>
+
+![image](https://github.com/user-attachments/assets/cc710b5a-829c-4050-898a-06a1a35b4e5a)
+<hr>
+
+<p>listar favoritos por usuário</p>
+
+![image](https://github.com/user-attachments/assets/94ec30ca-d6ef-4915-97a9-1a17d39030e7)
+<hr>
+
+<p>remover favorito (animal/usuario)</p>
+
+![image](https://github.com/user-attachments/assets/c7364273-6b5d-4015-bb9a-f458110dc7c9)
+
+
+
 
 
 

@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt');                                       // Importa o bcrypt para hash de senhas         
-const Usuario = require('../models/Usuario');                           // Importa o modelo de Usuário
+const Usuario = require('../../models/Usuario');                           // Importa o modelo de Usuário
 const validarCNPJ = require('../utils/validarCNPJ');
 
 const criarProtetor = async (dados) => {                                // Função para criar um novo Protetor

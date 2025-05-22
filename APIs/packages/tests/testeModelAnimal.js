@@ -1,5 +1,5 @@
 require('dotenv').config(); // Carrega variáveis do .env
-const sequelize = require('../config/database.js'); // Conexão com o banco
+const sequelize = require('../../config/database.js'); // Conexão com o banco
 const Usuario = require('../models/Usuario.js'); // Model do usuário
 const Animal = require('../models/Animal.js'); // Model do animal
 
@@ -21,7 +21,7 @@ async function testarModelAnimal() {
             email: 'protetor@example.com',
             telefone: '11999999999',
             senha: 'senha123',
-            cpf: '123.456.789-00',
+            cnpj: '123.456.789-00',
             data_nascimento: '1990-01-01',
             latitude: -23.55052,
             longitude: -46.633308

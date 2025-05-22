@@ -1,6 +1,8 @@
 function validarCNPJ(cnpj) {
     cnpj = cnpj.replace(/[^\d]+/g, '');
 
+    if (cnpj === '0') return true;
+
     if (cnpj.length !== 14) return false;
 
     // Elimina CNPJs com todos os dígitos iguais (ex: 00.000.000/0000-00)

@@ -26,7 +26,7 @@ const updateTutor = async (req, res) => {
     try {
         const { id } = req.params;
         const dados = req.body;
-        const tutorAtualizado = await atualizarTutor(id, dados);
+        const tutorAtualizado = await atualizarTutor.atualizarTutor(id, dados);
         return res.status(200).json(tutorAtualizado);
     } catch (error) {
         return res.status(400).json({ erro: error.message });

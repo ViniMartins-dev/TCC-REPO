@@ -1,5 +1,5 @@
 const { DataTypes } = require('sequelize');
-const sequelize = require('../config/database');
+const sequelize = require('../../config/database');
 
 // Definição do modelo de Adoção
 const Adocao = sequelize.define('Adocao', {
@@ -9,8 +9,8 @@ const Adocao = sequelize.define('Adocao', {
         primaryKey: true,
     },
     status: {
-        type: DataTypes.ENUM('Pendente', 'Aprovada', 'Rejeitada'),
-        defaultValue: 'Pendente',
+        type: DataTypes.ENUM('pendente', 'aprovada', 'rejeitada'),
+        defaultValue: 'pendente',
     },
     animal_id: {
         type: DataTypes.INTEGER,

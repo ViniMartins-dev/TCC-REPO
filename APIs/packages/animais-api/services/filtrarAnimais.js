@@ -1,4 +1,4 @@
-const Animal = require('../models/Animal');
+const Animal = require('../../models/Animal');
 const { Op } = require('sequelize');
 
 const aplicarFiltros = (query) => {
@@ -11,7 +11,8 @@ const aplicarFiltros = (query) => {
 
     // Filtro para 'raca' - busca exata
     if (query.raca) {
-        filtros.raca = query.raca;
+        const racas = Array.isArray(query.raca) ? query.raca : [query.raca];
+        filtros.raca = { [Op.in]: racas };
     }
 
     // Filtro para 'idadeMin' - maior ou igual
@@ -32,6 +33,11 @@ const aplicarFiltros = (query) => {
     // Filtro para 'nome' - busca parcial
     if (query.nome) {
         filtros.nome = { [Op.like]: `%${query.nome}%` };
+    }
+
+    // Filtro para 'especie' - busca exata
+    if (query.status) {
+        filtros.status = query.status;
     }
 
     return filtros;
