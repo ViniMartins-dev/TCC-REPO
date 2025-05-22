@@ -20,7 +20,16 @@ const listarAdocoes = async (protetorId) => {
             ]
         });
 
-        return adocoes;
+        const adocoesComImagemBase64 = adocoes.map(adocao => {
+            if (adocao.animal?.bin_foto) {
+                adocao.animal.bin_foto = adocao.animal.bin_foto.toString('base64');
+            }
+            return adocao;
+        });
+
+        return adocoesComImagemBase64;
+
+
     } catch (error) {
         console.error('Erro ao listar adoções:', error);
         throw error;
