@@ -260,25 +260,34 @@ input[type="search"]::-webkit-search-cancel-button {
   font-size: 22px;
 }
 
+main {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 500px));
+  justify-content: center;
+  gap: 20px;
+  padding: 20px 10px;
+}
     #card {
       background-color: white;
       font-family: var(--fonte-principal);
       border-radius: 10px;
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      max-width: 600px;
+      width: 100%;
+      max-width: 500px;
       margin: 40px auto;
       overflow: hidden;
     }
 
     .card-header {
       background-color: var(--laranja);
-      margin-top: 5%;
       color: white;
       padding: 15px;
       font-size: 18px;
     }
 
     .card-body {
+      position: relative;
       padding: 20px;
     }
 
@@ -312,6 +321,8 @@ input[type="search"]::-webkit-search-cancel-button {
       align-items: center;
       cursor: pointer;
       border-radius: 5px;
+      font-size: 14px;
+      font-weight: 600;
     }
 
     .div-btn button:hover {
@@ -320,8 +331,9 @@ input[type="search"]::-webkit-search-cancel-button {
     }
 
     #foto-animal {
-      float: right;
-      border-radius: 8px;
-      max-width: 150px;
-      border: 2px solid #cb7842;
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 30%;
+      max-width: 175px;
     }

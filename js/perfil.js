@@ -8,6 +8,7 @@ function pegarCookieUsuario() {
 }
 const cookieUsuario = pegarCookieUsuario()
 
+console.log(cookieUsuario)
 function irParaLogin() {
   window.location.href = "login.html#cadastro"
 }
@@ -59,39 +60,20 @@ function irParaAnimaisCadastrados() {
   window.location.href = "./animais_cadastrados.html"
 }
 
-const infoPerfil = async () => {
-  try {
-    let perfilUser = await fetch('/usuario', {method: 'GET'}) //vai pegar as informações do usuário na rota
-    
-    if(!perfilUser.ok) {
-      console.log('Erro ao encontrar dados do Usuário');//se não conseguir da um console com erro na busca dos dados  
-      return;
-    }
-
-    let dados = await perfilUser.json(); //caso consiga os dados são enviados em Json aqui
-
-    let nomeUs = document.getElementById('nome-user'); //pega o elemento com id nome-user 
-    let tel = document.getElementById('tel-user'); //pega o elemento com id tel-user
-
-    let nome; 
-
-    //faz a verificação se é tutor ou protetor para puxar o nome do usuário
-    if(dados.tipo === 'tutor') { 
-      nome = dados.nome 
-    } else if(dados.tipo === 'protetor') {
-      nome = dados.nome_fantasia 
-    } else {
-      console.log('Nome não encontrado !!!')
-    }
-    
-    //coloca as informações na pagina de perfil
-    nomeUs.textContent = nome; 
-    tel.textContent = dados.telefone;
-    
-  }catch(e) {
-    console.log('Perfil não encontrado'); 
+const colocarInfos = async () => {
+  let box = document.getElementById("box-infos")
+  if (cookieUsuario.tipo == "tutor") {
+    box.innerHTML = `
+        <p id="email-user">Email: ${cookieUsuario.email}</p>
+        <p id="tel-user">Tel: ${cookieUsuario.telefone}</p>
+        <p id="cpf-user">CPF: ${cookieUsuario.cpf}</p>
+    `
+  } else {
+    box.innerHTML = `
+        <p id="email-user">Email: ${cookieUsuario.email}</p>
+        <p id="tel-user">Tel: ${cookieUsuario.telefone}</p>
+        <p id="cpf-user">CPF: ${cookieUsuario.cpf}</p>
+    `
   }
-
 }
-
-//window.addEventListener('load', infoPerfil); //execulta ao carregar a página 
+colocarInfos()

@@ -335,6 +335,9 @@ class FormularioLogin {
         id: data.payload.id,
         tipo: data.payload.tipo,
         email: data.payload.email,
+        telefone: data.payload.telefone,
+        cpf: data.payload.cpf,
+        cnpj: data.payload.cnpj,
         token: data.token
       }));
      return true
