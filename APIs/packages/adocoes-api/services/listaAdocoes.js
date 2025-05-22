@@ -8,17 +8,13 @@ const listarAdocoes = async (protetorId) => {
             include: [
                 {
                     association: 'tutor',
-                    attributes: ['id', 'nome', 'email']
+                    attributes: ['id', 'nome', 'email', 'telefone'],
                 },
                 {
                     association: 'animal',
                     attributes: ['id', 'nome', 'especie', 'raca', 'idade', 'usuario_id'],
                     where: {
                         usuario_id: protetorId  // Filtra os animais cadastrados por esse protetor
-                    },
-                    include: {
-                        association: 'protetor',
-                        attributes: ['id', 'nome', 'email']
                     }
                 }
             ]
