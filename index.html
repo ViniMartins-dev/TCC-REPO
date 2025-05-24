@@ -23,8 +23,7 @@
         <img onclick="irParaHome()" id="logo" src="./img/Logo-laranja.png" alt="" />
         <div id="box-links" class="links-header">
             <a id="link" href="cadastro_animais.html">Cadastrar</a>
-            <a id="link" href="favoritos.html">Favoritos</a>
-            <a id="link" href="perfil.html">Perfil</a>
+            <a id="link" href="favoritos.html">Perfil</a>
         </div>
         <div onclick="sidebar.abrir()" class="btn-menu">
             <i class="btn-menu-icon fa-solid fa-bars"></i>
@@ -32,25 +31,21 @@
     </div>
 
     <div class="menu-sidebar" id="sidebar">
-        <div onclick="sidebar.fechar()" class="sidebar-overlay">
+      <div onclick="sidebar.fechar()" class="sidebar-overlay">
 
+      </div>
+      <div class="sidebar-content" id="sidebar-content">
+        <i onclick="sidebar.fechar()" class="x-icon fa-solid fa-xmark"></i>
+        <div class="sidebar-content-espaco"></div>
+        <div id="sidebarLinkCadastro" class="sidebar-content-item">
+          <i class="sidebar-link-icon fa-solid fa-caret-right"></i>
+          <a class="sidebar-link" href="cadastro_animais.html">Cadastrar Animal</a>
         </div>
-        <div class="sidebar-content" id="sidebar-content">
-            <i onclick="sidebar.fechar()" class="x-icon fa-solid fa-xmark"></i>
-            <div class="sidebar-content-espaco"></div>
-            <div id="sidebarLinkCadastro" class="sidebar-content-item">
-                <i class="sidebar-link-icon fa-solid fa-caret-right"></i>
-                <a class="sidebar-link" href="cadastro_animais.html">Cadastrar Animal</a>
-            </div>
-            <div id="sidebarLinkFavoritos" class="sidebar-content-item">
-                <i class="sidebar-link-icon fa-solid fa-caret-right"></i>
-                <a class="sidebar-link" href="favoritos.html">Favoritos</a>
-            </div>
-            <div id="sidebarLinkPerfil" class="sidebar-content-item">
-                <i class="sidebar-link-icon fa-solid fa-caret-right"></i>
-                <a class="sidebar-link" href="perfil.html">Perfil</a>
-            </div>
+        <div id="sidebarLinkFavoritos" class="sidebar-content-item">
+          <i class="sidebar-link-icon fa-solid fa-caret-right"></i>
+          <a class="sidebar-link" href="favoritos.html">Perfil</a>
         </div>
+      </div>
     </div>
     <div class="swiper container">
         <div class="card-wrapper">

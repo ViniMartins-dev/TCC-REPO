@@ -25,11 +25,21 @@ if (!estaLogado()) {
 } else if (cookieUsuario.tipo == "tutor") {
   let boxLinks = document.getElementById("box-links")
   let linkCadastro = document.getElementById("sidebarLinkCadastro")
+  let containerMain = document.getElementById("container-main")
+  containerMain.innerHTML = `
+    <button onclick="logout()"class="botao">
+      <i class="fa fa-sign-out-alt"></i>Sair
+    </button>
+  `
   linkCadastro.style.display = "none";
   boxLinks.innerHTML = `
       <a id="link" href="index.html">Home</a>
-      <a id="link" href="perfil.html">Perfil</a>
   `
+}
+
+function logout() {
+  document.cookie = "usuario=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+  irParaHome()
 }
 
 let contador = 0;
@@ -159,6 +169,35 @@ function fecharMenu() {
   body.style.overflow = "scroll"
   sidebar.style.display = "none";
 }
+
 function irParaHome() {
   window.location.href = "./index.html"
 }
+
+function irParaSolicitacoes() {
+  window.location.href = "solicita.html"
+}
+
+function irParaAnimaisCadastrados() {
+  window.location.href = "./animais_cadastrados.html"
+}
+
+const colocarInfos = async () => {
+  let box = document.getElementById("box-infos")
+  if (cookieUsuario.tipo == "tutor") {
+    box.innerHTML = `
+      <h1>Perfil</h1>
+      <p id="email-user">Email: ${cookieUsuario.email}</p>
+      <p id="tel-user">Telefone: ${cookieUsuario.telefone}</p>
+      <p id="cpf-user">CPF: ${cookieUsuario.cpf}</p>
+    `
+  } else {
+    box.innerHTML = `
+      <h1>Perfil</h1>
+      <p id="email-user">Email: ${cookieUsuario.email}</p>
+      <p id="tel-user">Telelfone: ${cookieUsuario.telefone}</p>
+      <p id="cpf-user">CPF: ${cookieUsuario.cpf}</p>
+    `
+  }
+}
+colocarInfos()

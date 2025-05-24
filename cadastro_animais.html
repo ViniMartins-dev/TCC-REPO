@@ -27,8 +27,7 @@
       <img onclick="irParaHome()"id="logo" src="./img/Logo-laranja.png" alt="" />
       <div class="links-header">
           <a id="link" href="index.html">Home</a>
-          <a id="link" href="favoritos.html">Favoritos</a>
-          <a id="link" href="perfil.html">Perfil</a>
+          <a id="link" href="favoritos.html">Perfil</a>
       </div>
       <div onclick="sidebar.abrir()" class="btn-menu">
         <i class="btn-menu-icon fa-solid fa-bars"></i>
@@ -42,13 +41,16 @@
         <i onclick="sidebar.fechar()" class="x-icon fa-solid fa-xmark"></i>
         <div class="sidebar-content-espaco"></div>
         <div class="sidebar-content-item">
+          <i class="sidebar-link-icon fa-solid fa-caret-right"></i>
           <a class="sidebar-link" href="index.html">Home</a>
         </div>
         <div class="sidebar-content-item">
-          <a class="sidebar-link" href="favoritos.html">Favoritos</a>
+          <i class="sidebar-link-icon fa-solid fa-caret-right"></i>
+          <a class="sidebar-link" href="cadastro_animais.html">Cadastrar Animais</a>
         </div>
         <div class="sidebar-content-item">
-          <a class="sidebar-link" href="perfil.html">Perfil</a>
+          <i class="sidebar-link-icon fa-solid fa-caret-right"></i>
+          <a class="sidebar-link" href="favoritos.html">Perfil</a>
         </div>
       </div>
     </div>
@@ -59,6 +61,7 @@
           <i class="icon-plus fa-solid fa-plus"></i>
           <img class="resized-img" id="resized-img" src="" />
         </div>
+        <span id="spanImg" class="spanImg"></span>
         <input type="file" id="img-input" accept="image/*" required>
       
 
@@ -87,14 +90,14 @@
         
         <label for="raca">Raça do Animal:</label>
         <select name="raca" id="raca" autocomplete="off" required>
-          <option selected disabled>Selecione uma Raça</option>
+          <option value="" selected disabled>Selecione uma Raça</option>
           <!--Options vão aparecer conforme for selecionado 
           a especie do animal -->
         </select>
         
         <label for="porte">Porte do animal:</label>
         <select name="porte" id="porte" autocomplete="off" required>
-          <option selected disabled>Selecione um Porte</option>
+          <option value="" selected disabled>Selecione um Porte</option>
           <option value="pequeno">Pequeno</option>
           <option value="medio">Medio</option>
           <option value="grande">Grande</option>
@@ -105,14 +108,14 @@
 
         <label for="sexo">Sexo:</label>
         <select id="sexo" name="sexo" autocomplete="off" required>
-          <option selected disabled>Selecione um Sexo</option>
+          <option value="" selected disabled>Selecione um Sexo</option>
           <option value="M">Macho</option>
           <option value="F">Fêmea</option>
         </select>
 
         <label for="personalidade">Personalidade:</label>
         <select id="personalidade" name="personalidade" autocomplete="off" required>
-          <option selected disabled>Selecione uma Pesonalidade</option>
+          <option value="" selected disabled>Selecione uma Pesonalidade</option>
           <option value="Curioso">Curioso</option>
           <option value="Carinhoso">Carinhoso</option>
           <option value="Brincalhao">Brincalhão</option>

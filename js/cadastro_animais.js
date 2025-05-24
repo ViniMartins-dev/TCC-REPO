@@ -281,7 +281,13 @@ class Formulario {
   adicionarObservadorSubmit() {
    this.tagForm.addEventListener("submit", (event) => {
     event.preventDefault();
-    this.cadastrar(this.pegarValuesInputs())
+    let inputImg = document.getElementById("img-input")
+    let avisoImg = document.getElementById("spanImg")
+    if (inputImg.files.length === 0) {
+      avisoImg.innerHTML = "Coloque uma Imagem"
+    } else {
+      this.cadastrar(this.pegarValuesInputs())
+    }
    })
   } 
   pegarValuesInputs() {

@@ -104,7 +104,6 @@ body {
     display: none;
   } 
 }
-
 .menu-sidebar {
   display: none;
   flex-direction: row;
@@ -119,7 +118,7 @@ body {
   position: absolute;
   width: 100%;
   height: 100%;
-  background-color: rgba(0,0,0,0.25);
+  background-color: rgba(0, 0, 0, 0.25);
 }
 .sidebar-content {
   display: flex;
@@ -127,7 +126,7 @@ body {
   width: 40%;
   min-width: 300px;
   max-width: 400px;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   z-index: 2;
   position: relative;
   gap: 10px;
@@ -154,25 +153,43 @@ body {
 }
 .x-icon:hover {
   scale: 1.1;
-
 }
 .sidebar-content-espaco {
   width: 100%;
   height: 90px;
 }
 .sidebar-content-item {
-  width: 90%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
   padding: 10px 20px;
   cursor: pointer;
+  transition: all 100ms;
+  gap: 10px;
 }
 .sidebar-link {
-  color:#cb7942;
+  color: #cb7942;
   text-decoration: none;
   font-size: 20px;
   transition: all 100ms;
   font-weight: 600;
 }
-.sidebar-content-item:hover .sidebar-link{
+.sidebar-link-icon {
+  position: absolute;
+  opacity: 0;
+  color: #cb7842;
+  font-size: 20px;
+  transition: all 100ms;
+}
+.sidebar-content-item:hover {
+  transform: translate(8px, 0);
+}
+.sidebar-content-item:hover .sidebar-link-icon {
+  position: unset;
+  opacity: 1;
+}
+.sidebar-content-item:hover .sidebar-link {
   font-size: 22px;
 }
 
@@ -207,6 +224,10 @@ body {
   height: 350px;
   background-color: rgba(0, 0, 0, 0.25);
   cursor: pointer;
+  transition: all 100ms;
+}
+.img-buton:hover {
+  scale: 1.02;
 }
 .img-buton .icon-plus {
   font-size: 25px;
@@ -218,6 +239,24 @@ body {
 }
 .resized-img:hover  {
   opacity: 0.5;
+}
+@keyframes piscar {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.spanImg {
+  animation: piscar 800ms linear infinite;
+  width: 100%;    
+  color: red;
+  font-weight: 600;
+  margin: 4px 0 0 0
 }
 #img-input {
   display: none;
@@ -296,6 +335,9 @@ textarea {
   border-radius: 5px;
   font-size: 14px;
 }
+.main__form select {
+  cursor: pointer
+}
 .main__form textarea {
   resize: vertical;
 }
@@ -311,8 +353,10 @@ textarea {
   font-weight: 500;
   cursor: pointer;
   background-color: #cb7842;
+  transition: all 100ms;
 }
 .main__form button:hover {
+  scale: 1.02;
   background-color: #b66d32; /* Alterei para um tom mais escuro */
 }
 .popup-resize {

@@ -15,7 +15,6 @@
     <div id="box-links"class="links-header">
       <a id="link" href="index.html">Home</a>
         <a id="link" href="cadastro_animais.html">Cadastrar</a>
-        <a id="link" href="perfil.html">Perfil</a>
     </div>
     <div onclick="abrirMenu()" class="btn-menu">
       <i class="btn-menu-icon fa-solid fa-bars"></i>
@@ -34,19 +33,35 @@
       <div id="sidebarLinkCadastro" class="sidebar-content-item">
         <a class="sidebar-link" href="cadastro_animais.html">Cadastrar Animal</a>
       </div>
-      <div class="sidebar-content-item">
-        <a class="sidebar-link" href="perfil.html">Perfil</a>
-      </div>
     </div>
   </div>
     <!-- ----------------AQUI -->
      <main>
+       <section class="main-content">
+         <section class="top-main">
+           <div id="box-infos"class="info">
+           </div>
+         </section>
+
+         <section id="container-main" class="container-main">
+           <button onclick="irParaAnimaisCadastrados()" class="botao">
+             <i class="fa fa-paw"></i>Seus Animais
+           </button>
+           <button onclick="irParaSolicitacoes()"class="botao">
+             <i class="fa fa-envelope"></i>Solicitações
+           </button>
+           <button onclick="logout()"class="botao">
+             <i class="fa fa-sign-out-alt"></i>Sair
+           </button>
+         </section>
+       </section>
       <div class="banner">
-        <img class="banner__img" src="./img/banner_favoritos3.jpg" alt="banner">
+        <img class="banner__img" src="./img/banner_favoritos6.jpg" alt="banner">
         <div class="banner__overlay">
-          <p class="overlay__text">Lista de favoritos</p>
+          <p class="overlay__text">Lista de favoritos:</p>
         </div>
       </div>
+      <br>
       <div class="container-animais" id="container-animais">
       </div>
     </main>

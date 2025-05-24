@@ -50,16 +50,24 @@ function estaLogado() {
 }
 if (!estaLogado()) {
   let boxLinks = document.getElementById("box-links")
+  let sidebarContent = document.getElementById("sidebar-content")
   boxLinks.innerHTML = `
       <a id="link" href="login.html#cadastro">Login</a>
+  `
+  sidebarContent.innerHTML = `
+    <i onclick="sidebar.fechar()" class="x-icon fa-solid fa-xmark"></i>
+    <div class="sidebar-content-espaco"></div>
+    <div id="sidebarLinkCadastro" class="sidebar-content-item">
+      <i class="sidebar-link-icon fa-solid fa-caret-right"></i>
+      <a class="sidebar-link" href="login.html#cadastro">Login</a>
+    </div>
   `
 } else if (cookieUsuario.tipo == "tutor") {
   let boxLinks = document.getElementById("box-links")
   let linkCadastro = document.getElementById("sidebarLinkCadastro")
   linkCadastro.style.display = "none";
   boxLinks.innerHTML = `
-      <a id="link" href="favoritos.html">Favoritos</a>
-      <a id="link" href="perfil.html">Perfil</a>
+      <a id="link" href="favoritos.html">Perfil</a>
   `
 } else {
 }

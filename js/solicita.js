@@ -44,13 +44,9 @@ async function buscarSolicitacoes() {
 async function inserirQuadradosSolicitacoes() {
   let main = document.getElementById("main");
   let json = await buscarSolicitacoes();
-  console.log(json)
   json.forEach((solicitacao) => {
     let tutor = solicitacao.tutor
     let animal = solicitacao.animal
-    const uint8Array = new Uint8Array(animal.bin_foto.data);
-    const blob = new Blob([uint8Array], { type: 'image/jpeg' });
-    const url = URL.createObjectURL(blob);
     if (solicitacao.status == "pendente") {
       main.innerHTML += `
         <section id="card">
@@ -63,11 +59,11 @@ async function inserirQuadradosSolicitacoes() {
             <div class="info"><strong>Telefone:</strong>${tutor.telefone}</div>
 
             <div id="titulo-animal"> Animal</div>
-            <img src="${url}" alt="Foto do animal" id="foto-animal">
+            <img src="data:image/jpeg;base64,${animal.bin_foto}" alt="Foto do animal" id="foto-animal">
             <div class="info">Nome: ${animal.nome}</div>
             <div class="info">Espécie: ${animal.especie}</div>
             <div class="info">Raça: ${animal.raca}</div>
-            <div class="info">Idade:2 ${animal.idade}</div>
+            <div class="info">Idade: ${animal.idade}</div>
 
           <div class="div-btn">
             <button onclick="aprovarAdocao(${solicitacao.id})">Aprovar</button>

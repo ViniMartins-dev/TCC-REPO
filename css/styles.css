@@ -147,22 +147,9 @@ input[type="search"]::-webkit-search-cancel-button {
     gap: 25px;
     padding: 10px 25px;
   }
-  .search-container {
-    position: unset;
-    right: none;
-    left: none;
-    transform: translate(0, 0);
-    width: 100%;
-    min-width: 0px;
-    width: 90%;
-  }
-  #search {
-    min-width: 0px;
-    width: 100%;
-  }
   .btn-menu {
-    position: unset;
-    right: 0;
+    position: absulute;
+    right: 20px;
   }
 }
 @media (max-width: 500px) {
