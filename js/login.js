@@ -26,9 +26,9 @@ class Usuario {
   }
   inserirInformacoes(tipo, obj) {
     this.resetarInformacoes()
-    this.nome = obj.nome_fantasia;
+    this.nome = obj.nome;
     this.sobrenome = obj.sobrenome;
-    this.nome_fantasia = obj.nome_fantasia;
+    this.nome_fantasia = obj.nome;
     this.email = obj.email;
     this.data_nascimento = obj.data;
     this.telefone = obj.telefone;
@@ -122,14 +122,12 @@ class FormularioCadastro {
         let tipo = event.currentTarget.value;
         this.definirThisTipo(tipo)
         if(tipo === 'tutor') {
-          console.log("tutor")
           this.trocaSelectTipo(this.boxInputCPF, this.boxInputCNPJ)
           this.inputSobrenome.style.display = "flex"
           this.inputSobrenome.required = true
           this.inputData.style.display = "flex"
           this.inputData.required = true
         } else if(tipo === 'protetor') {
-          console.log("protetor")
           this.trocaSelectTipo(this.boxInputCNPJ, this.boxInputCPF)
           this.inputSobrenome.style.display = "none"
           this.inputSobrenome.required = false
@@ -182,7 +180,6 @@ class FormularioCadastro {
       return true
   }
   async cadastrarTutor() {
-      console.log("cadastrar tutor")
       const resposta = await fetch("http://localhost:3000/usuario/tutor", {
         method: 'POST',
         headers: {
@@ -333,6 +330,9 @@ class FormularioLogin {
       }
       cadastrarCookie(decodificaObjEmStr({
         id: data.payload.id,
+        nome_fantasia: data.payload.nome_fantasia,
+        nome: data.payload.nome,
+        sobrenome: data.payload.sobrenome,
         tipo: data.payload.tipo,
         email: data.payload.email,
         telefone: data.payload.telefone,

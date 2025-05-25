@@ -187,6 +187,8 @@ const colocarInfos = async () => {
   if (cookieUsuario.tipo == "tutor") {
     box.innerHTML = `
       <h1>Perfil</h1>
+      <p id="nome-user">Nome: ${cookieUsuario.nome}</p>
+      <p id="sobrenome-user">Sobrenome: ${cookieUsuario.sobrenome}</p>
       <p id="email-user">Email: ${cookieUsuario.email}</p>
       <p id="tel-user">Telefone: ${cookieUsuario.telefone}</p>
       <p id="cpf-user">CPF: ${cookieUsuario.cpf}</p>
@@ -194,6 +196,7 @@ const colocarInfos = async () => {
   } else {
     box.innerHTML = `
       <h1>Perfil</h1>
+      <p id="nome-user">Nome: ${cookieUsuario.nome_fantasia}</p>
       <p id="email-user">Email: ${cookieUsuario.email}</p>
       <p id="tel-user">Telelfone: ${cookieUsuario.telefone}</p>
       <p id="cpf-user">CPF: ${cookieUsuario.cpf}</p>
