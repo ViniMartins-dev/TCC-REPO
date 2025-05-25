@@ -203,24 +203,6 @@
                 </div>
                 <!-- AQUI QUE VAI FICAR OS FILTROS MOBILE -->
                 <div class="filtro-mobile">
-                    <!-- parte em que os filtros selecionados aparecerão -->
-                    <div class="filtros-selecionados_mobile">
-                        <div onClick="selecionar(this)" class="filPersonalidade-option">Curioso</div>
-                        <div onClick="selecionar(this)" class="filPersonalidade-option">Carinhoso</div>
-                        <div onClick="selecionar(this)" class="filPersonalidade-option">Brincalhão</div>
-                        <div onClick="selecionar(this)" class="filPersonalidade-option">Protetor</div>
-                        <div onClick="selecionar(this)" class="filPersonalidade-option">Sociável</div>
-                        <div onClick="selecionar(this)" class="filPersonalidade-option">Tímido</div>
-                        <div onClick="selecionar(this)" class="filPersonalidade-option">Independente</div>
-                        <div onClick="selecionar(this)" class="filPersonalidade-option">Medroso</div>
-                        <div onClick="selecionar(this)" class="filPersonalidade-option">Obediente</div>
-                        <div onClick="selecionar(this)" class="filPersonalidade-option">Teimoso</div>
-                        <div onClick="selecionar(this)" class="filPersonalidade-option">Leal</div>
-                        <div onClick="selecionar(this)" class="filPersonalidade-option">Calmo</div>
-                        <div onClick="selecionar(this)" class="filPersonalidade-option">Agitado</div>
-                        <div onClick="selecionar(this)" class="filPersonalidade-option">Inteligente</div>
-                        <div onClick="selecionar(this)" class="filPersonalidade-option">Dócil</div>
-                    </div>
                     <button onclick="menuFiltro.abrir()" id="btn-filtro_mobile">Filtros</button>
                 </div>
 
@@ -241,6 +223,7 @@
             </div>
 
             <div class="content-main">
+              <button id="btn-buscar"class="btn-buscar" onclick="inserirQuadradosDosAnimais(aplicarFiltros()); menuFiltro.fechar()">Buscar</button>
                 <div class="main-filtro">
                     <input type="checkbox" class="main-filtro-item" id="filtro-mobile-cachorro" checked />
                     <label class="main-filtro-item" for="filtro-mobile-cachorro">&#9660; Cachorro</label>
@@ -306,27 +289,27 @@
                     <label class="main-filtro-item" for="filtro-mobile-idade">&#9660; Idades</label>
                     <div class="filtro-content v2">
                         <div>
-                            <input class="filIdade-option" type="radio" id="option-idade-6" name="idade">
+                            <input class="filIdade-option" type="radio" id="option-idade-6" name="idades">
                             <label class="filIdade-option" for="option-idade-6"> Todas</label>
                         </div>
                         <div>
-                            <input class="filIdade-option" type="radio" id="option-idade-7" name="idade">
+                            <input class="filIdade-option" type="radio" id="option-idade-7" name="idades">
                             <label class="filIdade-option" for="option-idade-7"> Até 1 ano</label>
                         </div>
                         <div>
-                            <input class="filIdade-option" type="radio" id="option-idade-8" name="idade">
+                            <input class="filIdade-option" type="radio" id="option-idade-8" name="idades">
                             <label class="filIdade-option" for="option-idade-8"> Até 2 anos</label>
                         </div>
                         <div>
-                            <input class="filIdade-option" type="radio" id="option-idade-9" name="idade">
+                            <input class="filIdade-option" type="radio" id="option-idade-9" name="idades">
                             <label class="filIdade-option" for="option-idade-9"> Até 3 anos</label>
                         </div>
                         <div>
-                            <input class="filIdade-option" type="radio" id="option-idade-10" name="idade">
+                            <input class="filIdade-option" type="radio" id="option-idade-10" name="idades">
                             <label class="filIdade-option" for="option-idade-10"> Até 4 anos</label>
                         </div>
                         <div>
-                            <input class="filIdade-option" type="radio" id="option-idade-11" name="idade">
+                            <input class="filIdade-option" type="radio" id="option-idade-11" name="idades">
                             <label class="filIdade-option" for="option-idade-11"> A partir de 5 anos</label>
                         </div>
                     </div>

@@ -133,20 +133,34 @@ const animaisFavoritos = new AnimaisFavoritos();
 async function inserirQuadradosDosAnimaisFavoritos(idUser) {
   let dados = await animaisFavoritos.buscarAnimaisFavoritos(idUser)
   let containerAnimais = document.getElementById("container-animais")
-  for (const element of dados) {
-    contador++;
-    let animal = await animaisFavoritos.buscarAnimal(element.animal_id);
-    containerAnimais.innerHTML += `
-      <div class="container-animais-item">
-        <img class="animais-item-img" src="${animal.fotoBase64}" alt="dog1">
-        <div class="item-content">
-          <i class="btnFavoritar fa-solid fa-heart" onclick="animaisFavoritos.alterarFavorito(${idUser}, ${animal.id}, ${contador})" id="btnFavoritar${contador}"></i>
-          <h6 class="animais-item-text">Nome: ${animal.nome}</h6>
-          <h6 class="animais-item-text">Raça: ${animal.raca}</h6>
-          <h6 class="animais-item-text">Idade: ${animal.idade}</h6>
-        </div>
+  if (dados.length == 0) {
+    console.log("vazio")
+    containerAnimais.style.display = "flex";
+    containerAnimais.style.height = "100%";
+    containerAnimais.innerHTML = "";
+    let conteudo = `
+      <div class="avisoNaoHaAnimais">
+        <img src="../img/silhueta_dog.jpg" alt="cachorro"></img>
+        <p>Não há animais favoritados</p>
       </div>
     `;
+    containerAnimais.innerHTML += conteudo;
+  } else {
+    for (const element of dados) {
+      contador++;
+      let animal = await animaisFavoritos.buscarAnimal(element.animal_id);
+      containerAnimais.innerHTML += `
+        <div class="container-animais-item">
+        <img class="animais-item-img" src="${animal.fotoBase64}" alt="dog1">
+        <div class="item-content">
+        <i class="btnFavoritar fa-solid fa-heart" onclick="animaisFavoritos.alterarFavorito(${idUser}, ${animal.id}, ${contador})" id="btnFavoritar${contador}"></i>
+        <h6 class="animais-item-text">Nome: ${animal.nome}</h6>
+        <h6 class="animais-item-text">Raça: ${animal.raca}</h6>
+        <h6 class="animais-item-text">Idade: ${animal.idade}</h6>
+        </div>
+        </div>
+        `;
+    }
   }
 }
 inserirQuadradosDosAnimaisFavoritos(cookieUsuario.id);
@@ -199,7 +213,7 @@ const colocarInfos = async () => {
       <p id="nome-user">Nome: ${cookieUsuario.nome_fantasia}</p>
       <p id="email-user">Email: ${cookieUsuario.email}</p>
       <p id="tel-user">Telelfone: ${cookieUsuario.telefone}</p>
-      <p id="cpf-user">CPF: ${cookieUsuario.cpf}</p>
+      <p id="cnpj-user">CNPJ: ${cookieUsuario.cnpj}</p>
     `
   }
 }

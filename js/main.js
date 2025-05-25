@@ -148,9 +148,11 @@ class Animal {
           "tutor_id": cookieUsuario.id
         })
       })
+      let json = await response.json();
       if (response.ok) {
         popup.inserirPopupPedidoDeAdocao();
-      }
+      } else if (json.erro == "Você já solicitou a adoção deste animal.")
+        popup.inserirPopupPedidoJaFeito()
     } else {
       irParaLogin()
     }
@@ -174,6 +176,19 @@ class PopupAnimal {
   fechar() {
     this.body.style.overflow = "";
     this.overlay.style.display = "none";
+  }
+  inserirPopupPedidoJaFeito() {
+    this.overlay.innerHTML = `
+      <div class="popupPedidoAdocao" onclick="event.stopPropagation()">
+        <h1>Atenção</h1>
+        <p>
+          Você ja fez o pedido de adoção deste animal 
+          <br>
+          Aguarde que o dono do anuncio entrara em contato
+        </p>
+        <button onclick="popup.fechar()">Fechar</button>
+      </div>
+    `
   }
   inserirPopupPedidoDeAdocao() {
     this.overlay.innerHTML = `
@@ -227,24 +242,42 @@ class PopupAnimal {
 
 const popup = new PopupAnimal();
 
-async function inserirQuadradosDosAnimais(params) {
+async function inserirQuadradosDosAnimais(params, isMenu) {
   let jsonApi = await consumirApi(`http://localhost:3000/animal/filtrar/?${params}`)
   let boxAnimais = document.getElementById("container-animais");
-  boxAnimais.innerHTML = "";
-  jsonApi.forEach((animal) => {
-    // Transforma o obj em uma string codigicada para passar pelo parametro
-    let animalStr = encodeURIComponent(JSON.stringify(animal));
+  if (jsonApi.length == 0) {
+    boxAnimais.style.display = "flex";
+    boxAnimais.style.height = "100%";
+    boxAnimais.innerHTML = "";
     let conteudo = `
-      <div class="container-animais-item">
-      <div class="container-animais-item-overlay" onclick="popup.abrir('${animalStr}')"></div>
-      <img class="animais-item-img" src="${animal.fotoBase64}" alt="imagem do animal">
-      <h6 class="animais-item-text">Nome: ${animal.nome}</h6>
-      <h6 class="animais-item-text">Raça: ${animal.raca}</h6>
-      <h6 class="animais-item-text">Idade: ${animal.idade}</h6>
+      <div class="avisoNaoHaAnimais">
+        <img src="../img/silhueta_dog.jpg" alt="cachorro"></img>
+        <p>Não há animais</p>
       </div>
     `;
     boxAnimais.innerHTML += conteudo;
-  });
+  } else {
+    boxAnimais.innerHTML = "";
+    jsonApi.forEach((animal) => {
+      if (animal.status == "disponivel") {
+        // Transforma o obj em uma string codigicada para passar pelo parametro
+        let animalStr = encodeURIComponent(JSON.stringify(animal));
+        let conteudo = `
+          <div class="container-animais-item">
+          <div class="container-animais-item-overlay" onclick="popup.abrir('${animalStr}')"></div>
+          <img class="animais-item-img" src="${animal.fotoBase64}" alt="imagem do animal">
+          <h6 class="animais-item-text">Nome: ${animal.nome}</h6>
+          <h6 class="animais-item-text">Raça: ${animal.raca}</h6>
+          <h6 class="animais-item-text">Idade: ${animal.idade}</h6>
+          </div>
+          `;
+        boxAnimais.innerHTML += conteudo;
+      }
+    });
+  }
+  if (isMenu) {
+    menuFiltro.fechar()
+  }
 };
 
 function decodificaStrEmObj(str) {
@@ -281,6 +314,12 @@ function selecionar(elemento) {
     } else {
       elemento.classList.add("checked")
     }   
+  }
+}
+const personalidadesLista = document.querySelectorAll('.filPersonalidade-option')
+for (const personalidade of personalidadesLista) {
+  if (personalidade.classList.contains("checked")) {
+    console.log(personalidade)
   }
 }
 class Sidebar {

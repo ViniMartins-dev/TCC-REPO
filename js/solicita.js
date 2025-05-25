@@ -44,36 +44,47 @@ async function buscarSolicitacoes() {
 async function inserirQuadradosSolicitacoes() {
   let main = document.getElementById("main");
   let json = await buscarSolicitacoes();
-  json.forEach((solicitacao) => {
-    let tutor = solicitacao.tutor
-    let animal = solicitacao.animal
-    if (solicitacao.status == "pendente") {
-      main.innerHTML += `
-        <section id="card">
+  if (json.length == 0) {
+    main.style.display = "flex";
+    main.style.height = "90vh";
+    main.innerHTML = "";
+    let conteudo = `
+      <div class="avisoNaoHaAnimais">
+        <img src="../img/silhueta_dog.jpg" alt="cachorro"></img>
+        <p>Não há solicitações no momento</p>
+      </div>
+    `;
+    main.innerHTML += conteudo;
+  } else {
+    json.forEach((solicitacao) => {
+      let tutor = solicitacao.tutor
+      let animal = solicitacao.animal
+      if (solicitacao.status == "pendente") {
+        main.innerHTML += `
+          <section id="card">
           <div class="card-header">
-            Solicitação de Adoção - Pendente 
+          Solicitação de Adoção - Pendente 
           </div>
-            <div class="card-body">
-            <div id="titulo-adotante">Adotante</div>
-            <div class="info"><strong>Email:</strong>${tutor.email}</div>
-            <div class="info"><strong>Telefone:</strong>${tutor.telefone}</div>
-
-            <div id="titulo-animal"> Animal</div>
-            <img src="data:image/jpeg;base64,${animal.bin_foto}" alt="Foto do animal" id="foto-animal">
-            <div class="info">Nome: ${animal.nome}</div>
-            <div class="info">Espécie: ${animal.especie}</div>
-            <div class="info">Raça: ${animal.raca}</div>
-            <div class="info">Idade: ${animal.idade}</div>
-
+          <div class="card-body">
+          <div id="titulo-adotante">Adotante</div>
+          <div class="info"><strong>Email:</strong>${tutor.email}</div>
+          <div class="info"><strong>Telefone:</strong>${tutor.telefone}</div>
+          <div id="titulo-animal"> Animal</div>
+          <img src="data:image/jpeg;base64,${animal.bin_foto}" alt="Foto do animal" id="foto-animal">
+          <div class="info">Nome: ${animal.nome}</div>
+          <div class="info">Espécie: ${animal.especie}</div>
+          <div class="info">Raça: ${animal.raca}</div>
+          <div class="info">Idade: ${animal.idade}</div>
           <div class="div-btn">
-            <button onclick="aprovarAdocao(${solicitacao.id})">Aprovar</button>
-            <button onclick="reprovarAdocao(${solicitacao.id})"style="background-color:#f44336;">Recusar</button>
+          <button onclick="aprovarAdocao(${solicitacao.id})">Aprovar</button>
+          <button onclick="reprovarAdocao(${solicitacao.id})"style="background-color:#f44336;">Recusar</button>
           </div>
           </div>
-        </section>
-      `
-    }
-  })
+          </section>
+          `
+      }
+    })
+  }
 }
 inserirQuadradosSolicitacoes()
 

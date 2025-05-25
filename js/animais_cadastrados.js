@@ -8,7 +8,6 @@ function pegarCookieUsuario() {
 }
 const cookieUsuario = pegarCookieUsuario()
 
-console.log(cookieUsuario)
 const user = {
   id : cookieUsuario.id,
   tipo : cookieUsuario.tipo
@@ -82,29 +81,41 @@ class AnimalCadastrado {
   async inserirQuadradosAnimais(idUser) {
     let dados = await this.buscarAnimaisCadastrados(idUser)
     let boxAnimais = document.getElementById("container-animais");
-    console.log(dados);
-    dados.forEach((animal) => {
-      // Transforma o obj em uma string codigicada para passar pelo parametro
-      let animalStr = encodeURIComponent(JSON.stringify(animal));
-      boxAnimais.innerHTML += `
-        <div class="container-animais-item">
+    if (dados.length == 0) {
+      document.getElementById("titulo").style.display = "none";
+      boxAnimais.style.display = "flex";
+      boxAnimais.style.height = "87vh";
+      boxAnimais.innerHTML = "";
+      let conteudo = `
+        <div class="avisoNaoHaAnimais">
+        <img src="../img/silhueta_dog.jpg" alt="cachorro"></img>
+        <p>Não há animais cadastrados</p>
+        </div>
+        `;
+      boxAnimais.innerHTML += conteudo;
+    } else {
+      dados.forEach((animal) => {
+        let animalStr = encodeURIComponent(JSON.stringify(animal));
+        boxAnimais.innerHTML += `
+          <div class="container-animais-item">
           <img class="animais-item-img" src="${animal.fotoBase64}" alt="dog1">
           <div class="item-content">
-            <div class="box-icons">
-              <div class="box-icon edit" onclick="popup.abrirPopupEditar('${animalStr}')">
-                <i class="icon fa-solid fa-pen-to-square"></i>
-              </div>
-              <div class="box-icon delete" onclick="popup.abrirPopupDeletar('${animalStr}')">
-                <i class="icon fa-solid fa-trash"></i>
-              </div>
-            </div>
-            <h6 class="animais-item-text">Nome: ${animal.nome}</h6>
-            <h6 class="animais-item-text">Raça: ${animal.raca}</h6>
-            <h6 class="animais-item-text">Idade: ${animal.idade}</h6>
+          <div class="box-icons">
+          <div class="box-icon edit" onclick="popup.abrirPopupEditar('${animalStr}')">
+          <i class="icon fa-solid fa-pen-to-square"></i>
           </div>
-        </div>
-      `;
-    });
+          <div class="box-icon delete" onclick="popup.abrirPopupDeletar('${animalStr}')">
+          <i class="icon fa-solid fa-trash"></i>
+          </div>
+          </div>
+          <h6 class="animais-item-text">Nome: ${animal.nome}</h6>
+          <h6 class="animais-item-text">Raça: ${animal.raca}</h6>
+          <h6 class="animais-item-text">Idade: ${animal.idade}</h6>
+          </div>
+          </div>
+          `;
+      });
+    }
   }
 
   async deletar(idUser, idAnimal) {
@@ -123,7 +134,6 @@ class AnimalCadastrado {
 
   async editar(idUser, idAnimal) {
     let dados = obterValoresDoFormulario();
-    console.log(dados);
     let response = await fetch(`http://localhost:3000/animal/${idAnimal}`, {
       method : "PUT",
       headers: {
@@ -202,7 +212,6 @@ class Popup {
   abrirPopupAcessoNegado() {
     this.popupAcessoNegado.style.display = "flex";
     this.body.style.overflow = "hidden";
-    console.log(this.popup.onClick)   
     this.popupAcessoNegado.innerHTML = `
       <div onclick="event.stopPropagation()" class="popupAcessoNegado-content">
         <h1>Acesso Negado</h1>

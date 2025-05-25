@@ -546,6 +546,38 @@ label.filIdade-option:before {
   justify-content: center;
   width: 100%;
 }
+.avisoNaoHaAnimais {
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+  align-self: center;
+  width: 100%;
+  max-width: 250px;
+  gap: 10px
+}
+.avisoNaoHaAnimais img {
+  width: 100%;
+  opacity: 0.9
+}
+.avisoNaoHaAnimais p {
+  font-size: 16px;
+  font-weight: 600;
+  color: #312D2E;
+  width: 100%;
+  text-align: center;
+}
+@media (min-width: 900px) {
+  .avisoNaoHaAnimais {
+    width: 100%;
+    max-width: 500px
+  }
+  .avisoNaoHaAnimais p {
+    font-size: 24px;
+    font-weight: 600;
+    width: 100%;
+    text-align: center;
+  }
+}
 .container-animais-item {
   position: relative;
   background-color: #ffff;
@@ -611,6 +643,8 @@ label.filIdade-option:before {
   font-weight: 600;
 }
 .popupPedidoAdocao p {
+  font-size: 16px;
+  font-weight: 500;
   margin: 0;
   text-align: center;
 }
@@ -706,12 +740,13 @@ label.filIdade-option:before {
     justify-content: center;
   }
 
-  /*minhas alterações*/
-  /*------------------*/
+  .btn-buscar {
+    height: 40px;
+  }
   .filtro-mobile {
-    display: grid;
-    grid-template-columns: 80% 20%;
+    display: flex;
     border: #000 1px solid;
+    height: 40px;
     border-radius: 4px;
     position: relative;
   }
@@ -735,9 +770,9 @@ label.filIdade-option:before {
     align-items: center;
     justify-content: flex-start;
     border: none;
-    right: 0;
     background-color: rgba(0, 0, 0, 0.05);
     width: 100%;
+    min-width: 90vw;
     height: 100%;
     padding: 0 0 0 8px;
     font-weight: 600;
@@ -763,26 +798,7 @@ label.filIdade-option:before {
 
   /*minhas alterações*/
   /*------------------*/
-  .filtro-mobile {
-    display: grid;
-    grid-template-columns: 80% 20%;
-    border: #000 1px solid;
-    border-radius: 4px;
-    padding: 5px;
-  }
 
-  .filtros-selecionados_mobile {
-    display: flex;
-    flex-direction: row;
-  }
-
-  #btn-filtro_mobile {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: none;
-    padding: 0 12px;
-  }
   /*-----------------------*/
   .container-animais {
     grid-template-columns: repeat(2, 2fr);

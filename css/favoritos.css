@@ -278,6 +278,38 @@
     width: 100%;
     padding: 2%;
   }
+  .avisoNaoHaAnimais {
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+    align-self: center;
+    width: 100%;
+    max-width: 250px;
+    gap: 10px
+  }
+  .avisoNaoHaAnimais img {
+    width: 100%;
+    opacity: 0.9
+  }
+  .avisoNaoHaAnimais p {
+    font-size: 16px;
+    font-weight: 600;
+    color: #312D2E;
+    width: 100%;
+    text-align: center;
+  }
+  @media (min-width: 900px) {
+    .avisoNaoHaAnimais {
+      width: 100%;
+      max-width: 500px
+    }
+    .avisoNaoHaAnimais p {
+      font-size: 24px;
+      font-weight: 600;
+      width: 100%;
+      text-align: center;
+    }
+  }
   .container-animais-item {
     position: relative;
     background-color: #ffff;

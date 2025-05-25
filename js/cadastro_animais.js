@@ -172,7 +172,6 @@ class RecortadorImagem {
   tranformaCanvasEmBlob(canvas) {
     canvas.toBlob(
       (blob) => {
-        console.log(blob)
         blobImg = blob
         blobToBase64(blob).then(base64String => {
           base64Img = base64String
@@ -313,7 +312,6 @@ class Formulario {
         formData.append(chave, valores[chave]);
       }
       formData.append('bin_foto', blobImg);
-      console.log(formData)
       let response = await fetch("http://localhost:3000/animal/", {
         method: "POST",
         headers: {
@@ -321,8 +319,13 @@ class Formulario {
         },
         body: formData
       })
-      if (!response.ok) throw new Error("Erro ao cadastrar animal")
-      irParaHome()
+      let json = await response.json();
+      if (json.erro == "write ECONNRESET") {
+        let avisoImg = document.getElementById("spanImg")
+        avisoImg.innerHTML = "Coloque uma imagem mais leve"
+      } else {
+        irParaHome()
+      }
     } catch (erro) {
       console.log(erro)
     }
