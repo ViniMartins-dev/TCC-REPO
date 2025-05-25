@@ -25,7 +25,10 @@ const loginUsuario = async (email, senha) => {
         sobrenome: usuario.sobrenome,
         nome_fantasia: usuario.nome_fantasia,
         email: usuario.email,
-        tipo: usuario.tipo
+        tipo: usuario.tipo,
+        telefone: usuario.telefone,
+        cnpj: usuario.cnpj,
+        cpf: usuario.cpf,
     };
 
     const token = jwt.sign(payload, SECRET, { expiresIn: '1d' });
