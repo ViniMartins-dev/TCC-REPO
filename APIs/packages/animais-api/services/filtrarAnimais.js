@@ -3,6 +3,7 @@ const { Op } = require('sequelize');
 
 const aplicarFiltros = (query) => {
     const filtros = {};
+    console.log("raca: " + query.raca)
 
     // Filtro para 'especie' - busca exata
     if (query.especie) {
@@ -11,8 +12,20 @@ const aplicarFiltros = (query) => {
 
     // Filtro para 'raca' - busca exata
     if (query.raca) {
-        const racas = Array.isArray(query.raca) ? query.raca : [query.raca];
+        const racas = Array.isArray(query.raca)
+            ? query.raca
+            : query.raca.split(',').map(r => r.trim());
+
         filtros.raca = { [Op.in]: racas };
+    }
+
+    // Filtro para 'raca' - busca exata
+    if (query.personalidade) {
+        const personalidades = Array.isArray(query.personalidade)
+            ? query.personalidade
+            : query.personalidade.split(',').map(r => r.trim());
+
+        filtros.personalidade = { [Op.in]: personalidades };
     }
 
     // Filtro para 'idadeMin' - maior ou igual
