@@ -21,6 +21,18 @@ const gerarAdocao = async (dados) => {
         throw new Error('Animal não está disponível para adoção.');
     }
 
+    // Verifica se o usuário já pediu adoção desse animal
+    const adocaoExistente = await Adocao.findOne({
+        where: {
+            tutor_id: dados.tutor_id,
+            animal_id: dados.animal_id,
+        },
+    });
+
+    if (adocaoExistente && adocaoExistente.status !== 'aprovada') { // Verifica se já existe uma adoção pendente ou aprovada
+        throw new Error('Você já solicitou a adoção deste animal.');
+    }
+
     // Cria a adoção
     const adocao = await Adocao.create({
         tutor_id: dados.tutor_id,
