@@ -29,33 +29,6 @@ const Home = ({ navigation }) => {
   const [loading, setLoading] = useState(true);
   const [apiError, setApiError] = useState(null);
 
-  // Dados de exemplo como fallback caso a API falhe
-  const exampleAnimals = [
-    {
-      id: 1,
-      name: "Bolt",
-      image: require("../assets/gato.jpg"),
-      age: "3",
-      type: "Cachorro",
-      breed: "Labrador",
-      sex: "M",
-      personality: "Energético e carinhoso",
-      description: "Cachorro brincalhão e amigável, adora correr.",
-    },
-    {
-      id: 2,
-      name: "Mia",
-      image: require("../assets/gato2.jpg"),
-      age: "2",
-      type: "Gato",
-      breed: "Siamês",
-      sex: "F",
-      personality: "Calma e observadora",
-      description: "Gata que adora um colo e ambientes tranquilos.",
-    },
-  ];
-
-  // Carregar credenciais e dados ao iniciar
   useEffect(() => {
     const carregarDados = async () => {
       try {
@@ -77,7 +50,10 @@ const Home = ({ navigation }) => {
           await carregarFavoritos(userToken, userId);
           await carregarAnimais(userToken, userId);
         } else {
-          console.warn('Usuário não logado');
+          console.warn('Token ou ID do usuário não encontrado');
+          console.log('Token:', userToken);
+          console.log('ID:', userId);
+          Alert.alert('Erro', 'Você precisa estar logado para ver os favoritos.');
           navigation.navigate('Login');
         }
       } catch (error) {
@@ -94,7 +70,7 @@ const Home = ({ navigation }) => {
   const carregarFavoritos = async (userToken, userId) => {
     try {
       const response = await axios.get(
-        `http://10.0.2.2:3000/api/favoritos/listar/${userId}`,
+        `http://10.0.2.2:3000/favoritos/listar/${userId}`,
         {
           headers: {
             Authorization: `Bearer ${userToken}`,
@@ -114,11 +90,11 @@ const Home = ({ navigation }) => {
     try {
       setLoading(true);
       console.log('\n===== CARREGANDO ANIMAIS DA API =====');
-      console.log('URL da requisição:', `http://10.0.2.2:3000/api/animal/cadastrados/${userId}`);
+      console.log('URL da requisição:', `http://10.0.2.2:3000/animal/filtrar`);
       
       // Usar rota fornecida pelo usuário
       const response = await axios.get(
-        `http://10.0.2.2:3000/api/animal/cadastrados/${userId}`,
+        `http://10.0.2.2:3000/animal/filtrar`,
         {
           headers: {
             Authorization: `Bearer ${userToken}`,
@@ -136,16 +112,42 @@ const Home = ({ navigation }) => {
         const animaisMapeados = response.data.map(animal => {
           console.log('Mapeando animal:', JSON.stringify(animal));
           
+          // Adicionar log para verificar o formato da imagem
+          console.log('Formato da imagem original:', animal.imagem_url ? 
+            `${animal.imagem_url.substring(0, 30)}... (${animal.imagem_url.length} caracteres)` : 
+            'Imagem não disponível');
+          
+          // Verificar se fotoBase64 está disponível (vem do backend)
+          console.log('fotoBase64 disponível?', !!animal.fotoBase64);
+          if (animal.fotoBase64) {
+            console.log('Primeiros 30 caracteres da fotoBase64:', animal.fotoBase64.substring(0, 30));
+          }
+          
+          // Escolher a fonte de imagem correta (fotoBase64 tem prioridade sobre imagem_url)
+          const imageUri = animal.fotoBase64 
+            ? animal.fotoBase64  // Já vem formatado como data:image/png;base64,...
+            : animal.imagem_url && animal.imagem_url.startsWith('data:') 
+              ? animal.imagem_url 
+              : animal.imagem_url && animal.imagem_url.startsWith('http') 
+                ? animal.imagem_url 
+                : animal.imagem_url 
+                  ? 'data:image/jpeg;base64,' + animal.imagem_url 
+                  : 'https://via.placeholder.com/300';
+          
+          // Adicionar log para verificar a URI final
+          console.log('URI final da imagem:', 
+            imageUri.substring(0, 30) + '... (' + imageUri.length + ' caracteres)');
+          
           return {
             id: animal.id || animal.animal_id,
             name: animal.nome || '',
             age: animal.idade || '',
-            type: animal.tipo || '',
+            type: animal.tipo || animal.especie || '',
             breed: animal.raca || '',
             sex: animal.sexo || '',
             personality: animal.personalidade || '',
             description: animal.descricao || '',
-            image: { uri: animal.imagem_url || 'https://via.placeholder.com/300' }
+            image: { uri: imageUri }
           };
         });
         
@@ -169,17 +171,45 @@ const Home = ({ navigation }) => {
             console.log('Encontrada array em propriedade:', possibleArrayProps[0]);
             const animaisDoObjeto = response.data[possibleArrayProps[0]];
             
-            const animaisMapeados = animaisDoObjeto.map(animal => ({
-              id: animal.id || animal.animal_id,
-              name: animal.nome || '',
-              age: animal.idade || '',
-              type: animal.tipo || '',
-              breed: animal.raca || '',
-              sex: animal.sexo || '',
-              personality: animal.personalidade || '',
-              description: animal.descricao || '',
-              image: { uri: animal.imagem_url || 'https://via.placeholder.com/300' }
-            }));
+            const animaisMapeados = animaisDoObjeto.map(animal => {
+              // Adicionar log para verificar o formato da imagem
+              console.log('Formato da imagem original (objeto):', animal.imagem_url ? 
+                `${animal.imagem_url.substring(0, 30)}... (${animal.imagem_url.length} caracteres)` : 
+                'Imagem não disponível');
+              
+              // Verificar se fotoBase64 está disponível (vem do backend)
+              console.log('fotoBase64 disponível (objeto)?', !!animal.fotoBase64);
+              if (animal.fotoBase64) {
+                console.log('Primeiros 30 caracteres da fotoBase64 (objeto):', animal.fotoBase64.substring(0, 30));
+              }
+              
+              // Escolher a fonte de imagem correta (fotoBase64 tem prioridade sobre imagem_url)
+              const imageUri = animal.fotoBase64 
+                ? animal.fotoBase64  // Já vem formatado como data:image/png;base64,...
+                : animal.imagem_url && animal.imagem_url.startsWith('data:') 
+                  ? animal.imagem_url 
+                  : animal.imagem_url && animal.imagem_url.startsWith('http') 
+                    ? animal.imagem_url 
+                    : animal.imagem_url 
+                      ? 'data:image/jpeg;base64,' + animal.imagem_url 
+                      : 'https://via.placeholder.com/300';
+              
+              // Adicionar log para verificar a URI final
+              console.log('URI final da imagem (objeto):', 
+                imageUri.substring(0, 30) + '... (' + imageUri.length + ' caracteres)');
+              
+              return {
+                id: animal.id || animal.animal_id,
+                name: animal.nome || '',
+                age: animal.idade || '',
+                type: animal.tipo || animal.especie || '',
+                breed: animal.raca || '',
+                sex: animal.sexo || '',
+                personality: animal.personalidade || '',
+                description: animal.descricao || '',
+                image: { uri: imageUri }
+              };
+            });
             
             setAnimals(animaisMapeados);
             console.log('Estado "animals" atualizado com dados extraídos da propriedade do objeto');
@@ -188,8 +218,8 @@ const Home = ({ navigation }) => {
         }
         
         // Se não conseguir encontrar dados válidos, usar dados de exemplo
-        console.log('Usando dados de exemplo como fallback');
-        setAnimals(exampleAnimals);
+        console.log('Nenhum animal encontrado na API');
+        setAnimals([]);
         setApiError('API não retornou animais no formato esperado');
       }
     } catch (error) {
@@ -199,11 +229,11 @@ const Home = ({ navigation }) => {
         console.log('Dados do erro:', JSON.stringify(error.response.data));
       } else {
         console.log('Erro sem resposta do servidor:', error.message);
+        
+        console.log('Nenhum animal disponível devido a erro');
+        setAnimals([]);
+        setApiError(`Erro: ${error.message}`);
       }
-      
-      console.log('Usando dados de exemplo como fallback devido a erro');
-      setAnimals(exampleAnimals);
-      setApiError(`Erro: ${error.message}`);
     } finally {
       setLoading(false);
     }
@@ -258,64 +288,71 @@ const Home = ({ navigation }) => {
   // Função para favoritar/desfavoritar animal
   const toggleFavorite = async (animal) => {
     try {
+      if (!token) {
+        console.log('Token não disponível:', token);
+        Alert.alert('Erro', 'Você precisa estar logado para favoritar.');
+        return;
+      }
+
+      console.log('Token disponível:', token.substring(0, 20) + '...');
+
       if (isFavorite(animal.id)) {
-        // Encontrar o ID do favorito para remover
-        const favoritoParaRemover = favorites.find(fav => 
-          fav.id === animal.id || 
-          fav.animal_id === animal.id ||
-          (fav.animal && fav.animal.id === animal.id)
-        );
+        console.log('Removendo dos favoritos:', animal.id);
         
-        const animalId = animal.id;
-        
-        // Desfavoritar - usar a URL fornecida pelo usuário
+        // Desfavoritar
         await axios.delete(
-          `http://10.0.2.2:3000/api/favoritos/${animalId}/${userId}`,
+          `http://10.0.2.2:3000/favoritos/${animal.id}/${userId}`,
           {
             headers: { 
-              Authorization: `Bearer ${token}`,
-              'Content-Type': 'application/json'
+              'Authorization': `Bearer ${token}`
             }
           }
         );
         
         // Atualiza estado local removendo dos favoritos
         setFavorites(favorites.filter(fav => 
-          fav.id !== animal.id && 
-          fav.animal_id !== animal.id &&
-          (!fav.animal || fav.animal.id !== animal.id)
+          fav.animal_id !== animal.id
         ));
+        
+        console.log('Animal removido dos favoritos com sucesso');
       } else {
+        console.log('Adicionando aos favoritos:', animal);
+        
         // Preparar dados do animal para favoritar
         const animalData = {
-          usuario_id: userId,
-          animal_id: animal.id,
-          nome: animal.name,
-          idade: animal.age,
-          raca: animal.breed,
-          tipo: animal.type,
-          descricao: animal.description,
-          imagem_url: animal.image?.uri || "https://via.placeholder.com/300"
+          usuario_id: parseInt(userId),
+          animal_id: parseInt(animal.id)
         };
+        
+        console.log('Dados para favoritar:', animalData);
+        console.log('Enviando com token:', token.substring(0, 20) + '...');
         
         // Favoritar
         const response = await axios.post(
-          'http://10.0.2.2:3000/api/favoritos',
+          'http://10.0.2.2:3000/favoritos',
           animalData,
           {
             headers: { 
-              Authorization: `Bearer ${token}`,
+              'Authorization': `Bearer ${token}`,
               'Content-Type': 'application/json'
             }
           }
         );
         
+        console.log('Resposta ao favoritar:', response.data);
+        
         // Atualiza estado local adicionando aos favoritos
-        setFavorites([...favorites, { ...animalData, id: response.data.id || Date.now() }]);
+        setFavorites([...favorites, response.data]);
+        console.log('Animal adicionado aos favoritos com sucesso');
       }
     } catch (error) {
       console.error('Erro ao atualizar favoritos:', error);
-      Alert.alert('Erro', 'Não foi possível atualizar os favoritos.');
+      if (error.response) {
+        console.log('Status do erro:', error.response.status);
+        console.log('Dados do erro:', error.response.data);
+        console.log('Headers enviados:', error.config?.headers);
+      }
+      Alert.alert('Erro', error.response?.data?.erro || error.response?.data?.error || 'Não foi possível atualizar os favoritos.');
     }
   };
 
@@ -466,6 +503,8 @@ const Home = ({ navigation }) => {
             </TouchableOpacity>
           )}
           
+          
+          
           <ScrollView contentContainerStyle={styles.animalList}>
             {filteredAnimals.length > 0 ? (
               filteredAnimals.map((animal) => (
@@ -476,25 +515,20 @@ const Home = ({ navigation }) => {
                 >
                   <Image 
                     source={typeof animal.image === 'number' ? animal.image : { uri: animal.image.uri }}
-                    style={styles.favoriteImage} 
+                    style={styles.favoriteImage}
+                    resizeMode="cover"
                   />
                   <View style={styles.cardContent}>
                     <Text style={styles.animalName}>Nome: {animal.name}</Text>
                     <Text style={styles.animalBreed}>Idade: {animal.age}</Text>
                     <Text style={styles.animalBreed}>Raça: {animal.breed}</Text>
-                    {/* Debug info */}
-                    <Text style={{fontSize: 10, color: 'gray'}}>ID: {animal.id}</Text>
+              
                   </View>
                 </TouchableOpacity>
               ))
             ) : (
               <Text style={styles.noAnimalsText}>Nenhum animal encontrado com os filtros aplicados.</Text>
             )}
-            
-            {/* Mostrar a fonte dos dados (API ou Exemplo) */}
-            <Text style={{textAlign: 'center', fontSize: 10, color: 'gray', marginTop: 10}}>
-              {apiError ? 'Usando dados de exemplo (fallback)' : 'Dados carregados da API'}
-            </Text>
           </ScrollView>
         </View>
       )}
@@ -512,7 +546,8 @@ const Home = ({ navigation }) => {
             <View style={styles.modalImageContainer}>
               <Image 
                 source={typeof selectedAnimal.image === 'number' ? selectedAnimal.image : { uri: selectedAnimal.image.uri }} 
-                style={styles.modalImage} 
+                style={styles.modalImage}
+                resizeMode="cover" 
               />
               <TouchableOpacity 
                 style={styles.modalHeartIcon}

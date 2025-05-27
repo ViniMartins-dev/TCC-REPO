@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   ScrollView,
   Alert,
+  ActivityIndicator,
 } from "react-native";
 import styles from "./styles";
 import logo from "../assets/Logo-laranja.png";
@@ -15,23 +16,89 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 const Favoritos = ({ navigation }) => {
   const [favoritos, setFavoritos] = useState([]);
   const [menuVisible, setMenuVisible] = useState(false);
+  const [loading, setLoading] = useState(true);
 
-useEffect(() => {
-  const fetchFavoritos = async () => {
+  useEffect(() => {
+    const fetchFavoritos = async () => {
+      try {
+        const token = await AsyncStorage.getItem("token");
+        const id = await AsyncStorage.getItem("id");
+
+        if (!token || !id) {
+          console.warn("Token ou ID ausente. Faça login novamente.");
+          Alert.alert("Erro", "Você precisa estar logado para ver seus favoritos.");
+          navigation.navigate("Login");
+          return;
+        }
+
+        console.log("Token:", token.substring(0, 20) + "...");
+        console.log("ID usado na requisição:", id);
+
+        const response = await axios.get(
+          `http://10.0.2.2:3000/favoritos/listar/${id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        console.log("Resposta da API:", response.data);
+
+        // Mapear os dados recebidos para o formato correto
+        const favoritosMapeados = response.data.map(favorito => {
+          const animal = favorito.animal;
+          if (!animal) {
+            console.log('Favorito sem dados do animal:', favorito);
+            return null;
+          }
+          
+          console.log('Mapeando animal:', animal);
+          return {
+            id: favorito.id,
+            animal_id: animal.id,
+            nome: animal.nome,
+            raca: animal.raca,
+            idade: animal.idade,
+            especie: animal.especie,
+            descricao: animal.descricao,
+            personalidade: animal.personalidade,
+            imagem_url: animal.fotoBase64 || 'https://via.placeholder.com/300'
+          };
+        }).filter(f => f !== null);
+
+        console.log("Favoritos mapeados:", favoritosMapeados.length);
+        if (favoritosMapeados.length > 0) {
+          console.log("Exemplo do primeiro favorito:", favoritosMapeados[0]);
+        }
+        setFavoritos(favoritosMapeados);
+      } catch (error) {
+        console.error("Erro ao buscar favoritos:", error);
+        if (error.response) {
+          console.log("Status:", error.response.status);
+          console.log("Dados:", error.response.data);
+        }
+        Alert.alert("Erro", "Não foi possível carregar os favoritos.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchFavoritos();
+  }, []);
+
+  const removerFavorito = async (animalId) => {
     try {
       const token = await AsyncStorage.getItem("token");
-      const id = await AsyncStorage.getItem("id");
+      const userId = await AsyncStorage.getItem("id");
 
-      if (!token || !id) {
-        console.warn("Token ou ID ausente. Faça login novamente.");
+      if (!token || !userId) {
+        Alert.alert("Erro", "Você precisa estar logado para remover favoritos.");
         return;
       }
 
-      console.log("Token:", token);
-      console.log("ID usado na requisição:", id);
-
-      const response = await axios.get(
-        `http://10.0.2.2:3000/api/favoritos/listar/${id}`,
+      await axios.delete(
+        `http://10.0.2.2:3000/favoritos/${animalId}/${userId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -39,17 +106,14 @@ useEffect(() => {
         }
       );
 
-      setFavoritos(response.data);
+      // Atualiza a lista local removendo o favorito
+      setFavoritos(favoritos.filter(fav => fav.animal_id !== animalId));
+      Alert.alert("Sucesso", "Animal removido dos favoritos!");
     } catch (error) {
-      console.error("Erro ao buscar favoritos:", error);
-      Alert.alert("Erro", "Não foi possível carregar os favoritos.");
+      console.error("Erro ao remover favorito:", error);
+      Alert.alert("Erro", "Não foi possível remover o favorito.");
     }
   };
-
-  fetchFavoritos();
-}, []);
-
-
 
   return (
     <View style={styles.container}>
@@ -113,28 +177,43 @@ useEffect(() => {
       </View>
 
       {/* Lista de favoritos */}
-      <ScrollView contentContainerStyle={styles.favoritesList}>
-        {favoritos.length === 0 ? (
-          <Text style={styles.emptyText}>Você ainda não favoritou nenhum animal.</Text>
-        ) : (
-          favoritos.map((animal) => (
-            <TouchableOpacity key={animal.id} style={styles.favoriteCard}>
-              <Image
-                source={{ uri: animal.imagem_url }}
-                style={styles.favoriteImage}
-              />
-              <TouchableOpacity style={styles.modalHeartIcon}>
-                <Text style={styles.heartIcon}>❤️</Text>
+      {loading ? (
+        <View style={styles.loadingContainer}>
+          <ActivityIndicator size="large" color="#FF6B00" />
+          <Text style={styles.loadingText}>Carregando favoritos...</Text>
+        </View>
+      ) : (
+        <ScrollView contentContainerStyle={styles.favoritesList}>
+          {favoritos.length === 0 ? (
+            <Text style={styles.emptyText}>Você ainda não favoritou nenhum animal.</Text>
+          ) : (
+            favoritos.map((animal) => (
+              <TouchableOpacity key={animal.id} style={styles.favoriteCard}>
+                <Image
+                  source={{ uri: animal.imagem_url }}
+                  style={styles.favoriteImage}
+                  resizeMode="cover"
+                />
+                <TouchableOpacity 
+                  style={styles.modalHeartIcon}
+                  onPress={() => removerFavorito(animal.animal_id)}
+                >
+                  <Text style={styles.heartIcon}>❤️</Text>
+                </TouchableOpacity>
+                <View style={styles.favoriteInfo}>
+                  <Text style={styles.favoriteName}>Nome: {animal.nome}</Text>
+                  <Text style={styles.favoriteDetail}>Espécie: {animal.especie}</Text>
+                  <Text style={styles.favoriteDetail}>Raça: {animal.raca}</Text>
+                  <Text style={styles.favoriteDetail}>Idade: {animal.idade}</Text>
+                  {animal.personalidade && (
+                    <Text style={styles.favoriteDetail}>Personalidade: {animal.personalidade}</Text>
+                  )}
+                </View>
               </TouchableOpacity>
-              <View style={styles.favoriteInfo}>
-                <Text style={styles.favoriteName}>Nome: {animal.nome}</Text>
-                <Text style={styles.favoriteDetail}>Raça: {animal.raca}</Text>
-                <Text style={styles.favoriteDetail}>Idade: {animal.idade}</Text>
-              </View>
-            </TouchableOpacity>
-          ))
-        )}
-      </ScrollView>
+            ))
+          )}
+        </ScrollView>
+      )}
     </View>
   );
 };
