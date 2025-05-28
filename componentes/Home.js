@@ -69,11 +69,17 @@ const Home = ({ navigation }) => {
   // Função para carregar favoritos do usuário
   const carregarFavoritos = async (userToken, userId) => {
     try {
+      console.log('\n===== CARREGANDO FAVORITOS =====');
+      console.log('URL da requisição:', `http://10.0.2.2:3000/favoritos/listar/${userId}`);
+      console.log('Headers sendo enviados:', {
+        bearer: userToken,
+      });
+
       const response = await axios.get(
         `http://10.0.2.2:3000/favoritos/listar/${userId}`,
         {
           headers: {
-            Authorization: `Bearer ${userToken}`,
+            bearer: userToken,
           },
         }
       );
@@ -82,6 +88,11 @@ const Home = ({ navigation }) => {
       setFavorites(response.data);
     } catch (error) {
       console.error('Erro ao carregar favoritos:', error);
+      if (error.response) {
+        console.log('Status do erro:', error.response.status);
+        console.log('Dados do erro:', error.response.data);
+        console.log('Headers enviados:', error.config?.headers);
+      }
     }
   };
 
@@ -92,12 +103,11 @@ const Home = ({ navigation }) => {
       console.log('\n===== CARREGANDO ANIMAIS DA API =====');
       console.log('URL da requisição:', `http://10.0.2.2:3000/animal/filtrar`);
       
-      // Usar rota fornecida pelo usuário
       const response = await axios.get(
         `http://10.0.2.2:3000/animal/filtrar`,
         {
           headers: {
-            Authorization: `Bearer ${userToken}`,
+            bearer: userToken
           }
         }
       );
@@ -304,7 +314,7 @@ const Home = ({ navigation }) => {
           `http://10.0.2.2:3000/favoritos/${animal.id}/${userId}`,
           {
             headers: { 
-              'Authorization': `Bearer ${token}`
+              bearer: token
             }
           }
         );
@@ -333,7 +343,7 @@ const Home = ({ navigation }) => {
           animalData,
           {
             headers: { 
-              'Authorization': `Bearer ${token}`,
+              bearer: token,
               'Content-Type': 'application/json'
             }
           }
