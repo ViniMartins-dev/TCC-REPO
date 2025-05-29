@@ -257,6 +257,8 @@ async function inserirQuadradosDosAnimais(params, isMenu) {
     `;
     boxAnimais.innerHTML += conteudo;
   } else {
+    boxAnimais.style.display = "grid";
+    boxAnimais.style.height = "auto";
     boxAnimais.innerHTML = "";
     jsonApi.forEach((animal) => {
       if (animal.status == "disponivel") {
