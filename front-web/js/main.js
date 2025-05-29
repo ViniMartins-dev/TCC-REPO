@@ -13,11 +13,6 @@ new Swiper('.card-wrapper', { //iniciando o SwiperJS
     bottomDinamico  : true //bolinha acompanha a transição dos slides
   },
 
-  navigation: {
-    nextEl: '.swiper-button-next', //botão de proximo
-    prevEl: '.swiper-button-prev', //botão de anterior
-  },
-
   //Responsividade dos breakpoints
   breakpoints: {
     0: {
