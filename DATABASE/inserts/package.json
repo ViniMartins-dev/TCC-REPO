@@ -1,0 +1,16 @@
+{
+  "name": "inserts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "insert.js",
+  "type": "module",
+  "scripts": {
+    "start": "node insert.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "form-data": "^4.0.2",
+    "mime": "^4.0.7"
+  }
+}
