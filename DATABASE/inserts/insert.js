@@ -1,6 +1,7 @@
-import fs from 'fs';
-import path from 'path';
-import mime from 'mime';
+const fs = require('fs');
+const path = require('path');
+const axios = require('axios');
+const FormData = require('form-data');
 
 const postProtetor = 'http://localhost:3000/usuario/protetor';
 const postTutor = 'http://localhost:3000/usuario/tutor';
@@ -91,16 +92,33 @@ async function insert() {
         //inserindo animais na base
         for (const animal of animais) {
             try {
+                const imagemBuffer = fs.readFileSync(animal.bin_foto);
+                const form = new FormData();
 
-                console.log(`Inserindo: ${animal.nome}`);
-                await fetch(postAnimais, {
-                    method: "POST",
-                    headers: { 
-                        'Content-Type': 'application/json',
-                        'bearer': '000'
-                    },
-                    body: JSON.stringify(animal)
+                form.append('nome', animal.nome);
+                form.append('especie', animal.especie);
+                form.append('porte', animal.porte);
+                form.append('raca', animal.raca);
+                form.append('idade', animal.idade.toString());
+                form.append('sexo', animal.sexo);
+                form.append('descricao', animal.descricao);
+                form.append('personalidade', animal.personalidade);
+                form.append('usuario_id', animal.usuario_id.toString());
+
+                form.append('bin_foto', imagemBuffer, {
+                    filename: path.basename(animal.bin_foto),
+                    contentType: 'image/jpeg'
                 });
+
+                console.log(`Enviando animal: ${animal.nome}`);
+
+                const response = await axios.post(postAnimais, form, {
+                    headers: {
+                        ...form.getHeaders(),
+                        'bearer': '000'
+                    }
+                });
+
             } catch (error) {
                 console.log("Erro ao inserir animal:", animal.nome, error);
             }
