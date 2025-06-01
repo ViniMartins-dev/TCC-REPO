@@ -9,7 +9,7 @@ function fecharMenu() {
   sidebar.style.display = "none";
 }
 function irParaHome() {
-  window.location.href = "./index.html"
+  window.location.href = "./home.html"
 }
 function pegarCookieUsuario() {
   const cookies = document.cookie.split('; ');

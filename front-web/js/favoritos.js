@@ -33,7 +33,7 @@ if (!estaLogado()) {
   `
   linkCadastro.style.display = "none";
   boxLinks.innerHTML = `
-      <a id="link" href="index.html">Home</a>
+      <a id="link" href="home.html">Home</a>
   `
 }
 
@@ -185,7 +185,7 @@ function fecharMenu() {
 }
 
 function irParaHome() {
-  window.location.href = "./index.html"
+  window.location.href = "./home.html"
 }
 
 function irParaSolicitacoes() {

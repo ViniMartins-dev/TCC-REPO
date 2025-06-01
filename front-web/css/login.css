@@ -4,7 +4,15 @@
     --branco: #fff;
     --font-principal: "Roboto", sans-serif;
 }
-
+body  {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 90vh; 
+  margin: 0;
+  padding: 10px;
+}
 .principal {
     width: 100%;
     max-width: 800px;

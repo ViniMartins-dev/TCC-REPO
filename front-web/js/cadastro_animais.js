@@ -29,7 +29,7 @@ if (cookieUsuario.tipo == "tutor" || cookieUsuario.tipo == null) {
 }
 
 function irParaHome() {
-  window.location.href = "./index.html";
+  window.location.href = "./home.html";
 }
 
 function abrirPopupRestricao() {
@@ -82,7 +82,7 @@ class Sidebar {
 const sidebar = new Sidebar();
 
 function irParaHome() {
-  window.location.href = "./index.html"
+  window.location.href = "./home.html"
 }
 
 

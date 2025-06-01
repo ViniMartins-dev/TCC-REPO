@@ -5,7 +5,7 @@ class Pagina {
     window.location.href = "#cadastro"
   }
   irParaHome() {
-    window.location.href = "index.html"
+    window.location.href = "home.html"
   }
 }
 const pagina = new Pagina();
