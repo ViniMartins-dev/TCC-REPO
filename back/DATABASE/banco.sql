@@ -5,7 +5,7 @@ USE DB_Haustier;
 -- Usuários: pode ser tutor ou protetor
 CREATE TABLE IF NOT EXISTS usuarios (
     id              INT AUTO_INCREMENT PRIMARY KEY,
-    tipo            ENUM('tutor', 'protetor') NOT NULL,     -- Escolhido no Front-end
+    tipo            ENUM('tutor', 'protetor', 'entregue') NOT NULL,     -- Escolhido no Front-end
     
     nome            VARCHAR(100),
     sobrenome       VARCHAR(100),

@@ -4,8 +4,8 @@ const gerarAdocao = require('../services/requestAdocao'); // Importa o serviço 
 
 const listarAdocoes = async (req, res) => {
     try {
-        const { id } = req.params; // id do protetor
-        const adocoes = await listaAdocoes.listarAdocoes(id);
+        const { idProtetor } = req.params; // id do protetor
+        const adocoes = await listaAdocoes.listarAdocoes(idProtetor);
         return res.status(200).json(adocoes);
     } catch (error) {
         return res.status(400).json({ erro: error.message });
@@ -33,8 +33,22 @@ const requestAdocao = async (req, res) => {
     }
 };
 
+const confirmarEntrega = async (req, res) => {
+    try {
+        const { idAdocao } = req.body;
+        const adocaoConfirmada = await aprovaAdocao.confirmarEntrega(idAdocao);
+        if (!adocaoConfirmada) {
+            return res.status(404).json({ erro: 'Adoção não encontrada ou já confirmada.' });
+        }
+        return res.status(200).json({ message: 'Entrega confirmada com sucesso.' });
+    } catch (error) {
+        return res.status(400).json({ erro: error.message });
+    }
+}
+
 module.exports = {
     listarAdocoes,
     aprovarAdocao,
-    requestAdocao
+    requestAdocao,
+    confirmarEntrega
 }
