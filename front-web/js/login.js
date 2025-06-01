@@ -171,13 +171,16 @@ class FormularioCadastro {
       });
       let dados = await resposta.json()
       if (dados.erro == "CNPJ inválido.") {
+        this.erroCNPJ.classList.remove("errorOFF");
         this.erroCNPJ.textContent = "Digite um CNPJ valido"
         return false
       } else if (dados.erro == "Validation error: Validation isEmail on email failed") {
+        this.erroEmail.classList.remove("errorOFF");
         this.erroEmail.textContent = "Digite um e-mail válido"
         return false
-      }
-      return true
+      } 
+    return true
+
   }
   async cadastrarTutor() {
       const resposta = await fetch("http://localhost:3000/usuario/tutor", {
@@ -192,7 +195,12 @@ class FormularioCadastro {
         this.erroData.textContent = "Voce deve ter entre 18 anos e 120 anos"
         return false
       } else if (dados.erro == "Validation error: Validation isEmail on email failed") {
+        this.erroEmail.classList.remove("errorOFF");
         this.erroEmail.textContent = "Digite um e-mail válido"
+        return false
+      } else if (dados.erro == "CPF inválido.") {
+        this.erroCPF.classList.remove("errorOFF");
+        this.erroCPF.textContent = "CPF invalido"
         return false
       }
       return true
@@ -200,49 +208,62 @@ class FormularioCadastro {
   adicionaObservadoresDeErro() {
     this.inputEmail.addEventListener('invalid', (e) => {
       e.preventDefault(); // evita o balãozinho do navegador
+      this.erroEmail.classList.remove("errorOFF")
       this.erroEmail.textContent = "Digite um e-mail válido.";
     });
     this.inputEmail.addEventListener('input', () => {
       if (this.inputEmail.checkValidity()) {
+      this.erroEmail.classList.add("errorOFF")
         this.erroEmail.textContent = "";
       }
     });
 
     this.inputCPF.addEventListener('invalid', (e) => {
       e.preventDefault(); // evita o balão do navegador
+      this.erroCPF.classList.remove("errorOFF")
       this.erroCPF.textContent = "CPF deve conter 11 números.";
     });
+
     this.inputCPF.addEventListener('input', () => {
       const cpfNumeros = this.inputCPF.value.replace(/\D/g, '');
       if (cpfNumeros.length === 11) {
+        this.erroCPF.classList.add("errorOFF")
         this.erroCPF.textContent = "";
       } else {
+        this.erroCPF.classList.remove("errorOFF")
         this.erroCPF.textContent = "CPF invalido"
       }
     });
 
     this.inputCNPJ.addEventListener('invalid', (e) => {
       e.preventDefault(); // evita o balão do navegador
+      this.erroCNPJ.classList.remove("errorOFF")
       this.erroCNPJ.textContent = "CNPJ deve conter 14 números.";
     });
 
     this.inputCNPJ.addEventListener('input', () => {
       const cnpjNumeros = this.inputCNPJ.value.replace(/\D/g, '');
       if (cnpjNumeros.length === 14) {
+        this.erroCNPJ.classList.add("errorOFF")
         this.erroCNPJ.textContent = "";
       } else {
+        this.erroCNPJ.classList.remove("errorOFF")
         this.erroCNPJ.textContent = "CNPJ invalido"
       }
     });
+
     this.inputTel.addEventListener('invalid', (e) => {
       e.preventDefault(); // evita o balão do navegador
+      this.erroTel.classList.remove("errorOFF")
       this.erroTel.textContent = "Telefone deve conter 10 ou 11 números.";
     });
     this.inputTel.addEventListener('input', () => {
       const telNumeros = this.inputTel.value.replace(/\D/g, '');
       if (telNumeros.length === 10 || telNumeros.length === 11) {
+        this.erroTel.classList.add("errorOFF")
         this.erroTel.textContent = "";
       } else {
+        this.erroTel.classList.remove("errorOFF")
         this.erroTel.textContent = "Telefone deve ter 11 caracteres";
       }
     });
@@ -250,11 +271,15 @@ class FormularioCadastro {
     this.inputData.addEventListener('invalid', (e) => {
       e.preventDefault(); // evita o balão do navegador
       const idade = calcularIdade(this.inputData.value);
+      this.erroData.classList.add("errorOFF")
       if (!this.inputData.value) {
+        this.erroData.classList.remove("errorOFF")
         this.erroData.textContent = "Informe sua data de nascimento.";
       } else if (idade < 18) {
+        this.erroData.classList.remove("errorOFF")
         this.erroData.textContent = "Idade minima 18";
       } else if (idade > 120) {
+        this.erroData.classList.remove("errorOFF")
         this.erroData.textContent = "Idade maxima 120";
       }
     });
@@ -262,12 +287,12 @@ class FormularioCadastro {
     this.inputData.addEventListener('input', () => {
       const data = this.inputData.value;
       const idade = calcularIdade(data);
-
-      if (data && idade >= 18) {
-        this.erroData.textContent = "";
-      } else if (data && idade < 18) {
+      this.erroData.classList.add("errorOFF")
+      if (idade < 18) {
+        this.erroData.classList.remove("errorOFF")
         this.erroData.textContent = "Idade minima 18";
       } else if (idade > 120) {
+        this.erroData.classList.remove("errorOFF")
         this.erroData.textContent = "Idade maxima 120";
       }
     });

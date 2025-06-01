@@ -143,7 +143,7 @@ input[type="search"]::-webkit-search-cancel-button {
 }
 @media (max-width: 650px) {
   .cabecalho {
-    justify-content: flex-start;
+    justify-content: flex-end;
     gap: 25px;
     padding: 10px 25px;
   }
@@ -261,12 +261,216 @@ input[type="search"]::-webkit-search-cancel-button {
 }
 
 main {
-  display: grid;
+  display: flex;
   width: 100%;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 500px));
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
   gap: 20px;
-  padding: 20px 10px;
+  padding: 20px 20px;
+}
+.main__top {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 1010px;
+  position: relative;
+  min-height: 172px;
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid #000000;
+  border-radius: 8px;
+  padding: 16px;
+}
+.main__top h1 {
+  font-size: 45px;
+  color: #cb7842;
+  font-weight: 600;
+  z-index: 1;
+  word-spacing: -10px;
+}
+.main__top img {
+  position: absolute;
+  max-width: 200px;
+  right: 10px;
+  bottom: -20px;
+  z-index: 0;
+}
+.status-box {
+  max-width: 1010px;
+  z-index: 5;
+}
+.status-box h1 {
+  font-size: 25px;
+}
+.box_pendentes {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(2,  minmax(200px, 500px));
+  justify-content: center;
+  gap: 20px;
+  padding: 20px 0px;
+}
+.box_entregue {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(2,  minmax(200px, 500px));
+  justify-content: center;
+  gap: 20px;
+  padding: 20px 0px;
+}
+.box_entregando {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(2,  minmax(200px, 500px));
+  justify-content: center;
+  gap: 20px;
+  padding: 20px 0px;
+}
+.box_rejeitadas {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(2,  minmax(200px, 500px));
+  justify-content: center;
+  gap: 20px;
+  padding: 20px 0px;
+}
+#card {
+  padding: 20px;
+  background-color: white;
+  font-family: var(--fonte-principal);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.25);
+  width: 100%;
+  max-width: 500px;
+  overflow: hidden;
+}
+#foto-animal {
+  width: 100%;
+}
+#titulo-adotante, #titulo-animal {
+  font-size: 20px;
+  font-family: var(--fonte-principal);
+  font-weight: bold;
+  margin-top: 15px;
+  border-bottom: 2px solid #cb7842;
+  border-radius: 2px;
+  margin-right: 90%;
+}
+.info {
+  margin: 7px 0;
+  font-size: 16px;
+}
+@media (min-width: 500px) and (max-width: 700px) {
+  #titulo-adotante, #titulo-animal {
+    font-size: 16px
+  }
+  .info {
+    font-size: 13px;
+  }
+  #card {
+    padding: 10px;
+  }
+  .main__top h1 {
+    font-size: 35px;
+  }
+  .main__top img {
+    max-width: 200px;
+  }
+}
+@media (max-width: 500px) {
+  #titulo-adotante, #titulo-animal {
+    font-size: 16px
+  }
+  .info {
+    font-size: 13px;
+  }
+  #card {
+    padding: 10px;
+  }
+  .main__top {
+    min-height: 150px;
+  }
+  .main__top h1 {
+    font-size: 30px;
+  }
+  .main__top img {
+    right: -10px;
+    bottom: -30px;
+    max-width: 200px;
+  }
+  .box_pendentes {
+    grid-template-columns: repeat(1,  minmax(200px, 500px));
+  }
+  .box_entregue {
+    grid-template-columns: repeat(1,  minmax(200px, 500px));
+  }
+  .box_entregando {
+    grid-template-columns: repeat(1,  minmax(200px, 500px));
+  }
+  .box_rejeitadas {
+    grid-template-columns: repeat(1,  minmax(200px, 500px));
+  }
+}
+@media (max-width: 500px) {
+  .main__top {
+    min-height: 150px;
+  }
+  .main__top h1 {
+    font-size: 20px;
+  }
+  .main__top img {
+    right: -10px;
+    bottom: -30px;
+    max-width: 200px;
+  }
+}
+.div-btn {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.div-btn .btn-aprovar {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  align-items: center;
+  cursor: pointer;
+  width: 50%;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: 600;
+}
+.div-btn .btn-rejeitar {
+  background-color: #fe2712 ;
+  color: white;
+  border: none;
+  width: 50%;
+  padding: 10px 15px;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: 600;
+}
+.div-btn .btn-entregue {
+  background-color: #103B5D;
+  color: white;
+  border: none;
+  width: 100%;
+  padding: 10px 15px;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.div-btn button:hover {
+  transform: translateY(-2px);
+  opacity: 0.8;
 }
 
 .avisoNaoHaAnimais {
@@ -301,72 +505,3 @@ main {
     text-align: center;
   }
 }
-    #card {
-      background-color: white;
-      font-family: var(--fonte-principal);
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      width: 100%;
-      max-width: 500px;
-      margin: 40px auto;
-      overflow: hidden;
-    }
-
-    .card-header {
-      background-color: var(--laranja);
-      color: white;
-      padding: 15px;
-      font-size: 18px;
-    }
-
-    .card-body {
-      position: relative;
-      padding: 20px;
-    }
-
-    #titulo-adotante, #titulo-animal {
-      font-size: 19px;
-      font-family: var(--fonte-principal);
-      font-weight: bold;
-      margin-top: 15px;
-      border-bottom: 2px solid #cb7842;
-      border-radius: 2px;
-      margin-right: 90%;
-    }
-
-    .info {
-      margin: 7px 0;
-      
-    }
-
-    .div-btn {
-      margin-top: 20px;
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-    }
-
-    .div-btn button {
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      padding: 10px 15px;
-      align-items: center;
-      cursor: pointer;
-      border-radius: 5px;
-      font-size: 14px;
-      font-weight: 600;
-    }
-
-    .div-btn button:hover {
-    transform: translateY(-2px);
-    opacity: 0.8;
-    }
-
-    #foto-animal {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      width: 30%;
-      max-width: 175px;
-    }

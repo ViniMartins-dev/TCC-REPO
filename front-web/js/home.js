@@ -146,8 +146,11 @@ class Animal {
       let json = await response.json();
       if (response.ok) {
         popup.inserirPopupPedidoDeAdocao();
-      } else if (json.erro == "Você já solicitou a adoção deste animal.")
+      } else if (json.erro == "Você já solicitou a adoção deste animal.") {
         popup.inserirPopupPedidoJaFeito()
+      } else if (json.erro == "Apenas tutores podem solicitar adoções.") {
+        popup.inserirPopupRestricao()
+      }
     } else {
       irParaLogin()
     }
@@ -193,6 +196,19 @@ class PopupAnimal {
           Seu pedido de adoção foi enviado!
           <br>
           Por favor aguarde a aprovação
+        </p>
+        <button onclick="popup.fechar()">Fechar</button>
+      </div>
+    `
+  }
+  inserirPopupRestricao() {
+    this.overlay.innerHTML = `
+      <div class="popupPedidoAdocao" onclick="event.stopPropagation()">
+        <h1>Atenção</h1>
+        <p>
+          Apenas tutores podem realizar pedidos
+          <br>
+          de adoção. Crie uma conta como tutor
         </p>
         <button onclick="popup.fechar()">Fechar</button>
       </div>

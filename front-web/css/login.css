@@ -121,6 +121,24 @@ select:invalid {
   font-weight: 500;
   font-size: 10px;
 }
+.errorOFF {
+  display: none;
+}
+/* #erroEmail { */
+/*   display: none */
+/* } */
+/* #erroLogin { */
+/*   display: none */
+/* } */
+/* #erroData { */
+/*   display: none */
+/* } */
+/* #erroTel { */
+/*   display: none */
+/* } */
+/* #erroCNPJ { */
+/*   display: none */
+/* } */
 .form-login a:hover {
     color: #cb7842;
 }

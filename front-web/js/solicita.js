@@ -41,52 +41,244 @@ async function buscarSolicitacoes() {
   let json = await response.json()
   return json;
 }
+async function filtrarSolicitacoes() {
+  let entregando = [];
+  let entregues = [];
+  let pendentes = [];
+  let rejeitadas = [];
+  let json = await buscarSolicitacoes();
+  json.forEach((solicitacao) => {
+    if (solicitacao.status == "pendente") {
+      pendentes.push(solicitacao)
+    } else if (solicitacao.status == "aprovada") {
+      entregando.push(solicitacao)
+    } else if (solicitacao.status == "entregue") {
+      entregues.push(solicitacao)
+    } else if (solicitacao.status == "rejeitada") {
+      rejeitadas.push(solicitacao)
+    }
+  })
+  return {
+    pendentes,
+    entregando,
+    entregues,
+    rejeitadas
+  };
+}
+
+
+async function inserirQuadradosSolicitacoesPendente() {
+  let main = document.getElementById("main");
+  let box;
+  let resultado = await filtrarSolicitacoes();
+  let pendentes = resultado.pendentes
+  if (pendentes.length == 0 ) {
+    return false;
+  } else {
+    main.innerHTML += `
+    <div class="status-box"> 
+      <h1>Pendentes:</h1>
+      <div id="box_pendentes" class="box_pendentes">
+      </div>
+    </div>
+    `
+    box = document.getElementById("box_pendentes")
+    pendentes.forEach((solicitacao) => {
+      let tutor = solicitacao.tutor
+      let animal = solicitacao.animal
+      box.innerHTML += `
+        <section id="card">
+          <img src="data:image/jpeg;base64,${animal.bin_foto}" alt="Foto do animal" id="foto-animal">
+        <div class="card-body">
+        <div id="titulo-adotante">Adotante</div>
+        <div class="info"><strong>Email:</strong>${tutor.email}</div>
+        <div class="info"><strong>Telefone:</strong>${tutor.telefone}</div>
+        <div id="titulo-animal"> Animal</div>
+        <div class="info"><strong>Nome:</strong> ${animal.nome}</div>
+        <div class="info"><strong>Espécie:</strong> ${animal.especie}</div>
+        <div class="info"><strong>Raça:</strong> ${animal.raca}</div>
+        <div class="info"><strong>Idade:</strong> ${animal.idade}</div>
+        <div class="div-btn">
+        <button class="btn-aprovar"onclick="aprovarAdocao(${solicitacao.id})">Aprovar</button>
+        <button class="btn-rejeitar"onclick="reprovarAdocao(${solicitacao.id})">Recusar</button>
+        </div>
+        </div>
+        </section>
+        `
+    })
+    return true
+  }
+  // if (json.length == 0) {
+    //     main.style.display = "flex";
+    //     main.style.height = "90vh";
+    //     main.innerHTML = "";
+    //     let conteudo = `
+    //       <div class="avisoNaoHaAnimais">
+      //           <img src="../img/silhueta_dog.jpg" alt="cachorro"></img>
+      //           <p>Não há solicitações no momento</p>
+      //         </div>
+      //       `;
+    //     main.innerHTML += conteudo;
+    //   }
+}
+
+async function inserirQuadradosSolicitacoesEntregando() {
+  let main = document.getElementById("main");
+  let box;
+  let resultado = await filtrarSolicitacoes();
+  let entregando = resultado.entregando
+  if (entregando.length == 0 ) {
+    return false;
+  } else {
+    main.innerHTML += `
+      <div class="status-box"> 
+        <h1>Entregando:</h1>
+        <div id="box_entregando" class="box_entregando">
+        </div>
+      </div>
+    `
+    box = document.getElementById("box_entregando")
+    entregando.forEach((solicitacao) => {
+      let tutor = solicitacao.tutor
+      let animal = solicitacao.animal
+      box.innerHTML += `
+        <section id="card">
+        <img src="data:image/jpeg;base64,${animal.bin_foto}" alt="Foto do animal" id="foto-animal">
+        <div class="card-body">
+        <div id="titulo-adotante">Adotante</div>
+        <div class="info"><strong>Email:</strong>${tutor.email}</div>
+        <div class="info"><strong>Telefone:</strong>${tutor.telefone}</div>
+        <div id="titulo-animal"> Animal</div>
+        <div class="info"><strong>Nome:</strong> ${animal.nome}</div>
+        <div class="info"><strong>Espécie:</strong> ${animal.especie}</div>
+        <div class="info"><strong>Raça:</strong> ${animal.raca}</div>
+        <div class="info"><strong>Idade:</strong> ${animal.idade}</div>
+        <div class="div-btn">
+        <button class="btn-entregue"onclick="validarEntrega(${solicitacao.id})">Entregar</button>
+        </div>
+        </div>
+        </section>
+        `
+    })
+    return true
+  }
+}
+async function inserirQuadradosSolicitacoesRejeitadas() {
+  let main = document.getElementById("main");
+  let box;
+  let resultado = await filtrarSolicitacoes();
+  let rejeitadas = resultado.rejeitadas
+  if (rejeitadas.length == 0 ) {
+    return false;
+  } else {
+    main.innerHTML += `
+      <div class="status-box"> 
+        <h1>Rejeitadas:</h1>
+        <div id="box_rejeitadas" class="box_rejeitadas">
+        </div>
+      </div>
+    `
+    box = document.getElementById("box_rejeitadas")
+    rejeitadas.forEach((solicitacao) => {
+      let tutor = solicitacao.tutor
+      let animal = solicitacao.animal
+      box.innerHTML += `
+        <section id="card">
+        <img src="data:image/jpeg;base64,${animal.bin_foto}" alt="Foto do animal" id="foto-animal">
+        <div class="card-body">
+        <div id="titulo-adotante">Adotante</div>
+        <div class="info"><strong>Email:</strong>${tutor.email}</div>
+        <div class="info"><strong>Telefone:</strong>${tutor.telefone}</div>
+        <div id="titulo-animal"> Animal</div>
+        <div class="info"><strong>Nome:</strong> ${animal.nome}</div>
+        <div class="info"><strong>Espéci2:</strong> ${animal.especie}</div>
+        <div class="info"><strong>Raça:</strong> ${animal.raca}</div>
+        <div class="info"><strong>Idade:</strong> ${animal.idade}</div>
+        <div class="div-btn">
+        </div>
+        </div>
+        </section>
+        `
+    })
+    return true
+  }
+}
+
+async function inserirQuadradosSolicitacoesEntregues() {
+  let main = document.getElementById("main");
+  let box;
+  let resultado = await filtrarSolicitacoes();
+  let entregues = resultado.entregues
+  if (entregues.length == 0 ) {
+    return false;
+  } else {
+    main.innerHTML += `
+      <div class="status-box"> 
+        <h1>Entregues:</h1>
+        <div id="box_entregue" class="box_entregue">
+        </div>
+      </div>
+    `
+    box = document.getElementById("box_entregue")
+    entregues.forEach((solicitacao) => {
+      let tutor = solicitacao.tutor
+      let animal = solicitacao.animal
+      box.innerHTML += `
+        <section id="card">
+        <img src="data:image/jpeg;base64,${animal.bin_foto}" alt="Foto do animal" id="foto-animal">
+        <div class="card-body">
+        <div id="titulo-adotante">Adotante</div>
+        <div class="info"><strong>Email:</strong>${tutor.email}</div>
+        <div class="info"><strong>Telefone:</strong>${tutor.telefone}</div>
+        <div id="titulo-animal"> Animal</div>
+        <div class="info"><strong>Nome:</strong> ${animal.nome}</div>
+        <div class="info"><strong>Espécie:</strong> ${animal.especie}</div>
+        <div class="info"><strong>Raça:</strong> ${animal.raca}</div>
+        <div class="info"><strong>Idade:</strong> ${animal.idade}</div>
+        <div class="div-btn">
+        </div>
+        </div>
+        </section>
+        `
+    })
+    return true
+  }
+}
 async function inserirQuadradosSolicitacoes() {
   let main = document.getElementById("main");
-  let json = await buscarSolicitacoes();
-  if (json.length == 0) {
+  let pendentes = await inserirQuadradosSolicitacoesPendente()
+  let entregando = await inserirQuadradosSolicitacoesEntregando()
+  let entregues = await inserirQuadradosSolicitacoesEntregues()
+  let rejeitadas = await inserirQuadradosSolicitacoesRejeitadas()
+  if (!pendentes && !entregando && !entregues && !rejeitadas) {
     main.style.display = "flex";
     main.style.height = "90vh";
     main.innerHTML = "";
     let conteudo = `
       <div class="avisoNaoHaAnimais">
-        <img src="../img/silhueta_dog.jpg" alt="cachorro"></img>
-        <p>Não há solicitações no momento</p>
+      <img src="../img/silhueta_dog.jpg" alt="cachorro"></img>
+      <p>Não há solicitações no momento</p>
       </div>
-    `;
+      `;
     main.innerHTML += conteudo;
   } else {
-    json.forEach((solicitacao) => {
-      let tutor = solicitacao.tutor
-      let animal = solicitacao.animal
-      if (solicitacao.status == "pendente") {
-        main.innerHTML += `
-          <section id="card">
-          <div class="card-header">
-          Solicitação de Adoção - Pendente 
-          </div>
-          <div class="card-body">
-          <div id="titulo-adotante">Adotante</div>
-          <div class="info"><strong>Email:</strong>${tutor.email}</div>
-          <div class="info"><strong>Telefone:</strong>${tutor.telefone}</div>
-          <div id="titulo-animal"> Animal</div>
-          <img src="data:image/jpeg;base64,${animal.bin_foto}" alt="Foto do animal" id="foto-animal">
-          <div class="info">Nome: ${animal.nome}</div>
-          <div class="info">Espécie: ${animal.especie}</div>
-          <div class="info">Raça: ${animal.raca}</div>
-          <div class="info">Idade: ${animal.idade}</div>
-          <div class="div-btn">
-          <button onclick="aprovarAdocao(${solicitacao.id})">Aprovar</button>
-          <button onclick="reprovarAdocao(${solicitacao.id})"style="background-color:#f44336;">Recusar</button>
-          </div>
-          </div>
-          </section>
-          `
-      }
-    })
+    console.log("ixi")
   }
 }
 inserirQuadradosSolicitacoes()
+async function validarEntrega(idAdocao) {
+  let response = await fetch("http://localhost:3000/adocao/confirmar", {
+    method : "PUT", 
+    headers : {
+      bearer: cookieUsuario.token,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      "idAdocao": idAdocao,
+    })
+  })
+  recarregaPagina()
+}
 
 async function aprovarAdocao(idAdocao) {
   let response = await fetch("http://localhost:3000/adocao/aprovar", {
