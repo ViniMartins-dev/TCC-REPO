@@ -31,6 +31,23 @@ const aprovarAdocao = async (idAdocao, aval) => {
     return adocao;
 };
 
+const confirmarEntrega = async (idAdocao) => {
+    const adocao = await Adocao.findByPk(idAdocao);
+    if (!adocao) {
+        throw new Error('Adoção não encontrada.');
+    }
+
+    if (adocao.status !== 'aprovada') {
+        throw new Error('Adoção não está aprovada para entrega.');
+    }
+
+    adocao.status = 'entregue';
+    await adocao.save();
+
+    return adocao;
+}
+
 module.exports = {
     aprovarAdocao,
+    confirmarEntrega
 };
