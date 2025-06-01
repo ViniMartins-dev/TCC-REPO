@@ -5,7 +5,7 @@ USE DB_Haustier;
 -- Usuários: pode ser tutor ou protetor
 CREATE TABLE IF NOT EXISTS usuarios (
     id              INT AUTO_INCREMENT PRIMARY KEY,
-    tipo            ENUM('tutor', 'protetor', 'entregue') NOT NULL,     -- Escolhido no Front-end
+    tipo            ENUM('tutor', 'protetor') NOT NULL,     -- Escolhido no Front-end
     
     nome            VARCHAR(100),
     sobrenome       VARCHAR(100),
@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS animais (
 CREATE TABLE IF NOT EXISTS adocoes (
     id              INT AUTO_INCREMENT PRIMARY KEY,
     
-    status          ENUM('pendente', 'aprovada', 'rejeitada') DEFAULT 'pendente',
+    status          ENUM('pendente', 'aprovada', 'rejeitada', 'entregue') DEFAULT 'pendente',
     
     animal_id       INT NOT NULL,
     tutor_id        INT NOT NULL, 											            -- FK para usuário com tipo = tutor
