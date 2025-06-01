@@ -4,8 +4,8 @@ const gerarAdocao = require('../services/requestAdocao'); // Importa o serviço 
 
 const listarAdocoes = async (req, res) => {
     try {
-        const { idProtetor } = req.params; // id do protetor
-        const adocoes = await listaAdocoes.listarAdocoes(idProtetor);
+        const { id } = req.params; // id do protetor
+        const adocoes = await listaAdocoes.listarAdocoes(id);
         return res.status(200).json(adocoes);
     } catch (error) {
         return res.status(400).json({ erro: error.message });
