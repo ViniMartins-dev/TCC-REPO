@@ -13,15 +13,10 @@ new Swiper('.card-wrapper', { //iniciando o SwiperJS
     bottomDinamico  : true //bolinha acompanha a transição dos slides
   },
 
-  navigation: {
-    nextEl: '.swiper-button-next', //botão de proximo
-    prevEl: '.swiper-button-prev', //botão de anterior
-  },
-
   //Responsividade dos breakpoints
   breakpoints: {
     0: {
-      slidesPerView: 1
+      slidesPerView: 0
     },
     768: { 
       slidesPerView: 2
@@ -257,6 +252,8 @@ async function inserirQuadradosDosAnimais(params, isMenu) {
     `;
     boxAnimais.innerHTML += conteudo;
   } else {
+    boxAnimais.style.display = "grid";
+    boxAnimais.style.height = "auto";
     boxAnimais.innerHTML = "";
     jsonApi.forEach((animal) => {
       if (animal.status == "disponivel") {
