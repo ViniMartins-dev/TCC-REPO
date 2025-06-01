@@ -14,7 +14,7 @@ const user = {
 }
 
 function irParaHome() {
-  window.location.href = "./index.html";
+  window.location.href = "./home.html";
 }
 
 function decodificaStrEmObj(str) {

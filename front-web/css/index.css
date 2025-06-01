@@ -1,0 +1,254 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  width: 100%;
+  height: 100%;
+}
+
+.cabecalho {
+  width: 100%;
+  display: flex;
+  height: 80px;
+  align-items: center;
+  justify-content: space-around;
+  position: relative;
+  top: 0;
+  background-color: #ffffff;
+  box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.05);
+  padding: 10px;
+  z-index: 5;
+}
+#logo {
+  width: 60px;
+  margin-bottom: -1%;
+  position: absolute;
+  left: 5%;
+  top: 10px;
+}
+.links-header {
+  display: flex;
+  position: absolute;
+  right: 70px;
+  gap: 25px;
+}
+
+#link {
+  text-decoration: none;
+  color: #cb7842;
+  font-weight: 600;
+  font-family: var(--fonte-principal);
+  font-size: 15px;
+  transition: all 100ms;
+}
+#link:hover {
+  scale: 1.1;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+.main__top {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  position: relative;
+  background-color: #FFFFFF;
+  width: 100%;
+  height: 80vh;
+  padding: 10vh 10vw 
+}
+.img_dog {
+  width: 300px;
+  position: absolute;
+  z-index: 1;
+  right: 20vw;
+  top: 100px;
+  border-radius: 20px;
+}
+.dog_principal {
+  width: 1000px;
+  position: absolute;
+  right: -10%;
+  top: -10%;
+  z-index: 1;
+}
+@media (min-width: 1300px) and (max-width: 1390px) {
+  .dog_principal {
+    top: 5%;
+    width: 900px;
+  }
+}
+@media (min-width: 1160px) and (max-width: 1300px) {
+  .dog_principal {
+    top: 10%;
+    width: 800px;
+  }
+}
+@media (min-width: 1000px) and (max-width: 1160px) {
+  .dog_principal {
+    top: 10%;
+    right: -15%; 
+    width: 800px;
+  }
+}
+@media (min-width: 900px) and (max-width: 1000px) {
+  .dog_principal {
+    top: 15%;
+    right: -15%;
+    width: 700px;
+  }
+}
+@media (min-width: 800px) and (max-width: 900px) {
+  .dog_principal {
+    top: 15%;
+    right: -20%;
+    width: 700px;
+  }
+}
+@media (min-width: 700px) and (max-width: 800px) {
+  .dog_principal {
+    top: 15%;
+    right: -30%;
+    width: 700px;
+  }
+}
+.img_cat {
+  width: 300px;
+  position: absolute;
+  z-index: 0;
+  right: 10vw;
+  top: 10px;
+  border-radius: 20px;
+}
+.main__top-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+  align-items: flex-start;
+  max-width: 50vw;
+  margin: 0 0 10% 0;
+}
+.main__top h1 {
+  font-size: 35px;
+  word-spacing: -6px;
+  text-align: left;
+  z-index: 5;
+}
+.main__top p {
+  font-size: 15px;
+  font-weight: 500;
+  text-align: left;
+  margin: 0 0 10px 0;
+  z-index: 5;
+}
+@media (max-width: 700px) {
+  .dog_principal {
+    display: none
+  }
+  .main__top {
+    align-items: center;
+    padding: 0vh 2vw;
+  }
+  .main__top-content {
+    align-items: center;
+    max-width: 90vw
+  }
+  .main__top h1 {
+    text-align: center;
+  }
+  .main__top p {
+    text-align: center;
+  }
+}
+.main__box-botoes {
+  display: flex;
+  gap: 15px;
+  width:80%;
+  z-index: 5;
+}
+.btn-adotar {
+  width: 50%;
+  border: none;
+  border-radius: 5px;
+  background-color: #CB7942;
+  color: #FFFFFF;
+  padding: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 100ms 100ms;
+}
+.btn-adotar:hover {
+  scale: 1.04;
+  background-color: #a85f32;
+}
+.btn-cadastrar {
+  width: 50%;
+  border: 1px solid #000000;
+  background-color: #FFFFFF;
+  border-radius: 5px;
+  padding:8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 100ms 100ms;
+}
+.btn-cadastrar:hover {
+  scale: 1.04;
+  background-color: #d3d3d3;
+}
+.curve {
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    transform: rotate(180deg);
+    z-index: 5;
+}
+
+.curve svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 130px;
+}
+
+.curve .shape-fill {
+    fill: #CB7942;
+}
+.main__bottom {
+  z-index: 5;
+  display: flex;
+  justify-content: center;
+  padding: 15vh 10vw 10vh 10vw;
+  background-color: #CB7942;
+  width: 100%;
+  height: 100%;
+  min-height: 400px;
+}
+.main__bottom-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  max-width: 700px;
+}
+.main__bottom-content h1 {
+  color: #FFFFFF;
+  font-size: 24px;
+}
+.main__bottom-content p {
+  color: #FFFFFF;
+  font-weight: 500;
+  font-size: 18px
+}
