@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cadastro de Animais para Adoção</title>
+    <link rel="stylesheet" href="./css/cadastro_animais.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link 
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" 
+    rel="stylesheet"
+    >
+    <!-- Necessario para rodar o Cropper -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css" rel="stylesheet"/>
+  </head>
+  <body id="body">
+    <div class="popupRestricao" id="popupRestricao">
+      <div onclick="event.stopPropagation()" class="popupRestricao-content">
+        <h1>Acesso Negado!</h1>
+        <p>
+          Apenas usuarios autorizados podem acessar essa pagina
+        </p>
+        <button onclick="irParaHome()"id="btnSair">Sair</button>
+      </div>
+    </div>
+    <div class="cabecalho">
+      <img onclick="irParaHome()"id="logo" src="./img/Logo-laranja.png" alt="" />
+      <div class="links-header">
+          <a id="link" href="home.html">Home</a>
+          <a id="link" href="favoritos.html">Perfil</a>
+      </div>
+      <div onclick="sidebar.abrir()" class="btn-menu">
+        <i class="btn-menu-icon fa-solid fa-bars"></i>
+      </div>
+    </div>
+    <div class="menu-sidebar" id="sidebar">
+      <div onclick="sidebar.fechar()" class="sidebar-overlay">
+        
+      </div>
+      <div class="sidebar-content" id="sidebar-content">
+        <i onclick="sidebar.fechar()" class="x-icon fa-solid fa-xmark"></i>
+        <div class="sidebar-content-espaco"></div>
+        <div class="sidebar-content-item">
+          <i class="sidebar-link-icon fa-solid fa-caret-right"></i>
+          <a class="sidebar-link" href="home.html">Home</a>
+        </div>
+        <div class="sidebar-content-item">
+          <i class="sidebar-link-icon fa-solid fa-caret-right"></i>
+          <a class="sidebar-link" href="cadastro_animais.html">Cadastrar Animais</a>
+        </div>
+        <div class="sidebar-content-item">
+          <i class="sidebar-link-icon fa-solid fa-caret-right"></i>
+          <a class="sidebar-link" href="favoritos.html">Perfil</a>
+        </div>
+      </div>
+    </div>
+    <h1 class="form__title">Cadastro de Animais para Adoção</h1>
+    <div class="main">
+      <div class="image-upload">
+        <div class="img-buton" id="img-buton">
+          <i class="icon-plus fa-solid fa-plus"></i>
+          <img class="resized-img" id="resized-img" src="" />
+        </div>
+        <span id="spanImg" class="spanImg"></span>
+        <input type="file" id="img-input" accept="image/*" required>
+      
+
+        <div class="popup-resize" id="popup-resize">
+          <div class="popup-content">
+            <div class="popup-resize__img-container">
+              <img id="img-container__item" src="" />
+            </div>
+            <button class="popup-resize__btn" id="popup-resize__btn">Ok</button>
+          </div>
+        </div>
+        
+    </div>
+
+      <form class="main__form" id="main__form">
+        <label for="nome">Nome do Animal:</label>
+        <input type="text" id="nome" name="nome" placeholder="Luke" autocomplete="off"/>
+
+        <label for="tipo">Espécie:</label>
+        <select id="tipo" name="tipo" autocomplete="off" required>
+          <option selected disabled>Selecione uma Espécie</option>
+          <option value="cachorro">Cachorro</option>
+          <option value="gato">Gato</option>
+          <option value="coelho">Coelho</option>
+        </select>
+        
+        <label for="raca">Raça do Animal:</label>
+        <select name="raca" id="raca" autocomplete="off" required>
+          <option value="" selected disabled>Selecione uma Raça</option>
+          <!--Options vão aparecer conforme for selecionado 
+          a especie do animal -->
+        </select>
+        
+        <label for="porte">Porte do animal:</label>
+        <select name="porte" id="porte" autocomplete="off" required>
+          <option value="" selected disabled>Selecione um Porte</option>
+          <option value="pequeno">Pequeno</option>
+          <option value="medio">Medio</option>
+          <option value="grande">Grande</option>
+        </select>
+
+        <label for="idade">Idade:</label>
+        <input type="number" min="1" id="idade" name="idade" autocomplete="off" required />
+
+        <label for="sexo">Sexo:</label>
+        <select id="sexo" name="sexo" autocomplete="off" required>
+          <option value="" selected disabled>Selecione um Sexo</option>
+          <option value="M">Macho</option>
+          <option value="F">Fêmea</option>
+        </select>
+
+        <label for="personalidade">Personalidade:</label>
+        <select id="personalidade" name="personalidade" autocomplete="off" required>
+          <option value="" selected disabled>Selecione uma Pesonalidade</option>
+          <option value="Curioso">Curioso</option>
+          <option value="Carinhoso">Carinhoso</option>
+          <option value="Brincalhao">Brincalhão</option>
+          <option value="Protetor">Protetor</option>
+          <option value="Sociavel">Sociável</option>
+          <option value="Timido">Tímido</option>
+          <option value="Independente">Independente</option>
+          <option value="Medroso">Medroso</option>
+          <option value="Obediente">Obediente</option>
+          <option value="Teimoso">Teimoso</option>
+          <option value="Leal">Leal</option>
+          <option value="Calmo">Calmo</option>
+          <option value="Agitado">Agitado</option>
+        </select>
+
+        <label for="descricao">Descrição:</label>
+        <textarea id="descricao" name="descricao" rows="4" autocomplete="off" placeholder="Adora passear de manhã" required></textarea>
+
+        <button id="btnCadastrar" type="submit">Cadastrar</button>
+      </form>
+    </div>
+    <!-- Necessario para rodar o Cropper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
+    <script src="./js/cadastro_animais.js"></script>
+  </body>
+</html>

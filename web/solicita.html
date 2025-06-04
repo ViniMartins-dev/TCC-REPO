@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="./css/solicita.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link 
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" 
+    rel="stylesheet"
+    >
+</head>
+    <div class="cabecalho">
+        <img onclick="irParaHome()"id="logo" src="./img/Logo-laranja.png" alt="" />
+      <div class="links-header">
+        <a id="link" href="home.html">Home</a>
+        <a id="link" href="cadastro_animais.html">Cadastrar</a>
+        <a id="link" href="favoritos.html">Perfil</a>
+      </div>
+      <div onclick="abrirMenu()" class="btn-menu">
+        <i class="btn-menu-icon fa-solid fa-bars"></i>
+      </div>
+    </div>
+    
+    <div class="menu-sidebar" id="sidebar">
+      <div onclick="fecharMenu()" class="sidebar-overlay">
+        
+      </div>
+      <div class="sidebar-content" id="sidebar-content">
+        <i onclick="fecharMenu()" class="x-icon fa-solid fa-xmark"></i>
+        <div class="sidebar-content-espaco"></div>
+        <div class="sidebar-content-item">
+          <i class="sidebar-link-icon fa-solid fa-caret-right"></i>
+          <a class="sidebar-link" href="home.html">Home</a>
+        </div>
+        <div class="sidebar-content-item">
+          <i class="sidebar-link-icon fa-solid fa-caret-right"></i>
+          <a class="sidebar-link" href="cadastro_animais.html">Cadastrar Animal</a>
+        </div>
+        <div class="sidebar-content-item">
+          <i class="sidebar-link-icon fa-solid fa-caret-right"></i>
+          <a class="sidebar-link" href="favoritos.html">Perfil</a>
+        </div>
+      </div>
+    </div>
+
+    <main id="main">
+      <div class="main__top">
+        <h1>Solicitações</h1>
+        <h1>de adoção:</h1>
+        <img src="../img/solicita_dog.png"></img>
+      </div>
+    </main>
+    <script src="./js/solicita.js"></script>
+</body>
+</html>

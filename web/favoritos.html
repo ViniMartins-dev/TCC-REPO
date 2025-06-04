@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/favoritos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link 
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" 
+    rel="stylesheet">
+</head>
+<body id="body">
+  <div class="cabecalho">
+    <img onclick="irParaHome()"id="logo" src="./img/Logo-laranja.png" alt="" />
+    <div id="box-links"class="links-header">
+      <a id="link" href="home.html">Home</a>
+        <a id="link" href="cadastro_animais.html">Cadastrar</a>
+    </div>
+    <div onclick="abrirMenu()" class="btn-menu">
+      <i class="btn-menu-icon fa-solid fa-bars"></i>
+    </div>
+    </div>
+    <div class="menu-sidebar" id="sidebar">
+    <div onclick="fecharMenu()" class="sidebar-overlay">
+      
+    </div>
+    <div class="sidebar-content" id="sidebar-content">
+      <i onclick="fecharMenu()" class="x-icon fa-solid fa-xmark"></i>
+      <div class="sidebar-content-espaco"></div>
+      <div class="sidebar-content-item">
+        <a class="sidebar-link" href="home.html">Home</a>
+      </div>
+      <div id="sidebarLinkCadastro" class="sidebar-content-item">
+        <a class="sidebar-link" href="cadastro_animais.html">Cadastrar Animal</a>
+      </div>
+    </div>
+  </div>
+    <!-- ----------------AQUI -->
+     <main>
+       <section class="main-content">
+         <section class="top-main">
+           <div id="box-infos"class="info">
+           </div>
+         </section>
+
+         <section id="container-main" class="container-main">
+           <button onclick="irParaAnimaisCadastrados()" class="botao">
+             <i class="fa fa-paw"></i>Seus Animais
+           </button>
+           <button onclick="irParaSolicitacoes()"class="botao">
+             <i class="fa fa-envelope"></i>Solicitações
+           </button>
+           <button onclick="logout()"class="botao">
+             <i class="fa fa-sign-out-alt"></i>Sair
+           </button>
+         </section>
+       </section>
+      <div class="banner">
+        <img class="banner__img" src="./img/banner_favoritos6.jpg" alt="banner">
+        <div class="banner__overlay">
+          <p class="overlay__text">Lista de favoritos:</p>
+        </div>
+      </div>
+      <br>
+      <div class="container-animais" id="container-animais">
+      </div>
+    </main>
+    
+    <!-- <footer class="rodape">
+      <div class="div1-rodape">
+        <a href="#">Sobre Nós</a>
+        <a href="#">Contatos</a>
+        <a href="#">Serviços</a>
+      </div>
+      
+      <div class="div2-rodape">
+        <p>©Copyright - 2025</p>
+        <img id="logo-rodape" src="./img/Logo-removebg.png" alt="" />
+      </div>
+    </footer> -->
+    
+  </body>
+<script src="./js/favoritos.js"></script>
+</html>
