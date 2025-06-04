@@ -103,6 +103,7 @@ export default StyleSheet.create({
     borderColor: "#000",  // Cor da borda preta
     padding: 15,  // Espaçamento interno
     borderRadius: 0,  // Bordas arredondadas
+  
   },
   
   tagButton: {
@@ -465,4 +466,20 @@ export default StyleSheet.create({
     fontStyle: 'italic',
     textAlign: 'center',
   },
+  adoteButton: {
+  backgroundColor: '#cb7842', // cor laranja ou ajuste conforme tema
+  paddingVertical: 8,
+  paddingHorizontal: 16,
+  borderRadius: 8,
+  marginTop: 10,
+  alignItems: 'center',
+},
+
+adoteButtonText: {
+  color: '#fff',
+  fontWeight: 'bold',
+  fontSize: 16,
+},
+
+
 });

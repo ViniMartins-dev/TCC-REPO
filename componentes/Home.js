@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigation } from '@react-navigation/native';
+
 import {
   View,
   Text,
@@ -28,6 +29,63 @@ const Home = ({ navigation }) => {
   const [animals, setAnimals] = useState([]);
   const [loading, setLoading] = useState(true);
   const [apiError, setApiError] = useState(null);
+const [personalityFilter, setPersonalityFilter] = useState("");
+
+
+
+
+async function salvarSolicitacaoLocalmente(solicitacao) {
+  try {
+    const solicitacoesString = await AsyncStorage.getItem('solicitacoesLocais');
+    let solicitacoes = solicitacoesString ? JSON.parse(solicitacoesString) : [];
+
+    solicitacoes.push(solicitacao); // adiciona a nova solicitação no array
+    await AsyncStorage.setItem('solicitacoesLocais', JSON.stringify(solicitacoes));
+  } catch (error) {
+    console.error('Erro ao salvar solicitação localmente', error);
+  }
+}
+
+const enviarSolicitacaoAdocao = async (animalId) => {
+  try {
+    const token = await AsyncStorage.getItem('token');
+    const tutorId = await AsyncStorage.getItem('id');
+
+    if (!token || !tutorId) {
+      Alert.alert('Erro', 'Usuário não autenticado.');
+      return;
+    }
+
+    const response = await fetch('http://10.0.2.2:3000/adocao/request', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'bearer': token,
+      },
+      body: JSON.stringify({
+        tutor_id: userId,
+        animal_id: animalId,
+      }),
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+      Alert.alert('Sucesso', 'Solicitação enviada com sucesso!');
+      setSelectedAnimal(null);  // Fecha o modal
+
+      // **Chama a gambiarra aqui para salvar localmente**
+      await salvarSolicitacaoLocalmente(data);
+
+    } else {
+      Alert.alert('Erro', data.erro || 'Erro ao enviar solicitação.');
+    }
+  } catch (error) {
+    console.error(error);
+    Alert.alert('Erro', 'Falha na conexão com o servidor.');
+  }
+};
+
 
   useEffect(() => {
     const carregarDados = async () => {
@@ -65,6 +123,11 @@ const Home = ({ navigation }) => {
 
     carregarDados();
   }, []);
+
+const uniqueAges = Array.from(
+  new Set(animals.map(a => a.age).filter(Boolean))
+).slice(0, 5);
+
 
   // Função para carregar favoritos do usuário
   const carregarFavoritos = async (userToken, userId) => {
@@ -258,13 +321,14 @@ const Home = ({ navigation }) => {
     );
   };
 
-  const filteredAnimals = animals.filter(
-    (a) =>
-      search === "" ||
-      (a.name && a.name.toLowerCase().includes(search.toLowerCase())) ||
-      (a.breed && a.breed.toLowerCase().includes(search.toLowerCase())) ||
-      (a.personality && a.personality.toLowerCase().includes(search.toLowerCase()))
-  );
+const filteredAnimals = animals.filter(
+  (a) =>
+    search === "" ||
+    (a.name && a.name.toLowerCase().includes(search.toLowerCase())) ||
+    (a.breed && a.breed.toLowerCase().includes(search.toLowerCase())) ||
+    (a.age && String(a.age) === search)
+);
+
 
   const clearFilters = () => {
     setSearch("");
@@ -392,103 +456,170 @@ const Home = ({ navigation }) => {
   </View>
   
   {/* Menu Dropdown */}
-  {menuVisible && (
-    <View style={styles.menuDropdown}>
-      <TouchableOpacity onPress={() => {
-        navigation.navigate("Home");
-        setMenuVisible(false);
-      }}>
-        <Text style={styles.menuItem}>Home</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => {
-        navigation.navigate("Favoritos");
-        setMenuVisible(false);
-      }}>
-        <Text style={styles.menuItem}>Favoritos</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => {
-        navigation.navigate("Perfil");
-        setMenuVisible(false);
-      }}>
+{menuVisible && (
+  <View style={styles.menuDropdown}>
+    <TouchableOpacity onPress={() => {
+      navigation.navigate("Home");
+      setMenuVisible(false);
+    }}>
+      <Text style={styles.menuItem}>Home</Text>
+    </TouchableOpacity>
 
-<TouchableOpacity onPress={() => {
-        navigation.navigate("Login");
-        setMenuVisible(false);
-      }}>
-        <Text style={styles.menuItem}>Login</Text>
-      </TouchableOpacity>
-        
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => setMenuVisible(false)}>
-        <Text style={styles.menuItem}>Fechar</Text>
-      </TouchableOpacity>
-    </View>
-  )}
+    <TouchableOpacity onPress={() => {
+      navigation.navigate("Favoritos");
+      setMenuVisible(false);
+    }}>
+      <Text style={styles.menuItem}>Favoritos</Text>
+    </TouchableOpacity>
+
+    <TouchableOpacity onPress={() => {
+      navigation.navigate("Perfil");
+      setMenuVisible(false);
+    }}>
+      <Text style={styles.menuItem}>Perfil</Text>
+    </TouchableOpacity>
+
+    <TouchableOpacity onPress={() => {
+      navigation.navigate("Login");
+      setMenuVisible(false);
+    }}>
+      <Text style={styles.menuItem}>Login</Text>
+    </TouchableOpacity>
+
+    <TouchableOpacity onPress={() => setMenuVisible(false)}>
+      <Text style={styles.menuItem}>Fechar</Text>
+    </TouchableOpacity>
+  </View>
+)}
+
 </View>
 
-      {/* Filtros rápidos */}
-      <View style={styles.filterTags}>
-        {["carinhoso", "observadora", "Energético"].map((tag, index) => (
-          <TouchableOpacity
-            key={index}
-            style={styles.tagButton}
-            onPress={() => setSearch(tag)}
-          >
-            <Text style={styles.tagText}>{tag}</Text>
-          </TouchableOpacity>
-        ))}
-        <TouchableOpacity style={styles.tagButton} onPress={handleFilterClick}>
-          <Text style={styles.tagText}>Filtros</Text>
-        </TouchableOpacity>
-      </View>
+
+    {/* Filtros rápidos */} 
+<View style={styles.filterTags}>
+  {uniqueAges.map((age, index) => (
+    <TouchableOpacity
+      key={index}
+      style={styles.tagButton}
+      onPress={() => {
+        if (search === String(age)) {
+          setSearch("");  // Desativa o filtro se clicar novamente
+        } else {
+          setSearch(String(age));
+        }
+      }}
+    >
+      <Text style={styles.tagText}>
+        {search === String(age) ? `✓ ${age} anos` : `${age} anos`}
+      </Text>
+    </TouchableOpacity>
+  ))}
+  <TouchableOpacity style={styles.tagButton} onPress={handleFilterClick}>
+    <Text style={styles.tagText}>Filtros</Text>
+  </TouchableOpacity>
+</View>
+
+
+
+
 
       {/* Menu de Filtros Expansível */}
-      {filterVisible && (
-        <View style={styles.filterContainer}>
-          <ScrollView style={{ maxHeight: 300 }}>
-            <Text style={styles.filterSectionTitle}>▼ Cachorro</Text>
-            <View style={styles.filterGroup}>
-              {[
-                "Labrador",
-                "Golden Retriever",
-                "Poodle",
-                "Bulldog Francês",
-                "Husky Siberiano",
-              ].map((breed, index) => (
-                <TouchableOpacity
-                  key={index}
-                  onPress={() => setSearch(breed)}
-                  style={[
-                    styles.filterButtonTag,
-                    search === breed && styles.selectedTag,
-                  ]}
-                >
-                  <Text>{breed}</Text>
-                </TouchableOpacity>
-              ))}
-            </View>
+    {filterVisible && (
+  <View style={styles.filterContainer}>
+    <ScrollView style={{ maxHeight: 300 }}>
+      
+      <Text style={styles.filterSectionTitle}>▼ Cachorro</Text>
+      <View style={styles.filterGroup}>
+        {[
+          "Labrador Retriever",
+          "Golden Retriever",
+          "Poodle",
+          "Bulldog Francês",
+          "Husky Siberiano",
+          "Pastor Alemão",
+          "Beagle",
+          "Border Collie",
+          "Shih Tzu",
+          "Chihuahua",
+          "Spitz Alemão",
+          "Doberman",
+          "Akita Inu",
+          "Cocker Spaniel",
+          "Rottweiler",
+        ].map((breed, index) => (
+          <TouchableOpacity
+            key={index}
+            onPress={() => setSearch(breed)}
+            style={[
+              styles.filterButtonTag,
+              search === breed && styles.selectedTag,
+            ]}
+          >
+            <Text>{breed}</Text>
+          </TouchableOpacity>
+        ))}
+      </View>
 
-            <Text style={styles.filterSectionTitle}>▼ Gatos</Text>
-            <View style={styles.filterGroup}>
-              {[
-                "Persa",
-                "Siamês",
-                "Maine Coon",
-                "Ragdoll",
-                "British Shorthair",
-              ].map((breed, index) => (
-                <TouchableOpacity
-                  key={index}
-                  onPress={() => setSearch(breed)}
-                  style={[
-                    styles.filterButtonTag,
-                    search === breed && styles.selectedTag,
-                  ]}
-                >
-                  <Text>{breed}</Text>
-                </TouchableOpacity>
-              ))}
-            </View>
+      <Text style={styles.filterSectionTitle}>▼ Gatos</Text>
+      <View style={styles.filterGroup}>
+        {[
+          "Persa",
+          "Siamês",
+          "Maine Coon",
+          "Ragdoll",
+          "Bengal",
+          "Sphynx",
+          "Burmese",
+          "British Shorthair",
+          "Abyssinian",
+          "Scottish Fold",
+          "Oriental",
+          "Devon Rex",
+          "Birman",
+          "Russian Blue",
+          "Exotic Shorthair",
+        ].map((breed, index) => (
+          <TouchableOpacity
+            key={index}
+            onPress={() => setSearch(breed)}
+            style={[
+              styles.filterButtonTag,
+              search === breed && styles.selectedTag,
+            ]}
+          >
+            <Text>{breed}</Text>
+          </TouchableOpacity>
+        ))}
+      </View>
+
+      <Text style={styles.filterSectionTitle}>▼ Coelho</Text>
+      <View style={styles.filterGroup}>
+        {[
+          "Holland Lop",
+          "Angorá",
+          "Mini Rex",
+          "Netherland Dwarf",
+          "English Lop",
+          "Flemish Giant",
+          "Himalayan",
+          "English Angora",
+          "New Zealand",
+          "Lionhead",
+          "French Lop",
+          "Californian",
+        ].map((breed, index) => (
+          <TouchableOpacity
+            key={index}
+            onPress={() => setSearch(breed)}
+            style={[
+              styles.filterButtonTag,
+              search === breed && styles.selectedTag,
+            ]}
+          >
+            <Text>{breed}</Text>
+          </TouchableOpacity>
+        ))}
+      </View>
 
             <TouchableOpacity onPress={clearFilters} style={styles.clearButton}>
               <Text style={styles.clearText}>Limpar Filtros</Text>
@@ -543,6 +674,8 @@ const Home = ({ navigation }) => {
         </View>
       )}
 
+
+
       {/* Modal polaroid */}
       {selectedAnimal && (
         <Modal
@@ -591,7 +724,19 @@ const Home = ({ navigation }) => {
                 style={styles.closeButton}
               >
                 <Text style={styles.closeButtonText}>Fechar</Text>
+
+       
               </TouchableOpacity>
+
+                  {/* Botão Adote */}
+        <TouchableOpacity
+  style={styles.adoteButton}
+  onPress={() => enviarSolicitacaoAdocao(selectedAnimal.id)}
+>
+  <Text style={styles.adoteButtonText}>Adote</Text>
+</TouchableOpacity>
+
+
             </View>
           </View>
         </View>

@@ -8,6 +8,7 @@ import {
   Image,
   Alert,
 } from 'react-native';
+
 import styles from './styleLogin';
 import logo from '../assets/image.png';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -45,16 +46,20 @@ const handleLogin = async () => {
 
     const data = await response.json();
 
-    if (response.ok) {
-      console.log('Login bem-sucedido:', data);
-      
-      // Salvar token e ID no AsyncStorage
-      await AsyncStorage.setItem('token', data.token);
-      await AsyncStorage.setItem('id', data.payload.id.toString());
-      console.log('Token e ID salvos no AsyncStorage');
-      
-      navigation.navigate('Home');
-    } else {
+if (response.ok) {
+  console.log('Login bem-sucedido:', data);
+  
+  // Salvar token e ID no AsyncStorage
+  await AsyncStorage.setItem('token', data.token);
+  await AsyncStorage.setItem('id', data.payload.id.toString());
+
+  // Salvar todo o payload (usuario) no AsyncStorage
+  await AsyncStorage.setItem('usuario', JSON.stringify(data.payload));
+  
+  console.log('Token, ID e usuário salvos no AsyncStorage');
+
+  navigation.navigate('Home');
+}else {
       Alert.alert('Erro', data.erro || 'Erro no login.');
     }
   } catch (error) {
