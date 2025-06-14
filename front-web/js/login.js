@@ -50,9 +50,7 @@ class Usuario {
     this.data_nascimento = "";
     this.senha = "";
     this.cpf = "";
-    this.cnpj = "";
-    this.sobrenome = "";
-    this.data_nascimento = "";  
+    this.cnpj = ""; 
   }
   pegarInformacoesProtetor() {
     return {
